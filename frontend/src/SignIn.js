@@ -23,7 +23,8 @@ function SignIn() {
 
       if (response.ok) {
         setErrorMessage('');
-        navigate('/dashboard'); // Redirect to the new page
+        localStorage.setItem('userData', JSON.stringify(data.userData)); // Save user data
+        navigate('/dashboard'); // Redirect to the dashboard
       } else {
         setErrorMessage(data.message);
       }

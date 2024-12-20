@@ -1,0 +1,15 @@
+{
+    "admin": {
+      "company": "AdminCorp",
+      "metrics": [11, 20, 30]
+    },
+    "user1": {
+      "company": "User1Corp",
+      "metrics": [5, 15, 25]
+    },
+    "user2": {
+      "company": "User2Corp",
+      "metrics": [8, 18, 28]
+    }
+  }
+  
