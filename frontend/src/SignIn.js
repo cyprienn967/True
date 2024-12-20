@@ -22,8 +22,7 @@ function SignIn() {
       const data = await response.json();
 
       if (response.ok) {
-        setErrorMessage('');
-        localStorage.setItem('userData', JSON.stringify(data.userData)); // Save user data
+        localStorage.setItem('userData', JSON.stringify({ username, ...data.userData})); // Save user data
         navigate('/dashboard'); // Redirect to the dashboard
       } else {
         setErrorMessage(data.message);
