@@ -9,3 +9,15 @@ Structure:
 3. semantic_uncertainty1 - code from a repo of a paper on semantic uncertainity - needs adapting for dynamic API stuff once we've got pipeline and frontend fully working
 4. testing - any python scripts for testing stuff like calls, syntax etc.
 
+To run this all yourself gonna need to install some packages and shit:
+off the top of my head (this maybe isnt the completed list but when you try and run it all it'll say whats not installed)
+pip install openai
+pip install flask
+uhhh something for the frontend
+
+to run:
+[/backend] python app.py
+open a seperate terminal
+[/frontend] npm start
+
+will open up a website in ur browser 
