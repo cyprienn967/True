@@ -2,16 +2,15 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
 import SignIn from './SignIn';
+import Dashboard from './Dashboard'; // Import the new component
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* Main page route */}
         <Route path="/" element={<MainPage />} />
-
-        {/* Sign-in page route */}
         <Route path="/signin" element={<SignIn />} />
+        <Route path="/dashboard" element={<Dashboard />} /> {/* New route */}
       </Routes>
     </Router>
   );
@@ -19,3 +18,4 @@ function App() {
 
 export default App;
  
+
