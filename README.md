@@ -15,9 +15,11 @@ pip install openai
 pip install flask
 uhhh something for the frontend
 
-to run:
+To run: just main page where LLM key pasting works
 [/backend] python app.py
-open a seperate terminal
 [/frontend] npm start
 
-will open up a website in ur browser 
+To run: main page with sign in and authentication but no LLM yet
+[/backend] node server.js
+[/frontend] npm start
+
