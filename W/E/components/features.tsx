@@ -14,11 +14,11 @@ export function Features() {
     >
       <Header>
         <h2 className="font-sans text-bold text-xl text-center md:text-4xl w-fit mx-auto font-bold tracking-tight text-neutral-8000 dark:text-neutral-100 text-neutral-800">
-          Deployments made easy
+          Safety made easy
         </h2>
       </Header>
       <p className="max-w-lg text-sm text-neutral-600 text-center mx-auto mt-4 dark:text-neutral-400">
-        Deploy with ease, leave complexities to us.
+        Deploy with ease, leave the rest to us
       </p>
       <div className="mt-20  grid cols-1 md:grid-cols-5 gap-4 md:auto-rows-[25rem] max-w-7xl mx-auto">
         <Card className="flex flex-col justify-between md:col-span-3">
@@ -26,19 +26,19 @@ export function Features() {
             <SkeletonOne />
           </CardSkeletonBody>
           <CardContent className="h-40">
-            <CardTitle>One click deploy</CardTitle>
+            <CardTitle>Bias and Fairness Evaluations</CardTitle>
             <CardDescription>
-              Deploy your app in seconds, with our one click deploy feature.
+              Keep your AI stereotype and bias free 
             </CardDescription>
           </CardContent>
         </Card>
 
         <Card className="flex flex-col justify-between md:col-span-2">
           <CardContent className="h-40">
-            <CardTitle>Intuitive workflow</CardTitle>
+            <CardTitle>Hallucination Testing</CardTitle>
             <CardDescription>
-              With our intuitive workflow, you can easily manage your app
-              without complex steps.
+              Test your AI for hallucinations, confabulations 
+              and false positives all in our dashboard
             </CardDescription>
           </CardContent>
           <CardSkeletonBody>
@@ -56,10 +56,9 @@ export function Features() {
 
         <Card className="flex flex-col justify-between md:col-span-2">
           <CardContent className="h-40">
-            <CardTitle>Hosting over the edge</CardTitle>
+            <CardTitle>Chain of Thought Safety</CardTitle>
             <CardDescription>
-              With our edge network, we host your website by going into each
-              city by ourselves.
+              CoT deception monitoring 
             </CardDescription>
           </CardContent>
           <CardSkeletonBody>
@@ -68,10 +67,9 @@ export function Features() {
         </Card>
         <Card className="flex flex-col justify-between md:col-span-3">
           <CardContent className="h-40">
-            <CardTitle>Running out of copy</CardTitle>
+            <CardTitle>Jailbreak Evaluations</CardTitle>
             <CardDescription>
-              You are running out of copy for your website, we can generate copy
-              for you.
+              We evaluate the robustness of your AI against jailbreaks
             </CardDescription>
           </CardContent>
           <CardSkeletonBody>

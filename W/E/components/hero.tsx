@@ -113,14 +113,6 @@ export function Hero() {
         transition={{ duration: 0.2, delay: 0.7 }}
         className="mb-10 mt-8 flex w-full flex-col items-center justify-center gap-4 px-8 sm:flex-row md:mb-20"
       >
-        <Button
-          as={Link}
-          href="/login"
-          variant="dark"
-          className="hidden md:block w-40 text-center"
-        >
-          Create account
-        </Button>
 
         <Button
           data-cal-namespace={calOptions.namespace}
