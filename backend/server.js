@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const fs = require('fs');
+const { exec } = require('child_process');
 
 const app = express(); // Define the app variable here
 const PORT = 5000;
@@ -61,6 +62,29 @@ app.post('/api/update-api-key', (req, res) => {
   } else {
     res.status(404).json({ success: false, message: 'User not found' });
   }
+});
+
+app.post('/api/run-test', (req, res) => {
+  const { apiKey } = req.body;
+
+  if (!apiKey) {
+    return res.status(400).json({ success: false, message: 'API key is missing.' });
+  }
+
+  // Execute the Python script and pass the API key as an argument
+  exec(`python test_chat_gpt.py ${apiKey}`, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`Error executing script: ${error.message}`);
+      return res.status(500).json({ success: false, message: 'Error running test.' });
+    }
+    if (stderr) {
+      console.error(`Script error: ${stderr}`);
+      return res.status(500).json({ success: false, message: 'Script error occurred.' });
+    }
+
+    const average = parseFloat(stdout.trim());
+    res.json({ success: true, average });
+  });
 });
 
 // Default route for testing
