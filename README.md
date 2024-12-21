@@ -4,11 +4,11 @@ Sign in button on top right.
 Clicking it brings you to a sign in page, need right username and password for it to work. 
 If correct, takes you to page
 where previous user 'metrics' are there, and option to paste in API key. 
-If you press test, API key gets sent to the backend, backend runs test_chat_gpt.py which gives an average of prompt response lengths and it displays it on the dashboard.
+///////If you press test, API key gets sent to the backend, backend runs test_chat_gpt.py which gives an average of prompt response lengths and it displays it on the dashboard. NEED TO UPDATE THIS FOR NEW WEBSITE
 
 Structure:
-1. Backend - app.py and test_chat_gpt.py basically take in API key and perform stuff on it (the latter sends in 10 prompts, collects 50 responses and averages the length of the responses). Server.js basically takes in the API key from the frontend and passes it to the backend. Other files not important
-2. frontend - App.js contains links to the files for all the other pages pretty much. Dashboard.js is the dashboard once you've signed in, MainPage.js, SignIn.js similar. ProtectedRoute.js is basically MEANT to make it so that, since the dashboard is at like websitename.com/dashboard, you can't access it by just typing it into the browser without signing in first although i dont think it currently works - to be fixed later.
+1. Backend - app.py basically takes in API key from frontend and stores it
+2. W/E - frontend website stuff.
 3. semantic_uncertainty1 - code from a repo of a paper on semantic uncertainity - needs adapting for dynamic API stuff once we've got pipeline and frontend fully working
 4. testing - any python scripts for testing stuff like calls, syntax etc (stuff which doesn't rely on frontend/backend info)
 
