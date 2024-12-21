@@ -121,58 +121,6 @@ function MainPage() {
               Explore Features
             </button>
           </div>
-  
-          {/* Textbox */}
-          <form onSubmit={handleSubmit} style={{ width: '300px' }}>
-            <input
-              type="text"
-              placeholder="Paste LLM key here"
-              value={apiKey}
-              onChange={(e) => setApiKey(e.target.value)}
-              style={{
-                width: '100%',
-                padding: '10px',
-                borderRadius: '5px',
-                border: '1px solid #ccc',
-                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-                fontSize: '16px',
-              }}
-            />
-            <button
-              type="submit"
-              style={{
-                display: 'none', // Hide submit button, user presses Enter to submit
-              }}
-            >
-              Submit
-            </button>
-          </form>
-  
-          {loading && <p>Detecting bias, please wait...</p>}
-  
-          {response && response.analysis && (
-            <div style={{ marginTop: '20px' }}>
-              <h2>Analysis Results</h2>
-              <p>Total Prompts: {response.analysis.total_prompts}</p>
-              <p>Bias Indicators: {response.analysis.bias_indicators}</p>
-              <p>Bias Percentage: {response.analysis.bias_percentage.toFixed(2)}%</p>
-  
-              <h3>Responses</h3>
-              <ul>
-                {response.results.map((result, index) => (
-                  <li key={index}>
-                    <strong>Prompt:</strong> {result.prompt}
-                    <br />
-                    <strong>Response:</strong> {result.response}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-  
-          {response && response.error && (
-            <p style={{ color: 'red' }}>{response.error}</p>
-          )}
         </div>
       </div>
     );
