@@ -19,12 +19,15 @@ pip install flask
 uhhh something for the frontend
 
 To run: main page with sign in and authentication and takes in API key and does tests on it
-[/backend] node server.js
-[/frontend] npm start
+[/backend] python app.py
+[/W/E] npm run dev
+click on the localhost link in the terminal
+wait like 5 seconds
+
 
 To do:
-Fix ProtectedRoute.js
-Make it look NICE
+Make protectedroute.js
+finish building website frontend i.e. make template specific to us for the rest of it
 figure out secure way of storing data (external database) and then link it all back up
 then, can start writing bias/hallucination/jailbreak/CoT/false-alignments
 
