@@ -72,7 +72,6 @@ def main(args):
 
     # Load entailment model.
     if args.compute_predictive_entropy:
-        logging.info('Beginning loading for entailment model.')
         if args.entailment_model == 'deberta':
             entailment_model = EntailmentDeberta()
         elif args.entailment_model == 'gpt-4':
@@ -85,12 +84,6 @@ def main(args):
             entailment_model = EntailmentLlama(args.entailment_cache_id, args.entailment_cache_only, args.entailment_model)
         else:
             raise ValueError
-        logging.info('Entailment model loading complete.')
-
-    if args.recompute_accuracy:
-        # This is usually not enabled.
-        logging.warning('Recompute accuracy enabled. This does not apply to precomputed p_true!')
-        metric = utils.get_metric(args.metric)
 
     # Restore outputs from `generate_answrs.py` run.
     result_dict_pickle = restore('uncertainty_measures.pkl')
@@ -125,17 +118,7 @@ def main(args):
         else:
             responses = [fr[0] for fr in full_responses]
 
-        if args.recompute_accuracy:
-            logging.info('Recomputing accuracy!')
-            if is_answerable(example):
-                acc = metric(most_likely_answer['response'], example, None)
-            else:
-                acc = 0.0  # pylint: disable=invalid-name
-            validation_is_true.append(acc)
-            logging.info('Recomputed accuracy!')
-
-        else:
-            validation_is_true.append(most_likely_answer['accuracy'])
+        validation_is_true.append(most_likely_answer['accuracy'])
 
         validation_answerable.append(is_answerable(example))
         validation_embeddings.append(most_likely_answer['embedding'])
