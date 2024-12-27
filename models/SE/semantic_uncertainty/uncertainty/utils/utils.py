@@ -8,8 +8,7 @@ import wandb
 
 from evaluate import load
 
-from uncertainty.models.huggingface_models import HuggingfaceModel
-from uncertainty.utils import openai as oai
+from ..pretrained_models.huggingface_models import HuggingfaceModel
 from semantic_uncertainty.SE_config import SEConfig
 
 

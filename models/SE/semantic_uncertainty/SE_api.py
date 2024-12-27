@@ -9,19 +9,19 @@ import numpy as np
 import torch
 import wandb
 
-from SE_config import SEConfig
-from uncertainty.uncertainty_measures.semantic_entropy import get_semantic_ids
-from uncertainty.uncertainty_measures.semantic_entropy import logsumexp_by_id
-from uncertainty.uncertainty_measures.semantic_entropy import predictive_entropy
-from uncertainty.uncertainty_measures.semantic_entropy import predictive_entropy_rao
-from uncertainty.uncertainty_measures.semantic_entropy import cluster_assignment_entropy
-from uncertainty.uncertainty_measures.semantic_entropy import context_entails_response
-from uncertainty.uncertainty_measures.semantic_entropy import EntailmentDeberta
-from uncertainty.uncertainty_measures.semantic_entropy import EntailmentGPT4
-from uncertainty.uncertainty_measures.semantic_entropy import EntailmentGPT35
-from uncertainty.uncertainty_measures.semantic_entropy import EntailmentGPT4Turbo
-from uncertainty.uncertainty_measures.semantic_entropy import EntailmentLlama
-from uncertainty.utils import utils
+from semantic_uncertainty.SE_config import SEConfig
+from semantic_uncertainty.uncertainty.semantic_entropy import get_semantic_ids
+from semantic_uncertainty.uncertainty.semantic_entropy import logsumexp_by_id
+from semantic_uncertainty.uncertainty.semantic_entropy import predictive_entropy
+from semantic_uncertainty.uncertainty.semantic_entropy import predictive_entropy_rao
+from semantic_uncertainty.uncertainty.semantic_entropy import cluster_assignment_entropy
+from semantic_uncertainty.uncertainty.semantic_entropy import context_entails_response
+from semantic_uncertainty.uncertainty.semantic_entropy import EntailmentDeberta
+from semantic_uncertainty.uncertainty.semantic_entropy import EntailmentGPT4
+from semantic_uncertainty.uncertainty.semantic_entropy import EntailmentGPT35
+from semantic_uncertainty.uncertainty.semantic_entropy import EntailmentGPT4Turbo
+from semantic_uncertainty.uncertainty.semantic_entropy import EntailmentLlama
+from semantic_uncertainty.uncertainty.utils import utils
 from collections import defaultdict
 
 # edit this

@@ -3,7 +3,6 @@ import os
 import json
 from collections import OrderedDict
 import torch
-from utils import CONFIG_NAME, hf_bucket_url, cached_path, is_remote_url
 
 
 class SEConfig:
