@@ -50,20 +50,20 @@ class EntailmentLLM(BaseEntailment):
 
     # entailment_file = 'entailment_cache.pkl'
 
-    def __init__(self, entailment_cache_id, entailment_cache_only):
-        self.prediction_cache = self.init_prediction_cache(entailment_cache_id)
-        self.entailment_cache_only = entailment_cache_only
+    # def __init__(self, entailment_cache_id, entailment_cache_only):
+    #     self.prediction_cache = self.init_prediction_cache(entailment_cache_id)
+    #     self.entailment_cache_only = entailment_cache_only
 
-    def init_prediction_cache(self, entailment_cache_id):
-        if entailment_cache_id is None:
-            return dict()
+    # def init_prediction_cache(self, entailment_cache_id):
+    #     if entailment_cache_id is None:
+    #         return dict()
 
-        logging.info('Restoring prediction cache from %s', entailment_cache_id)
+    #     logging.info('Restoring prediction cache from %s', entailment_cache_id)
 
-        api = wandb.Api()
-        run = api.run(entailment_cache_id)
-        run.file(self.entailment_file).download(
-            replace=True, exist_ok=False, root=wandb.run.dir)
+    #     api = wandb.Api()
+    #     run = api.run(entailment_cache_id)
+    #     run.file(self.entailment_file).download(
+    #         replace=True, exist_ok=False, root=wandb.run.dir)
 
     #     with open(f'{wandb.run.dir}/{self.entailment_file}', "rb") as infile:
     #         return pickle.load(infile)
@@ -72,22 +72,23 @@ class EntailmentLLM(BaseEntailment):
     #     # Write the dictionary to a pickle file.
     #     utils.save(self.prediction_cache, self.entailment_file)
 
-    def check_implication(self, text1, text2, example=None):
-        if example is None:
+    def check_implication(self, text1, text2, question=None):
+        if question is None:
             raise ValueError
-        prompt = self.equivalence_prompt(text1, text2, example['question'])
+        prompt = self.equivalence_prompt(text1, text2, question)
 
         logging.info('%s input: %s', self.name, prompt)
 
-        hashed = oai.md5hash(prompt)
-        if hashed in self.prediction_cache:
-            logging.info('Restoring hashed instead of predicting with model.')
-            response = self.prediction_cache[hashed]
-        else:
-            if self.entailment_cache_only:
-                raise ValueError
-            response = self.predict(prompt, temperature=0.02)
-            self.prediction_cache[hashed] = response
+        # hashed = oai.md5hash(prompt)
+        # if hashed in self.prediction_cache:
+        #     logging.info('Restoring hashed instead of predicting with model.')
+        #     response = self.prediction_cache[hashed]
+        # else:
+        #     if self.entailment_cache_only:
+        #         raise ValueError
+            
+        #     self.prediction_cache[hashed] = response
+        response = self.predict(prompt, temperature=0.02)
 
         logging.info('%s prediction: %s', self.name, response)
 
@@ -105,8 +106,8 @@ class EntailmentLLM(BaseEntailment):
 
 class EntailmentGPT4(EntailmentLLM):
 
-    def __init__(self, entailment_cache_id, entailment_cache_only):
-        super().__init__(entailment_cache_id, entailment_cache_only)
+    def __init__(self):
+        super().__init__()
         self.name = 'gpt-4'
 
     def equivalence_prompt(self, text1, text2, question):
@@ -124,29 +125,29 @@ class EntailmentGPT4(EntailmentLLM):
 
 class EntailmentGPT35(EntailmentGPT4):
 
-    def __init__(self, entailment_cache_id, entailment_cache_only):
-        super().__init__(entailment_cache_id, entailment_cache_only)
+    def __init__(self):
+        super().__init__()
         self.name = 'gpt-3.5'
 
 
 class EntailmentGPT4Turbo(EntailmentGPT4):
 
-    def __init__(self, entailment_cache_id, entailment_cache_only):
-        super().__init__(entailment_cache_id, entailment_cache_only)
+    def __init__(self):
+        super().__init__()
         self.name = 'gpt-4-turbo'
 
 
 class EntailmentLlama(EntailmentLLM):
 
-    def __init__(self, entailment_cache_id, entailment_cache_only, name):
-        super().__init__(entailment_cache_id, entailment_cache_only)
+    def __init__(self, name):
+        super().__init__()
         self.name = name
         self.model = HuggingfaceModel(
-            name, stop_sequences='default', max_new_tokens=30)
+            name, stop_sequences='default', max_new_tokens=500)
 
     def equivalence_prompt(self, text1, text2, question):
 
-        prompt = f"""We are evaluating answers to the question \"{question}\"\n"""
+        prompt = f"""We are evaluating answers to the prompt \"{question}\"\n"""
         prompt += "Here are two possible answers:\n"
         prompt += f"Possible Answer 1: {text1}\nPossible Answer 2: {text2}\n"
         prompt += "Does Possible Answer 1 semantically entail Possible Answer 2? Respond only with entailment, contradiction, or neutral.\n"""
@@ -166,13 +167,13 @@ def context_entails_response(context, responses, model):
     return 2 - np.mean(votes)
 
 
-def get_semantic_ids(strings_list, model, strict_entailment=False, example=None):
+def get_semantic_ids(strings_list, model, strict_entailment=False, question=None):
     """Group list of predictions into semantic meaning."""
 
     def are_equivalent(text1, text2):
 
-        implication_1 = model.check_implication(text1, text2, example=example)
-        implication_2 = model.check_implication(text2, text1, example=example)  # pylint: disable=arguments-out-of-order
+        implication_1 = model.check_implication(text1, text2, question)
+        implication_2 = model.check_implication(text2, text1, question)  # pylint: disable=arguments-out-of-order
         assert (implication_1 in [0, 1, 2]) and (implication_2 in [0, 1, 2])
 
         if strict_entailment:

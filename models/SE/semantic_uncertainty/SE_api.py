@@ -10,9 +10,19 @@ import torch
 import wandb
 
 from SE_config import SEConfig
-from uncertainty.data.data_utils import load_ds
+from uncertainty.uncertainty_measures.semantic_entropy import get_semantic_ids
+from uncertainty.uncertainty_measures.semantic_entropy import logsumexp_by_id
+from uncertainty.uncertainty_measures.semantic_entropy import predictive_entropy
+from uncertainty.uncertainty_measures.semantic_entropy import predictive_entropy_rao
+from uncertainty.uncertainty_measures.semantic_entropy import cluster_assignment_entropy
+from uncertainty.uncertainty_measures.semantic_entropy import context_entails_response
+from uncertainty.uncertainty_measures.semantic_entropy import EntailmentDeberta
+from uncertainty.uncertainty_measures.semantic_entropy import EntailmentGPT4
+from uncertainty.uncertainty_measures.semantic_entropy import EntailmentGPT35
+from uncertainty.uncertainty_measures.semantic_entropy import EntailmentGPT4Turbo
+from uncertainty.uncertainty_measures.semantic_entropy import EntailmentLlama
 from uncertainty.utils import utils
-from compute_uncertainty_measures import main as main_compute
+from collections import defaultdict
 
 # edit this
 def make_prompt(use_context, context, question, answer):
@@ -27,28 +37,46 @@ def make_prompt(use_context, context, question, answer):
   return prompt
 
 
-def compute_entropy():
-  if not args.use_all_generations:
-    log_liks = [r[1] for r in full_responses[:args.use_num_generations]]
+def compute_entropy(config: SEConfig, prompt, full_responses, most_likely_answer):
+  entropies = defaultdict(list)
+  result_dict = {}
+  result_dict['semantic_ids'] = []
+  
+  if config.entailment_model == 'deberta':
+    entailment_model = EntailmentDeberta()
+  elif config.entailment_model == 'gpt-4':
+    entailment_model = EntailmentGPT4()
+  elif config.entailment_model == 'gpt-3.5':
+    entailment_model = EntailmentGPT35()
+  elif config.entailment_model == 'gpt-4-turbo':
+    entailment_model = EntailmentGPT4Turbo()
+  elif 'llama' in config.entailment_model.lower():
+    entailment_model = EntailmentLlama(config.entailment_model)
   else:
-    log_liks = [r[1] for r in full_responses]
+    raise ValueError
+  
+  if not config.use_all_generations:
+    if config.use_num_generations == -1:
+      raise ValueError
+    responses = [fr[0] for fr in full_responses[:config.use_num_generations]]
+    log_liks = [r[1] for r in full_responses[:config.use_num_generations]]
+  else:
+    responses = [fr[0] for fr in full_responses]
+    log_liks = [r[1] for r in full_responses] 
 
   for i in log_liks:
     assert i
 
-  if args.compute_context_entails_response:
+  if config.compute_context_entails_response:
     # Compute context entails answer baseline.
     entropies['context_entails_response'].append(context_entails_response(
-      context, responses, entailment_model))
-
-  if args.condition_on_question and args.entailment_model == 'deberta':
-    responses = [f'{question} {r}' for r in responses]
+      prompt, responses, entailment_model))
 
   # Compute semantic ids.
-  semantic_ids = get_semantic_ids(
-    responses, model=entailment_model,
-    strict_entailment=args.strict_entailment, example=example)
-
+  semantic_ids = get_semantic_ids(responses,
+                                  model=entailment_model,
+                                  strict_entailment=config.strict_entailment,
+                                  question=prompt)
   result_dict['semantic_ids'].append(semantic_ids)
 
   # Compute entropy from frequencies of cluster assignments.
@@ -64,6 +92,8 @@ def compute_entropy():
   log_likelihood_per_semantic_id = logsumexp_by_id(semantic_ids, log_liks_agg, agg='sum_normalized')
   pe = predictive_entropy_rao(log_likelihood_per_semantic_id)
   entropies['semantic_entropy'].append(pe)
+  
+  return entropies, result_dict
 
 
 app = Flask(__name__)
@@ -91,21 +121,15 @@ def get_data():
   config = SEConfig()
   
   model = utils.init_model(config.model)
-  accuracies, generations, results_dict = [], {}, {}
+  generations, results_dict = {}, {}
 
   # current_input = make_prompt(in_context, context, question, None)
   # local_prompt = prompt + current_input
 
   full_responses = []
-
-  # We sample one low temperature answer on which we will compute the
-  # accuracy and args.num_generation high temperature answers which will
-  # be used to estimate the entropy variants.
-
   num_generations = 1 + config.num_generations
 
   for i in range(num_generations):
-
     # Temperature for first generation is always `0.1`.
     temperature = 0.1 if i == 0 else inference_temperature
 

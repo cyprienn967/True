@@ -10,9 +10,15 @@ class SEConfig:
   def __init__(self):
     self.api_key = "your_api_key_here"
     self.api_url = "https://api.example.com"
+    self.use_all_generations = True
     self.num_generations = 10
+    self.use_num_generations = 5
     self.model = "Llama-2-7b"
+    self.entailment_model = "gpt-4"
+    self.strict_entailment = False
     self.model_max_new_tokens = 500
+    self.compute_context_entails_response = False
+
 
   def display(self):
     config_vars = vars(self)
