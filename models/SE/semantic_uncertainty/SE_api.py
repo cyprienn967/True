@@ -141,23 +141,18 @@ def get_data():
         'response': predicted_answer,
         'token_log_likelihoods': token_log_likelihoods,
         'embedding': embedding,}
-      generations[example['id']].update({
-        'most_likely_answer': most_likely_answer_dict,
-        'reference': utils.get_reference(example)})
-    else:
-      # Aggregate predictions over num_generations.
-      full_responses.append(
-        (predicted_answer, token_log_likelihoods, embedding))
+    full_responses.append((predicted_answer, token_log_likelihoods, embedding))
 
   # Append all predictions for this example to `generations`.
-  generations[example['id']]['responses'] = full_responses
+  # generations['responses'] = full_responses
+  
+  entropies, result_dict = compute_entropy(config, prompt, full_responses, most_likely_answer_dict)
 
-  sample_data = {
-    "id": id,
-    "name": name,
-    "description": description
+  # Return data
+  entropy_data = {
+    "id": id
   }
-  return jsonify(sample_data)
+  return jsonify(entropy_data)
 
 # @app.route('/api/data', methods=['POST'])
 # def post_data():
