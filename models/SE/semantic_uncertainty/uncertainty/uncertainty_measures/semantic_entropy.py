@@ -48,7 +48,7 @@ class EntailmentDeberta(BaseEntailment):
 
 class EntailmentLLM(BaseEntailment):
 
-    entailment_file = 'entailment_cache.pkl'
+    # entailment_file = 'entailment_cache.pkl'
 
     def __init__(self, entailment_cache_id, entailment_cache_only):
         self.prediction_cache = self.init_prediction_cache(entailment_cache_id)
@@ -65,12 +65,12 @@ class EntailmentLLM(BaseEntailment):
         run.file(self.entailment_file).download(
             replace=True, exist_ok=False, root=wandb.run.dir)
 
-        with open(f'{wandb.run.dir}/{self.entailment_file}', "rb") as infile:
-            return pickle.load(infile)
+    #     with open(f'{wandb.run.dir}/{self.entailment_file}', "rb") as infile:
+    #         return pickle.load(infile)
 
-    def save_prediction_cache(self):
-        # Write the dictionary to a pickle file.
-        utils.save(self.prediction_cache, self.entailment_file)
+    # def save_prediction_cache(self):
+    #     # Write the dictionary to a pickle file.
+    #     utils.save(self.prediction_cache, self.entailment_file)
 
     def check_implication(self, text1, text2, example=None):
         if example is None:

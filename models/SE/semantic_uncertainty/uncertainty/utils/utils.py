@@ -10,6 +10,8 @@ from evaluate import load
 
 from uncertainty.models.huggingface_models import HuggingfaceModel
 from uncertainty.utils import openai as oai
+from semantic_uncertainty.SE_config import SEConfig
+
 
 BRIEF_PROMPTS = {
     'default': "Answer the following question as briefly as possible.\n",
@@ -272,14 +274,13 @@ def construct_fewshot_prompt_from_indices(dataset, example_indices, brief, brief
 #     return reference
 
 
-def init_model(args):
-    mn = args.model_name
-    if 'llama' in mn.lower() or 'falcon' in mn or 'mistral' in mn.lower():
+def init_model(config: SEConfig, model_name):
+    if 'llama' in model_name.lower() or 'falcon' in model_name or 'mistral' in model_name.lower():
         model = HuggingfaceModel(
-            mn, stop_sequences='default',
-            max_new_tokens=args.model_max_new_tokens)
+            model_name, stop_sequences='default',
+            max_new_tokens=config.model_max_new_tokens)
     else:
-        raise ValueError(f'Unknown model_name `{mn}`.')
+        raise ValueError(f'Unknown model_name `{model_name}`.')
     return model
 
 
