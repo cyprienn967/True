@@ -14,9 +14,10 @@ from .pretrained_models.huggingface_models import HuggingfaceModel
 from .utils import openai as oai
 from .utils import utils
 
+os.environ['USE_MPS'] = 'true'  # for M3
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-
+DEVICE = torch.device("mps") if os.environ.get('USE_MPS', False) else DEVICE
 
 class BaseEntailment:
     def save_prediction_cache(self):

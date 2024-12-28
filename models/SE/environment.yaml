@@ -10,6 +10,10 @@ dependencies:
   - pytorch
   - torchvision
   - torchaudio
+  - cuda-libraries
+  - cudatoolkit
+  - cudnn
+  - cuda-nvcc
   - pytorch-cuda=11.8
   - numpy
   - transformers

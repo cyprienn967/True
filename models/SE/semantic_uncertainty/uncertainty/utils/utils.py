@@ -273,7 +273,8 @@ def construct_fewshot_prompt_from_indices(dataset, example_indices, brief, brief
 #     return reference
 
 
-def init_model(config: SEConfig, model_name):
+def init_model(config: SEConfig):
+    model_name = config.model
     if 'llama' in model_name.lower() or 'falcon' in model_name or 'mistral' in model_name.lower():
         model = HuggingfaceModel(
             model_name, stop_sequences='default',

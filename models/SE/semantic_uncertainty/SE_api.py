@@ -98,29 +98,30 @@ def compute_entropy(config: SEConfig, prompt, full_responses, most_likely_answer
 
 app = Flask(__name__)
 
+# Initialize the model once
+config = SEConfig()
+model = utils.init_model(config)
+
 @app.route('/')
 def home():
-  return "Semantic Entropy Checker API"
+  return "Semantic Entropy API"
 
 @app.route('/api/data', methods=['GET'])
-def get_data():
-  id = request.args.get('id')
+def get_entropies():
+  request_data = request.get_json()
+  id = request_data["id"]
   if not id:
     return jsonify({"error": "ID parameter is required"}), 400
-  api_key = request.args.get('api_key')
+  api_key = request_data["api_key"]
   if not api_key:
     return jsonify({"error": "API Key parameter is required"}), 400
-  prompt = request.args.get('prompt')
+  prompt = request_data["prompt"]
   if not prompt:
     return jsonify({"error": "Prompt parameter is required"}), 400
-  in_context = request.args.get('in_context', default=False, type=bool)
+  in_context = request_data.get("in_context", False)
   inference_temperature = request.args.get('inference_temperature', default=1, type=float)
   
-  # Fetch data from API
-  
-  config = SEConfig()
-  
-  model = utils.init_model(config.model)
+
   generations, results_dict = {}, {}
 
   # current_input = make_prompt(in_context, context, question, None)

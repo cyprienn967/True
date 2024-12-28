@@ -28,7 +28,7 @@ class StoppingCriteriaSub(StoppingCriteria):
         self.tokenizer = tokenizer
         self.match_on = match_on
         if self.match_on == 'tokens':
-            self.stops = [torch.tensor(self.tokenizer.encode(i)).to('cuda') for i in self.stops]
+            self.stops = [torch.tensor(self.tokenizer.encode(i)).to("mps") for i in self.stops]
             print(self.stops)
 
     def __call__(self, input_ids: torch.LongTensor, scores: torch.FloatTensor):
@@ -112,14 +112,14 @@ class HuggingfaceModel(BaseModel):
 
             self.tokenizer = AutoTokenizer.from_pretrained(
                 f"{base}/{model_name}", device_map="auto",
-                token_type_ids=None)
+                local_files_only=True, token_type_ids=None)
 
             llama65b = '65b' in model_name and base == 'huggyllama'
             llama2_70b = '70b' in model_name and base == 'meta-llama'
 
             if ('7b' in model_name or '13b' in model_name) or eightbit:
                 self.model = AutoModelForCausalLM.from_pretrained(
-                    f"{base}/{model_name}", device_map="auto",
+                    f"{base}/{model_name}", local_files_only=True,
                     max_memory={0: '80GIB'}, **kwargs,)
 
             elif llama2_70b or llama65b:
@@ -165,12 +165,13 @@ class HuggingfaceModel(BaseModel):
             model_id = f'mistralai/{model_name}'
             self.tokenizer = AutoTokenizer.from_pretrained(
                 model_id, device_map='auto', token_type_ids=None,
-                clean_up_tokenization_spaces=False)
+                local_files_only=True, clean_up_tokenization_spaces=False)
 
             self.model = AutoModelForCausalLM.from_pretrained(
                 model_id,
                 device_map='auto',
                 max_memory={0: '80GIB'},
+                local_files_only=True,
                 **kwargs,
             )
 
@@ -178,7 +179,7 @@ class HuggingfaceModel(BaseModel):
             model_id = f'tiiuae/{model_name}'
             self.tokenizer = AutoTokenizer.from_pretrained(
                 model_id, device_map='auto', token_type_ids=None,
-                clean_up_tokenization_spaces=False)
+                local_files_only=True, clean_up_tokenization_spaces=False)
 
             kwargs = {'quantization_config': BitsAndBytesConfig(
                 load_in_8bit=True,)}
@@ -187,6 +188,7 @@ class HuggingfaceModel(BaseModel):
                 model_id,
                 trust_remote_code=True,
                 device_map='auto',
+                local_files_only=True,
                 **kwargs,
             )
         else:
@@ -199,7 +201,7 @@ class HuggingfaceModel(BaseModel):
     def predict(self, input_data, temperature, return_full=False):
 
         # Implement prediction.
-        inputs = self.tokenizer(input_data, return_tensors="pt").to("cuda")
+        inputs = self.tokenizer(input_data, return_tensors="pt")
 
         if 'llama' in self.model_name.lower() or 'falcon' in self.model_name or 'mistral' in self.model_name.lower():
             if 'token_type_ids' in inputs:  # Some HF models have changed.
