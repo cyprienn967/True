@@ -6,6 +6,7 @@ import random
 from tqdm import tqdm
 
 import numpy as np
+import json
 import torch
 import wandb
 
@@ -22,6 +23,7 @@ from semantic_uncertainty.uncertainty.semantic_entropy import EntailmentGPT35
 from semantic_uncertainty.uncertainty.semantic_entropy import EntailmentGPT4Turbo
 from semantic_uncertainty.uncertainty.semantic_entropy import EntailmentLlama
 from semantic_uncertainty.uncertainty.utils import utils
+from semantic_uncertainty.uncertainty.utils import openai as oai
 from collections import defaultdict
 
 # edit this
@@ -104,7 +106,9 @@ model = utils.init_model(config)
 
 @app.route('/')
 def home():
-  return "Semantic Entropy API"
+  response, entropies = oai.predict("hi!", temperature=1.0, model='gpt-4', logprobs=True)
+  data = {"response": response, "entropies": json.dump(entropies)}
+  return jsonify(data)
 
 @app.route('/api/data', methods=['GET'])
 def get_entropies():

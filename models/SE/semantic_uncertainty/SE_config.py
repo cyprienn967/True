@@ -12,7 +12,7 @@ class SEConfig:
     self.use_all_generations = True
     self.num_generations = 10
     self.use_num_generations = 5
-    self.model = "Llama-2-7b"
+    self.model = "gpt-4o"    # "Llama-2-7b"
     self.entailment_model = "gpt-4"
     self.strict_entailment = False
     self.model_max_new_tokens = 500

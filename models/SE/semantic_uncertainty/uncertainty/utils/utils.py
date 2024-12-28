@@ -279,6 +279,8 @@ def init_model(config: SEConfig):
         model = HuggingfaceModel(
             model_name, stop_sequences='default',
             max_new_tokens=config.model_max_new_tokens)
+    elif 'gpt' in model_name.lower():
+        model = get_gpt_model(model_name)
     else:
         raise ValueError(f'Unknown model_name `{model_name}`.')
     return model

@@ -3,6 +3,7 @@ import hashlib
 from tenacity import retry, wait_random_exponential, retry_if_not_exception_type
 
 from openai import OpenAI
+from ...SE_config import SEConfig
 
 
 CLIENT = OpenAI(api_key=os.environ.get('OPENAI_API_KEY', False))
@@ -14,7 +15,7 @@ class KeyError(Exception):
 
 
 @retry(retry=retry_if_not_exception_type(KeyError), wait=wait_random_exponential(min=1, max=10))
-def predict(prompt, temperature=1.0, model='gpt-4'):
+def predict(prompt, temperature=1.0, model='gpt-4', logprobs=False):
     """Predict with GPT models."""
 
     if not CLIENT.api_key:
@@ -26,7 +27,7 @@ def predict(prompt, temperature=1.0, model='gpt-4'):
         ]
     else:
         messages = prompt
-
+        
     if model == 'gpt-4':
         model = 'gpt-4-0613'
     elif model == 'gpt-4-turbo':
@@ -37,11 +38,21 @@ def predict(prompt, temperature=1.0, model='gpt-4'):
     output = CLIENT.chat.completions.create(
         model=model,
         messages=messages,
-        max_tokens=200,
+        max_tokens=500,
         temperature=temperature,
     )
     response = output.choices[0].message.content
-    return response
+    
+    if logprobs:
+        logits = [token_info.logprob for token_info in output.choices[0].logprobs.content]
+        return response, logits
+    else:
+        return response, None
+
+
+# @retry(retry=retry_if_not_exception_type(KeyError), wait=wait_random_exponential(min=1, max=10))
+# def sample_predict(prompt, num_samples, model='gpt-4', temperature=1.0, logprobs=0, config: SEConfig=None):
+    
 
 
 def md5hash(string):
