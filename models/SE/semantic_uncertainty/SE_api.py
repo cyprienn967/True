@@ -10,7 +10,7 @@ import json
 import torch
 import wandb
 
-from semantic_uncertainty.SE_config import SEConfig
+from semantic_uncertainty.uncertainty.utils.SE_config import SEConfig
 from semantic_uncertainty.uncertainty.semantic_entropy import get_semantic_ids
 from semantic_uncertainty.uncertainty.semantic_entropy import logsumexp_by_id
 from semantic_uncertainty.uncertainty.semantic_entropy import predictive_entropy
@@ -95,7 +95,7 @@ def compute_entropy(config: SEConfig, prompt, full_responses, most_likely_answer
   pe = predictive_entropy_rao(log_likelihood_per_semantic_id)
   entropies['semantic_entropy'].append(pe)
   
-  return entropies, result_dict
+  return entropies, semantic_ids
 
 
 app = Flask(__name__)
@@ -151,11 +151,12 @@ def get_entropies():
   # Append all predictions for this example to `generations`.
   # generations['responses'] = full_responses
   
-  entropies, result_dict = compute_entropy(config, prompt, full_responses, most_likely_answer_dict)
+  entropies, semantic_ids = compute_entropy(config, prompt, full_responses, most_likely_answer_dict)
 
   # Return data
   entropy_data = {
-    "id": id
+    "semantic ids": json.dumps(semantic_ids),
+    "entropies": json.dumps(entropies)
   }
   return jsonify(entropy_data)
 

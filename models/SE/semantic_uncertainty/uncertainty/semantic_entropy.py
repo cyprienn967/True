@@ -89,7 +89,7 @@ class EntailmentLLM(BaseEntailment):
         #         raise ValueError
             
         #     self.prediction_cache[hashed] = response
-        response = self.predict(prompt, temperature=0.02)
+        response, logits, embeddings, = self.predict(prompt, temperature=0.02)
 
         logging.info('%s prediction: %s', self.name, response)
 
