@@ -103,6 +103,7 @@ export default function Dashboard() {
 
       {/* Main Content */}
       <div className="w-3/4 bg-gray-50 dark:bg-neutral-950 p-8">
+        {/* My Profile Section */}
         {activeCategory === "profile" && (
           <div>
             <h2 className="text-2xl font-bold text-black dark:text-white mb-6">
@@ -148,13 +149,91 @@ export default function Dashboard() {
           </div>
         )}
 
-        {activeCategory !== "profile" && (
+        {/* Bias and Fairness Section */}
+        {/* {activeCategory === "bias" && (
+          <div>
+            <h2 className="text-2xl font-bold text-black dark:text-white mb-6">
+              Bias and Fairness
+            </h2>
+            <p className="text-neutral-700 dark:text-neutral-400 mb-4">
+              Below are some visualizations from the bias analysis.
+            </p>
+            <div className="space-y-6">
+              <div>
+                <h3 className="font-semibold">Spider Plot</h3>
+                <img
+                  src="/bias/bias_spider_plot.png"
+                  alt="Bias Spider Plot"
+                  className="mt-2 border rounded max-w-full"
+                />
+              </div>
+              <div>
+                <h3 className="font-semibold">Heatmap</h3>
+                <img
+                  src="/bias/bias_heatmap.png"
+                  alt="Bias Heatmap"
+                  className="mt-2 border rounded max-w-full"
+                />
+              </div>
+              <div>
+                <h3 className="font-semibold">Toxicity Pie Chart</h3>
+                <img
+                  src="/bias/toxicity_pie_chart.png"
+                  alt="Toxicity Pie Chart"
+                  className="mt-2 border rounded max-w-full"
+                />
+              </div>
+            </div>
+          </div>
+        )} */}
+        {/* Bias and Fairness Section */}
+        {activeCategory === "bias" && (
+  <div>
+    <h2 className="text-2xl font-bold text-black dark:text-white mb-6">
+      Bias and Fairness
+    </h2>
+    <p className="text-neutral-700 dark:text-neutral-400 mb-4">
+      Below are some visualizations from the bias analysis.
+    </p>
+    <div className="space-y-6">
+      <div>
+        <h3 className="font-semibold">Spider Plot</h3>
+        <img
+          src="/bias/bias_spider_plot.png"
+          alt="Bias Spider Plot"
+          className="mt-2 border rounded max-w-full w-1/2 transition-transform duration-300 hover:scale-105"
+        />
+      </div>
+      <div>
+        <h3 className="font-semibold">Heatmap</h3>
+        <img
+          src="/bias/bias_heatmap.png"
+          alt="Bias Heatmap"
+          className="mt-2 border rounded max-w-full w-1/2 transition-transform duration-300 hover:scale-105"
+        />
+      </div>
+      <div>
+        <h3 className="font-semibold">Toxicity Pie Chart</h3>
+        <img
+          src="/bias/toxicity_pie_chart.png"
+          alt="Toxicity Pie Chart"
+          className="mt-2 border rounded max-w-full w-1/2 transition-transform duration-300 hover:scale-105"
+        />
+      </div>
+    </div>
+  </div>
+)}
+
+
+        {/* Other Sections (Hallucinations, Jailbreaking, CoT) */}
+        {activeCategory !== "profile" && activeCategory !== "bias" && (
           <div>
             <h2 className="text-2xl font-bold text-black dark:text-white mb-6">
               {categories.find((c) => c.id === activeCategory)?.name}
             </h2>
             <p className="text-neutral-700 dark:text-neutral-400">
-              Content for {categories.find((c) => c.id === activeCategory)?.name} will go here.
+              Content for{" "}
+              {categories.find((c) => c.id === activeCategory)?.name} will go here.
             </p>
           </div>
         )}

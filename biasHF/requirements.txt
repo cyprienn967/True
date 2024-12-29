@@ -3,3 +3,6 @@ transformers
 evaluate
 torch
 unidecode
+matplotlib
+seaborn
+numpy
