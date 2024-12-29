@@ -1,5 +1,3 @@
-# server.py
-
 import os
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
@@ -8,28 +6,24 @@ from typing import Optional
 import openai
 
 from conversation_store import conversation_store
+from retrieval import hybrid_retrieve
 from verification import verify_partial_answer
-from retrieval import retrieve_relevant_docs
+from critique import correct_after_critique
+from pipeline import chain_of_thought_reader
 
 
-#  Set your OpenAI API Key
-
-openai.api_key = "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"
-
-
-#   FastAPI Initialization
+openai.api_key = "" #put a key here
 
 app = FastAPI(
     title="Stepwise RAG Verification API",
     version="1.0.0",
-    description="Provides endpoints for verifying partial steps in a conversation using RAG & NLI stuff"
+    description="Retrieval + Verification + Correction"
 )
-
 
 class VerifyRequest(BaseModel):
     conversation_id: str
     partial_text: str
-    auto_correct: bool = True  # if True, attempt auto-correction if verification fails
+    auto_correct: bool = True
 
 class VerifyResponse(BaseModel):
     verified_text: str
@@ -41,72 +35,36 @@ class ConversationResponse(BaseModel):
     partial_steps: list[str]
 
 
-#   Auto-correction function
-
-def correct_step_with_openai(original_text: str, references: list[str]) -> str:
-
-    system_prompt = (
-        "You are a factual correctness assistant. You generated a partial answer that contradicts known facts.\n"
-        "Below are the relevant references from your knowledge base:\n" +
-        "\n".join(f"- {r}" for r in references) + "\n" +
-        "Please rewrite the partial answer so that it is factually correct and aligns with the references.\n"
-        "Your answer should be concise (1-2 sentences)."
-    )
-    user_prompt = f"Original partial answer: {original_text}\nRewrite it correctly."
-
-    try:
-        response = openai.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt},
-            ],
-            max_tokens=100,
-            temperature=0.5
-        )
-        corrected = response.choices[0].message.content.strip()
-        print("DEBUG: Correction function was called")
-        print("DEBUG: Original partial text:", original_text)
-        print("DEBUG: References passed in:", references)
-        print("DEBUG: The LLM responded with corrected text:", corrected)
-        return corrected
-    except Exception as e:
-        return f"[Correction Error: {str(e)}]"
-
-
-#   POST /verify_step
-
 @app.post("/verify_step", response_model=VerifyResponse)
 def verify_step(req: VerifyRequest):
-    
-    #endpoint that LLM stores after generating a partial step, if contradiction is found and auto_correct is True we correct
-    #store resulting text in convo store
+    """
+    Endpoint to verify (and optionally correct) a partial step using:
+    - NLI aggregator (verify_partial_answer)
+    - correction (correct_after_critique)
+    """
     conversation_id = req.conversation_id
     partial_text = req.partial_text
 
-
     conversation_store.init_conversation(conversation_id)
 
+    # 1. Verify partial step
     is_valid = verify_partial_answer(partial_text)
     was_contradicted = not is_valid
     final_text = partial_text
 
-    if not is_valid:
-        if req.auto_correct:
-            
-            relevant_refs = retrieve_relevant_docs(partial_text, top_k=3)
-            corrected_text = correct_step_with_openai(partial_text, relevant_refs)
-            
-            if verify_partial_answer(corrected_text):
-                final_text = corrected_text
-                was_contradicted = True
-            else:
-                
-                final_text = "[HALTED] Could not correct contradiction."
+    # 2. If invalid => try auto-correction
+    if not is_valid and req.auto_correct:
+        # Retrieve relevant docs to help correction
+        relevant_docs = hybrid_retrieve(partial_text, top_k=3)
+        corrected_text = correct_after_critique(partial_text, relevant_docs)
+        # Re-verify the corrected text
+        if verify_partial_answer(corrected_text):
+            final_text = corrected_text
+            was_contradicted = True
         else:
-            final_text = "[FAILED VERIFICATION]"
+            final_text = "[HALTED] Could not correct contradiction."
 
-    
+    # 3. Add final step to conversation
     conversation_store.add_step(conversation_id, final_text)
 
     return VerifyResponse(
@@ -115,13 +73,19 @@ def verify_step(req: VerifyRequest):
         conversation_id=conversation_id
     )
 
+@app.get("/chain_of_thought_reader")
+def chain_of_thought_reader_endpoint(query: str, top_k: int = 3):
+    """
+    Example endpoint demonstrating a chain-of-thought 'retriever-reader' pipeline.
+    """
+    answer = chain_of_thought_reader(query, top_k=top_k)
+    return {"query": query, "answer": answer}
 
-#  GET /conversation/{conv_id}
 
 @app.get("/conversation/{conv_id}", response_model=ConversationResponse)
 def get_conversation(conv_id: str):
     """
-    Retrieve all partial steps for a given conversation ID.
+    Retrieve all partial steps for the specified conversation ID.
     """
     steps = conversation_store.get_steps(conv_id)
     return ConversationResponse(
@@ -130,9 +94,8 @@ def get_conversation(conv_id: str):
     )
 
 
-#  For local running
-
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("server:app", host="0.0.0.0", port=8000, reload=True)
-
+    # Run uvicorn if you want to serve locally
+    # uvicorn.run("server:app", host="0.0.0.0", port=8000, reload=True)
+    pass

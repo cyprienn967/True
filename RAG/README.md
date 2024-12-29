@@ -1,26 +1,24 @@
-STEPS TO RUN:
-cd RAG
-python -m venv venv (to activate virtual environment)
-source venv/bin/activate (virtual environment)
-pip install -r requirements.txt (install requirements)
-python knowledge_base.py (to create knowledge base - creates file called knowledge_base.pkl)
-uvicorn server:app --reload (to run server which you can access at http://127.0.0.1:8000)
+step-byu-step retrieval and verification API
 
-To then test THE API:
-curl -X POST -H "Content-Type: application/json" \
-  -d '{
-    "conversation_id":"my-convo-1",
-    "partial_text":"Mars has 50 inhabitants",
-    "auto_correct": true
-  }' \
-  http://127.0.0.1:8000/verify_step
 
-(put the above in a seperate terminal (cd into RAG first as well))
-check convo:
-curl http://127.0.0.1:8000/conversation/my-convo-1
+1. Hybrid Retrieval (FAISS + BM25)  
+2. Multi-Document Aggregator for NLI Verification  
+3. Retriever–Reader Pipeline with Chain-of-Thought Prompting  
+4. LLM-on-LLM Critique for post-generation correction  
+5. Benchmarking comparing GPT-2 outputs with/without the verification pipeline
 
-Possible next steps off the top of my head (on top of your next steps):
-1. chunking + metadata : better retrieving
-2. cross encoder re ranking : after retreive top-k w/ SBERT pass to cross encoder to re rank for better acc
-3. more verification layers: quick substring check, NLI check, entity check
-4. persistent store: instead of conversation-store.py store partial steps in vertical DB/cahce
+Create a virtual environment and install requirements:
+bash
+python -m venv venv
+source venv/bin/activate
+pip install fastapi uvicorn openai sentence-transformers faiss-cpu torch transformers rank-bm25 requests
+(requirements file isn't up to date i cba rn)
+
+run: 
+python knowledge_base.py to build knowledge base 
+(KNOWLEDGE BASE IS BUILT WHEN HAS bm25_index.pkl, knowledge_base.pkl, knowledge_index)
+(if already built no need to re run python script but if update knowledge base, delete those files and re run)
+uvicorn server:app --host 0.0.0.0 --port 8000 --reload
+
+in another terminal:
+python benchmark.py

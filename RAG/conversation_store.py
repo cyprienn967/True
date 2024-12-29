@@ -1,9 +1,7 @@
 from typing import List, Dict
 
 class ConversationStore:
-    
-
-    #should really be storing in DB to be properly deployablr
+ 
     def __init__(self):
         self.state: Dict[str, List[str]] = {}
 
@@ -18,6 +16,5 @@ class ConversationStore:
     def get_steps(self, conversation_id: str) -> List[str]:
         self.init_conversation(conversation_id)
         return self.state[conversation_id]
-
 
 conversation_store = ConversationStore()
