@@ -10,7 +10,7 @@ class SEConfig:
     self.api_key = "your_api_key_here"
     self.api_url = "https://api.example.com"
     self.use_all_generations = True
-    self.num_generations = 5
+    self.num_generations = 2
     self.use_num_generations = 1
     self.model = "gpt-3.5"    # "Llama-2-7b"
     self.entailment_model = "gpt-4"

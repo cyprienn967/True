@@ -106,24 +106,36 @@ model = utils.init_model(config)
 
 @app.route('/')
 def home():
-  response, entropies = oai.predict("hi!", temperature=1.0, model='gpt-4', logprobs=True)
-  data = {"response": response, "entropies": json.dump(entropies)}
-  return jsonify(data)
+  # response, entropies = oai.predict("hi!", temperature=1.0, model='gpt-4', logprobs=True)
+  # data = {"response": response, "entropies": json.dump(entropies)}
+  # return jsonify(data)
+  return "Model initialized"
 
 @app.route('/api/data', methods=['GET'])
 def get_entropies():
   request_data = request.get_json()
+  
   id = request_data["id"]
   if not id:
-    return jsonify({"error": "ID parameter is required"}), 400
+    return jsonify({"error": "id parameter is required"}), 400
+  
   api_key = request_data["api_key"]
   if not api_key:
-    return jsonify({"error": "API Key parameter is required"}), 400
+    return jsonify({"error": "api_key parameter is required"}), 400
+  
   prompt = request_data["prompt"]
   if not prompt:
-    return jsonify({"error": "Prompt parameter is required"}), 400
+    return jsonify({"error": "prompt parameter is required"}), 400
+  
+  model_name = request_data["model"]
+  if not model_name:
+    return jsonify({"error": "model parameter is required"}), 400
+  
   in_context = request_data.get("in_context", False)
+  context = request_data.get("context", None)
+  
   inference_temperature = request.args.get('inference_temperature', default=1, type=float)
+
   
 
   generations, results_dict = {}, {}
@@ -132,6 +144,7 @@ def get_entropies():
   # local_prompt = prompt + current_input
 
   full_responses = []
+  sampled_responses = []
   num_generations = 1 + config.num_generations
 
   for i in range(num_generations):
@@ -147,6 +160,7 @@ def get_entropies():
         'token_log_likelihoods': token_log_likelihoods,
         'embedding': embedding,}
     full_responses.append((predicted_answer, token_log_likelihoods, embedding))
+    sampled_responses.append(predicted_answer)
 
   # Append all predictions for this example to `generations`.
   # generations['responses'] = full_responses
@@ -155,6 +169,8 @@ def get_entropies():
 
   # Return data
   entropy_data = {
+    "output": most_likely_answer_dict['response'],
+    "all responses": json.dumps(sampled_responses),
     "semantic ids": json.dumps(semantic_ids),
     "entropies": json.dumps(entropies)
   }
