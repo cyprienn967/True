@@ -9,7 +9,7 @@ from pathlib import Path
 import CoNLI.modules.utils.gpt_output_utils as gpt_output_utils
 from CoNLI.modules.utils.aoai_utils import AOAIUtil
 from CoNLI.modules.hallucination_mitigation_prompt import hallucination_mitigation_prompt
-from CoNLI.modules.arguments import OpenaiArguments, MitigationArguments
+from True.models.CoNLI.configs.arguments import OpenaiArguments, MitigationConfig
 
 @dataclass
 class HmResult:
@@ -29,11 +29,11 @@ class HallucinationMitigator :
     def __init__(
             self,
             openai_args : OpenaiArguments = OpenaiArguments(),
-            mitigation_args : MitigationArguments = MitigationArguments(),
+            mitigation_config : MitigationConfig = MitigationConfig(),
             config_file: str = (Path(__file__).absolute()).parent.parent/"configs"/"aoai_config.json",
             ) -> None:
         
-        self._mitigation_args = mitigation_args
+        self._mitigation_config = mitigation_config
         self._openai_args = openai_args 
         self.aoaiUtil = AOAIUtil(
             config_setting=openai_args.config_setting,
@@ -91,7 +91,7 @@ class HallucinationMitigator :
                             payload,
                             self.aoaiUtil,
                             self._openai_args,
-                            self._mitigation_args): payload
+                            self._mitigation_config): payload
                         for payload in gpt_request_payloads
                     }
                     
@@ -139,7 +139,7 @@ class HallucinationMitigator :
 
     # send payload to GPT endpoint and get back the results
     @staticmethod
-    def process_payload_by_GPT(payload, aoaiUtil : AOAIUtil, openai_args : OpenaiArguments, mitigation_args : MitigationArguments) -> Dict:
+    def process_payload_by_GPT(payload, aoaiUtil : AOAIUtil, openai_args : OpenaiArguments, mitigation_config : MitigationConfig) -> Dict:
 
         outputs = []
         try:
@@ -147,12 +147,12 @@ class HallucinationMitigator :
             if openai_args.use_chat_completions:
                 gpt_response = aoaiUtil.get_chat_completion(
                     messages = payload['prompt'],
-                    temperature = mitigation_args.temp,
-                    top_p = mitigation_args.top_p, 
-                    max_tokens = mitigation_args.max_tokens,
-                    frequency_penalty = mitigation_args.freq_penalty,
-                    presence_penalty = mitigation_args.presence_penalty,
-                    generations=mitigation_args.generations)
+                    temperature = mitigation_config.temp,
+                    top_p = mitigation_config.top_p, 
+                    max_tokens = mitigation_config.max_tokens,
+                    frequency_penalty = mitigation_config.freq_penalty,
+                    presence_penalty = mitigation_config.presence_penalty,
+                    generations=mitigation_config.generations)
                 choices = gpt_response['choices']
                 for choice in choices:
                     outputs.append(choice['message']['content'])
@@ -160,13 +160,13 @@ class HallucinationMitigator :
             else:
                 gpt_response = aoaiUtil.get_completion(
                     prompt = payload['prompt'],
-                    max_tokens = mitigation_args.max_tokens,
-                    temperature = mitigation_args.temp,
-                    top_p = mitigation_args.top_p,
-                    frequency_penalty = mitigation_args.freq_penalty,
-                    presence_penalty = mitigation_args.presence_penalty,
-                    logprobs = mitigation_args.log_prob,
-                    generations=mitigation_args.generations)
+                    max_tokens = mitigation_config.max_tokens,
+                    temperature = mitigation_config.temp,
+                    top_p = mitigation_config.top_p,
+                    frequency_penalty = mitigation_config.freq_penalty,
+                    presence_penalty = mitigation_config.presence_penalty,
+                    logprobs = mitigation_config.log_prob,
+                    generations=mitigation_config.generations)
                 choices = gpt_response['choices']
                 for choice in choices:
                     outputs.append(choice['text'])

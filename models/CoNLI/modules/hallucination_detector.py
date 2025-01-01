@@ -9,7 +9,8 @@ from typing import Dict, List
 from pathlib import Path
 
 import CoNLI.modules.utils.gpt_output_utils as gpt_output_utils
-from CoNLI.modules.arguments import OpenaiArguments, DetectionArguments
+from CoNLI.configs.nli_config import DetectionConfig
+from CoNLI.configs.openai_config import OpenaiArguments
 from CoNLI.modules.entity_detector import EntityDetectorBase, GenTAEntityDetector
 from CoNLI.modules.hallucination_detection_prompt import hallucination_detection_prompt
 from CoNLI.modules.hd_constants import FieldName
@@ -28,8 +29,7 @@ class HallucinationDetector:
                  entity_detector : EntityDetectorBase,
                  openai_args : OpenaiArguments = OpenaiArguments(),
                  aoai_config_file: str = (Path(__file__).absolute()).parent/"configs"/"aoai_config.json",
-                 detection_args : DetectionArguments = DetectionArguments(),
-                 disable_progress_bar : bool = False,
+                 detection_config : DetectionConfig = DetectionConfig(),
                  entity_detection_parallelism: int = 1,
                  entity_detection_batch: int = 25,
                  ) -> None:
@@ -41,10 +41,9 @@ class HallucinationDetector:
         self._sentence_splitter = SentenceSplitter()
         
         self._openai_args = openai_args
-        self._detection_args = detection_args
+        self._detection_args = detection_config
         self._prompt_util = hallucination_detection_prompt(use_chat_completions = openai_args.use_chat_completions,
                                                             max_prompt_tokens = AOAIUtil.get_model_context_length(aoai_config_file, openai_args.config_setting))
-        self._disable_progress_bar = disable_progress_bar
 
         self.aoaiUtil = AOAIUtil(
             config_setting=openai_args.config_setting,
@@ -76,7 +75,6 @@ class HallucinationDetector:
         return self.detect_hallucinations(data_id, source, sentences_enriched)
 
     def _add_entities_to_sentences(self, sentences : List[Dict]) -> List[Dict]:
-        disable_progress = self._disable_progress_bar
         if isinstance(self._entity_detector, GenTAEntityDetector):
             batch_len = min(self._entity_detection_batch, 5)
         elif isinstance(self._entity_detector):
@@ -89,11 +87,9 @@ class HallucinationDetector:
         sentence_batches = [sentences_text[x:x+batch_len] for x in range(0, len(sentences_text), batch_len)]
         max_workers = min(max(self._entity_detection_parallelism, 1), len(sentence_batches))
         hd_entities = []
-        with tqdm(total=len(sentence_batches), disable=disable_progress, leave=False) as pbar2:
-            with ThreadPoolExecutor(max_workers=max_workers) as executor:
-                for batch in executor.map(self._entity_detector.detect_entities, sentence_batches):
-                    hd_entities += batch
-                    pbar2.update(1)
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            for batch in executor.map(self._entity_detector.detect_entities, sentence_batches):
+                hd_entities += batch
         n_entities = sum(len(x) for x in hd_entities)
         sentences_df[FieldName.HD_ENTITY] = hd_entities
         sentences = sentences_df.to_dict('records')
@@ -151,7 +147,6 @@ class HallucinationDetector:
                                  perf_counters: dict) -> List[Dict]:
         batch_size = self._detection_args.batch_size
         max_parallelism = self._openai_args.max_parallelism
-        disable_progress = self._disable_progress_bar
 
         items, results = [], []
         for data in sentences:
@@ -185,7 +180,7 @@ class HallucinationDetector:
         if len(gpt_request_payloads) > 0:
             gpt_results_raw = list()
             max_workers = min(max(max_parallelism, 1), len(gpt_request_payloads))
-            with tqdm(total=len(gpt_request_payloads), disable=disable_progress, leave=False) as pbar2:
+            with tqdm(total=len(gpt_request_payloads), leave=False) as pbar2:
                 with ThreadPoolExecutor(max_workers=max_workers) as executor:
                     futures = {
                         executor.submit(
@@ -211,11 +206,10 @@ class HallucinationDetector:
 
     # send payload to GPT endpoint and get back the results
     @staticmethod
-    def process_payload_by_GPT(payload, aoaiUtil : AOAIUtil, openai_args : OpenaiArguments, detection_args : DetectionArguments) -> Dict:
+    def process_payload_by_GPT(payload, aoaiUtil : AOAIUtil, openai_args : OpenaiArguments, detection_args : DetectionConfig) -> Dict:
 
         outputs = []
         try:
-            logging.info(f"Start to call GPT to process {len(payload['items'])} items")
             if openai_args.use_chat_completions:
                 gpt_response = aoaiUtil.get_chat_completion(
                     messages = payload['prompt'],

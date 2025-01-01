@@ -9,7 +9,7 @@ from typing import List
 from azure.core.credentials import AzureKeyCredential
 from azure.ai.textanalytics.aio import TextAnalyticsClient
 
-from CoNLI.modules.arguments import TAArguments
+from True.models.CoNLI.configs.arguments import TAArguments
 
 # entity class for hallucination detection
 @dataclass

@@ -7,7 +7,7 @@ from glob import glob
 from typing import Dict, List
 from pathlib import Path
 
-from CoNLI.modules.arguments import OpenaiArguments, create_openai_arguments
+from True.models.CoNLI.configs.arguments import OpenaiArguments, create_openai_arguments
 from CoNLI.modules.hallucination_mitigator import HmResult, HdResult, HallucinationMitigator
 from CoNLI.modules.hd_constants import AllHallucinations, FieldName
 from CoNLI.modules.utils.conversion_utils import str2bool

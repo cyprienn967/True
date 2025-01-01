@@ -6,7 +6,9 @@ import os
 from pathlib import Path
 import time
 from tqdm import tqdm
-from CoNLI.modules.arguments import DetectionArguments, create_openai_arguments, create_ta_arguments
+from CoNLI.configs.nli_config import DetectionConfig
+from CoNLI.configs.openai_config import create_openai_arguments
+from CoNLI.configs.ta_config import create_ta_arguments
 from CoNLI.modules.data.data_loader import DataLoader
 from CoNLI.modules.entity_detector import EntityDetectorFactory
 from CoNLI.modules.sentence_selector import SentenceSelectorFactory
@@ -155,8 +157,8 @@ if __name__ == '__main__':
     openai_args = create_openai_arguments(args.aoai_config_setting, args.max_parallelism, config_file=args.aoai_config_file)
     ta_args = create_ta_arguments(args.ta_config_setting, ta_config_file=args.ta_config_file)
 
-    detector_args = DetectionArguments()
-    detector_args.batch_size = args.gpt_batch_size
+    detector_config = DetectionConfig()
+    detector_config.batch_size = args.gpt_batch_size
     
     print('Enabling parallelism for the tokenizer')
     os.environ['TOKENIZERS_PARALLELISM'] = 'true'
@@ -203,7 +205,7 @@ if __name__ == '__main__':
         sentence_selector=sentence_selector,
         entity_detector=entity_detector,
         openai_args=openai_args,
-        detection_args=detector_args,
+        detection_config=detector_config,
         aoai_config_file=args.aoai_config_file,
         entity_detection_parallelism=args.entity_detection_parallelism,
         disable_progress_bar=pbar_disabled_batch_request_level)
