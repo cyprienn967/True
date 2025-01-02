@@ -9,7 +9,7 @@ from pathlib import Path
 import CoNLI.modules.utils.gpt_output_utils as gpt_output_utils
 from CoNLI.modules.utils.aoai_utils import AOAIUtil
 from CoNLI.modules.hallucination_mitigation_prompt import hallucination_mitigation_prompt
-from True.models.CoNLI.configs.arguments import OpenaiArguments, MitigationConfig
+from CoNLI.configs.arguments import OpenaiArguments, MitigationConfig
 
 @dataclass
 class HmResult:

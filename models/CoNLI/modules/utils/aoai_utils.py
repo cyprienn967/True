@@ -1,7 +1,6 @@
 import datetime
 import json
 import re
-from azure.identity import AzureCliCredential, ManagedIdentityCredential
 import logging
 import os
 from openai import OpenAI
@@ -34,14 +33,14 @@ class AOAIUtil:
 
     def get_completion(
             self,
-            model,
             prompt: str,
-            temperature: float,
-            top_p: float,
-            max_tokens: int,
-            frequency_penalty: float,
-            presence_penalty: float,
-            logprobs: int,
+            model,
+            temperature: float = 1.0,
+            top_p: float = 0.0,
+            max_tokens: int = 100,
+            frequency_penalty: float = 0.0,
+            presence_penalty: float = 0.0,
+            logprobs: bool = False,
             stop: list() = ["<|im_end|>"],
             n: int = 1):
         response = CLIENT.completions.create(
@@ -62,14 +61,14 @@ class AOAIUtil:
 
     def get_chat_completion(
             self,
-            model,
             prompt: str,
-            temperature: float,
-            top_p: float,
-            max_tokens: int,
-            frequency_penalty: float,
-            presence_penalty: float,
-            logprobs: int,
+            model,
+            temperature: float = 1.0,
+            top_p: float = 0.0,
+            max_tokens: int = 100,
+            frequency_penalty: float = 0.0,
+            presence_penalty: float = 0.0,
+            logprobs: bool = False,
             stop: list() = ["<|im_end|>"],
             n: int = 1,
             ):

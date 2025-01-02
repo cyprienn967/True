@@ -10,7 +10,7 @@ from pathlib import Path
 
 import CoNLI.modules.utils.gpt_output_utils as gpt_output_utils
 from CoNLI.configs.nli_config import DetectionConfig
-from CoNLI.configs.openai_config import OpenaiArguments
+from CoNLI.configs.openai_config import Openai_Config
 from CoNLI.modules.entity_detector import EntityDetectorBase, GenTAEntityDetector
 from CoNLI.modules.hallucination_detection_prompt import hallucination_detection_prompt
 from CoNLI.modules.hd_constants import FieldName
@@ -27,8 +27,7 @@ class HallucinationDetector:
     def __init__(self,
                  sentence_selector : SentenceSelectorBase,
                  entity_detector : EntityDetectorBase,
-                 openai_args : OpenaiArguments = OpenaiArguments(),
-                 aoai_config_file: str = (Path(__file__).absolute()).parent/"configs"/"aoai_config.json",
+                 openai_args : Openai_Config = Openai_Config(),
                  detection_config : DetectionConfig = DetectionConfig(),
                  entity_detection_parallelism: int = 1,
                  entity_detection_batch: int = 25,
@@ -41,16 +40,10 @@ class HallucinationDetector:
         self._sentence_splitter = SentenceSplitter()
         
         self._openai_args = openai_args
-        self._detection_args = detection_config
+        self._detection_config = detection_config
         self._prompt_util = hallucination_detection_prompt(use_chat_completions = openai_args.use_chat_completions,
-                                                            max_prompt_tokens = AOAIUtil.get_model_context_length(aoai_config_file, openai_args.config_setting))
-
-        self.aoaiUtil = AOAIUtil(
-            config_setting=openai_args.config_setting,
-            config_file=aoai_config_file)
-        
+                                                           max_prompt_tokens = openai_args.max_context_length)
         self._entity_detection_batch = entity_detection_batch
-
         self._entity_detection_parallelism = entity_detection_parallelism
 
 
@@ -64,7 +57,7 @@ class HallucinationDetector:
             sentences = [raw_response_text]
 
         # add data_id and sentence_id to each sentence
-        def to_record(line_no, sentence_text) :
+        def to_record(line_no, sentence_text):
             return {FieldName.DATA_ID : data_id,
                     FieldName.SENTENCE_ID : line_no,
                     FieldName.SENTENCE_TEXT : sentence_text}
@@ -105,7 +98,7 @@ class HallucinationDetector:
             perf_counters["n_sentences"] = len(sentences)
             # step # 3.1 select sentences send for HD
             n_content_tokens = 0
-            for s in sentences :
+            for s in sentences:
                 is_selected, hd_sentence = self._sentence_selector.select_sentence(s[FieldName.SENTENCE_TEXT])
                 s[FieldName.HD_ENTITY] = set([hd_sentence]) if is_selected else set([])
                 n_content_tokens += count_tokens(s[FieldName.SENTENCE_TEXT])
@@ -145,7 +138,7 @@ class HallucinationDetector:
                                  sentences : List[Dict],
                                  sentence_level_hd : bool,
                                  perf_counters: dict) -> List[Dict]:
-        batch_size = self._detection_args.batch_size
+        batch_size = self._detection_config.batch_size
         max_parallelism = self._openai_args.max_parallelism
 
         items, results = [], []
@@ -188,7 +181,7 @@ class HallucinationDetector:
                             payload,
                             self.aoaiUtil,
                             self._openai_args,
-                            self._detection_args): payload
+                            self._detection_config): payload
                         for payload in gpt_request_payloads
                     }
                     
@@ -206,19 +199,19 @@ class HallucinationDetector:
 
     # send payload to GPT endpoint and get back the results
     @staticmethod
-    def process_payload_by_GPT(payload, aoaiUtil : AOAIUtil, openai_args : OpenaiArguments, detection_args : DetectionConfig) -> Dict:
+    def process_payload_by_GPT(payload, aoaiUtil : AOAIUtil, openai_args : Openai_Config, detection_config : DetectionConfig) -> Dict:
 
         outputs = []
         try:
             if openai_args.use_chat_completions:
                 gpt_response = aoaiUtil.get_chat_completion(
                     messages = payload['prompt'],
-                    temperature = detection_args.temp,
-                    top_p = detection_args.top_p, 
-                    max_tokens = detection_args.max_tokens,
-                    frequency_penalty = detection_args.freq_penalty,
-                    presence_penalty = detection_args.presence_penalty,
-                    generations=detection_args.generations)
+                    temperature = detection_config.temperature,
+                    top_p = detection_config.top_p, 
+                    max_tokens = detection_config.max_tokens,
+                    frequency_penalty = detection_config.freq_penalty,
+                    presence_penalty = detection_config.presence_penalty,
+                    n=detection_config.n)
                 choices = gpt_response['choices']
                 for choice in choices:
                     outputs.append(gpt_output_utils.clean_for_tsv(choice['message']['content']))
@@ -226,18 +219,17 @@ class HallucinationDetector:
             else:
                 gpt_response = aoaiUtil.get_completion(
                     prompt = payload['prompt'],
-                    max_tokens = detection_args.max_tokens,
-                    temperature = detection_args.temp,
-                    top_p = detection_args.top_p,
-                    frequency_penalty = detection_args.freq_penalty,
-                    presence_penalty = detection_args.presence_penalty,
-                    logprobs = detection_args.log_prob,
-                    generations=detection_args.generations)
+                    max_tokens = detection_config.max_tokens,
+                    temperature = detection_config.temperature,
+                    top_p = detection_config.top_p,
+                    frequency_penalty = detection_config.freq_penalty,
+                    presence_penalty = detection_config.presence_penalty,
+                    logprobs = detection_config.log_prob,
+                    n=detection_config.n)
                 choices = gpt_response['choices']
                 for choice in choices:
                     outputs.append(gpt_output_utils.clean_for_tsv(choice['text']))
                 payload['gpt_raw_output'] = outputs
-            logging.info(f"Completed calling GPT to process {len(payload['items'])} items")
         except Exception as exc:
             logging.warning(f"Failed to call GPT: output format wrong!")
             logging.warning(f'Exception: {exc}')
