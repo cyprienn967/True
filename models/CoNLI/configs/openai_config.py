@@ -9,7 +9,7 @@ from openai import OpenAI
 CLIENT = OpenAI(api_key=os.environ.get('OPENAI_API_KEY', False))
 
 @dataclass
-class Openai_Config:
+class OpenaiConfig:
   """
   Configuration for OpenAI engine
   """

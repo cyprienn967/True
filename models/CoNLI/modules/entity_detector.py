@@ -9,7 +9,7 @@ from typing import List
 from azure.core.credentials import AzureKeyCredential
 from azure.ai.textanalytics.aio import TextAnalyticsClient
 
-from CoNLI.configs.ta_config import TAArguments
+from CoNLI.configs.ta_config import TAConfig
 
 # entity class for hallucination detection
 @dataclass
@@ -84,7 +84,7 @@ class EnsembledEntityDetector(EntityDetectorBase) :
 
 
 class GenTAEntityDetector(EntityDetectorBase) :
-    def __init__(self, ta_args : TAArguments) -> None:
+    def __init__(self, ta_args : TAConfig) -> None:
         super().__init__()
         self.ta_args = ta_args
         api_key = ta_args.api_key

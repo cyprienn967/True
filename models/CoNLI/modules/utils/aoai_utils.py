@@ -8,6 +8,7 @@ import time
 from pathlib import Path
 
 from CoNLI.modules.utils.gpt_output_utils import certified_gpt_output_prefix
+from CoNLI.configs.openai_config import OpenaiConfig
 
 
 CLIENT = OpenAI(api_key=os.environ.get('OPENAI_API_KEY', False))
@@ -97,16 +98,6 @@ class AOAIUtil:
         return chat
     
     @staticmethod
-    def get_model_context_length(config_file : str, config_setting : str) -> int:
-        with open(config_file, "r") as config_file:
-            config = json.load(config_file)
-        
-        section = config[config_setting]
-        key_name = "MAX_CONTEXT_LENGTH"
-        if key_name in section:
-            return int(section[key_name])
-        else :
-            logging.warning(f'Key {key_name} not found in config file for {config_setting}, using default value of 8K')
-            return 8192 #8K as default for GPT
-
+    def get_model_context_length(openai_config: OpenaiConfig) -> int:
+        return openai_config.max_context_length
 

@@ -10,7 +10,7 @@ from pathlib import Path
 
 import CoNLI.modules.utils.gpt_output_utils as gpt_output_utils
 from CoNLI.configs.nli_config import DetectionConfig
-from CoNLI.configs.openai_config import Openai_Config
+from CoNLI.configs.openai_config import OpenaiConfig
 from CoNLI.modules.entity_detector import EntityDetectorBase, GenTAEntityDetector
 from CoNLI.modules.hallucination_detection_prompt import hallucination_detection_prompt
 from CoNLI.modules.hd_constants import FieldName
@@ -27,7 +27,7 @@ class HallucinationDetector:
     def __init__(self,
                  sentence_selector : SentenceSelectorBase,
                  entity_detector : EntityDetectorBase,
-                 openai_config : Openai_Config = Openai_Config(),
+                 openai_config : OpenaiConfig = OpenaiConfig(),
                  detection_config : DetectionConfig = DetectionConfig(),
                  entity_detection_parallelism: int = 1,
                  entity_detection_batch: int = 25,
@@ -120,7 +120,7 @@ class HallucinationDetector:
         for sentence in sentences:
             sentence_id = sentence[FieldName.SENTENCE_ID]
             sentence_text = sentence[FieldName.SENTENCE_TEXT].strip()
-                
+            
             # sending one request per entity span
             for hdEntity in sentence[FieldName.HD_ENTITY]:
                 request = {
@@ -146,22 +146,19 @@ class HallucinationDetector:
         perf_counters["n_gpt_calls"] += len(gpt_request_payloads)
         if len(gpt_request_payloads) > 0:
             gpt_results_raw = list()
-            max_workers = min(max(max_parallelism, 1), len(gpt_request_payloads))
-            with tqdm(total=len(gpt_request_payloads), leave=False) as pbar2:
-                with ThreadPoolExecutor(max_workers=max_workers) as executor:
-                    futures = {
-                        executor.submit(
-                            self.process_payload_by_GPT,
-                            payload,
-                            self.aoaiUtil,
-                            self._openai_config,
-                            self._detection_config): payload
-                        for payload in gpt_request_payloads
-                    }
-                    
-                    for future in as_completed(futures):
-                        gpt_results_raw.append(future.result())
-                        pbar2.update(1)
+            max_workers = min(max_parallelism, len(gpt_request_payloads))
+            with ThreadPoolExecutor(max_workers=max_workers) as executor:
+                futures = {
+                    executor.submit(
+                        self.process_payload_by_GPT,
+                        payload,
+                        self.aoaiUtil,
+                        self._openai_config,
+                        self._detection_config): payload
+                    for payload in gpt_request_payloads
+                }
+                for future in as_completed(futures):
+                    gpt_results_raw.append(future.result())
             results += HallucinationDetector.parse_gpt_results(gpt_results_raw)
             
         return results
@@ -173,11 +170,11 @@ class HallucinationDetector:
 
     # send payload to GPT endpoint and get back the results
     @staticmethod
-    def process_payload_by_GPT(payload, aoaiUtil : AOAIUtil, openai_args : Openai_Config, detection_config : DetectionConfig) -> Dict:
+    def process_payload_by_GPT(payload, aoaiUtil : AOAIUtil, openai_config : OpenaiConfig, detection_config : DetectionConfig) -> Dict:
 
         outputs = []
         try:
-            if openai_args.use_chat_completions:
+            if openai_config.use_chat_completions:
                 gpt_response = aoaiUtil.get_chat_completion(
                     messages = payload['prompt'],
                     temperature = detection_config.temperature,
@@ -186,7 +183,7 @@ class HallucinationDetector:
                     frequency_penalty = detection_config.freq_penalty,
                     presence_penalty = detection_config.presence_penalty,
                     n=detection_config.n)
-                choices = gpt_response['choices']
+                choices = gpt_response.choices
                 for choice in choices:
                     outputs.append(choice.message.content)
                 payload['gpt_raw_output'] = outputs
@@ -200,7 +197,7 @@ class HallucinationDetector:
                     presence_penalty = detection_config.presence_penalty,
                     logprobs = detection_config.log_prob,
                     n=detection_config.n)
-                choices = gpt_response['choices']
+                choices = gpt_response.choices
                 for choice in choices:
                     outputs.append(choice.text)
                 payload['gpt_raw_output'] = outputs

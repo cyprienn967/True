@@ -7,8 +7,8 @@ from pathlib import Path
 import time
 from tqdm import tqdm
 from CoNLI.configs.nli_config import DetectionConfig
-from CoNLI.configs.openai_config import Openai_Config
-from CoNLI.configs.ta_config import create_ta_arguments
+from CoNLI.configs.openai_config import OpenaiConfig
+from CoNLI.configs.ta_config import TAConfig
 from CoNLI.modules.data.data_loader import DataLoader
 from CoNLI.modules.entity_detector import EntityDetectorFactory
 from CoNLI.modules.sentence_selector import SentenceSelectorFactory
@@ -23,11 +23,11 @@ app = Flask(__name__)
 model = AOAIUtil()
 
 detection_config = DetectionConfig()
-openai_config = Openai_Config()
-ta_args = create_ta_arguments('ta-general', ta_config_file=args.ta_config_file)
+openai_config = OpenaiConfig()
+ta_config = TAConfig()
 
 sentence_selector = SentenceSelectorFactory.create_sentence_selector(detection_config.sentence_selector_type)
-entity_detector = EntityDetectorFactory.create_entity_detector(detection_config.entity_detector_type, ta_args=ta_args)
+entity_detector = EntityDetectorFactory.create_entity_detector(detection_config.entity_detector_type, ta_args=ta_config)
 
 detection_agent = HallucinationDetector(
   sentence_selector=sentence_selector,
