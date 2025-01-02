@@ -80,16 +80,13 @@ class DataLoader:
         if len(self._data_ids) != len(self._hypothesis_preproc_sentences) or len(self._data_ids) != len(self._src_docs):
             print('=============\n!! WARNING !!\n=============\nThe number of unique data ids is different between your source and hypothesis folders.\nPlease confirm your inputs are correct before proceeding...\n=============')
 
-    def hypothesis_preprocess_into_sentences(self, hypothesis) -> dict:
-        hyp_sentences_preproc = {}
-        # Configure response preprocessing module
-        # There is an expectation that the input data is cleaned before running Hallucination Detection
-        preprocess_skipStartsWithSet = set(['#'])
-        preprocess_replaceWordSet = set([])
-        responsepreprocess = ResponsePreprocess(
-            skip_starts_with_set=preprocess_skipStartsWithSet,
-            replace_set=preprocess_replaceWordSet)
-        for id in hypothesis.keys():
-            hyp_sentences_preproc[id] = responsepreprocess.Preprocess(
-                hypothesis[id])
-        return hyp_sentences_preproc
+
+def hypothesis_preprocess_into_sentences(hypothesis: str) -> List[Dict[str, str]]:
+    # Configure response preprocessing module
+    # There is an expectation that the input data is cleaned before running Hallucination Detection
+    preprocess_skipStartsWithSet = set(['#'])
+    preprocess_replaceWordSet = set([])
+    rp = ResponsePreprocess(
+        skip_starts_with_set=preprocess_skipStartsWithSet,
+        replace_set=preprocess_replaceWordSet)
+    return rp.preprocess(hypothesis)

@@ -27,7 +27,7 @@ class HallucinationDetector:
     def __init__(self,
                  sentence_selector : SentenceSelectorBase,
                  entity_detector : EntityDetectorBase,
-                 openai_args : Openai_Config = Openai_Config(),
+                 openai_config : Openai_Config = Openai_Config(),
                  detection_config : DetectionConfig = DetectionConfig(),
                  entity_detection_parallelism: int = 1,
                  entity_detection_batch: int = 25,
@@ -39,33 +39,13 @@ class HallucinationDetector:
         
         self._sentence_splitter = SentenceSplitter()
         
-        self._openai_args = openai_args
+        self._openai_config = openai_config
         self._detection_config = detection_config
-        self._prompt_util = hallucination_detection_prompt(use_chat_completions = openai_args.use_chat_completions,
-                                                           max_prompt_tokens = openai_args.max_context_length)
+        self._prompt_util = hallucination_detection_prompt(use_chat_completions = openai_config.use_chat_completions,
+                                                           max_prompt_tokens = openai_config.max_context_length)
         self._entity_detection_batch = entity_detection_batch
         self._entity_detection_parallelism = entity_detection_parallelism
-
-
-    def detect_hallucinations_sentence_level(self, data_id : str, source : str, raw_response_text : str, split_sentence : bool = False) -> List[Dict]:
-        if split_sentence:
-            # split raw_response_text into sentences
-            sentences = self._sentence_splitter.split_into_sentences(raw_response_text)
-            # filter out empty sentences
-            sentences = [s for s in sentences if s.strip()]
-        else:
-            sentences = [raw_response_text]
-
-        # add data_id and sentence_id to each sentence
-        def to_record(line_no, sentence_text):
-            return {FieldName.DATA_ID : data_id,
-                    FieldName.SENTENCE_ID : line_no,
-                    FieldName.SENTENCE_TEXT : sentence_text}
-
-        sentences_enriched = [to_record(i+1, s) for i, s in enumerate(sentences)]
-
-        # step #2: detect hallucinations in each sentence
-        return self.detect_hallucinations(data_id, source, sentences_enriched)
+        
 
     def _add_entities_to_sentences(self, sentences : List[Dict]) -> List[Dict]:
         if isinstance(self._entity_detector, GenTAEntityDetector):
@@ -88,7 +68,7 @@ class HallucinationDetector:
         sentences = sentences_df.to_dict('records')
         return sentences, n_entities
     
-    def detect_hallucinations(self, data_id : str, source : str, sentences : List[Dict]) -> List[Dict]:
+    def detect_hallucinations(self, source : str, sentences : List[Dict]) -> List[Dict]:
         perf_counters = {}
         perf_counters["n_gpt_requests"] = 0
         perf_counters["n_gpt_calls"] = 0
@@ -105,7 +85,7 @@ class HallucinationDetector:
 
             perf_counters["n_content_tokens"] = n_content_tokens
             # step #3.2: do hallucination detection with extra information
-            hd_result = self.do_hallucation_detection(data_id, source, sentences, perf_counters=perf_counters, sentence_level_hd=True)
+            hd_result = self.do_hallucation_detection(source, sentences, perf_counters=perf_counters, sentence_level_hd=True)
 
             # skip hallucination sentences for 2nd round on entity-level hd
             is_hallucination_sentence_ids = set([x[FieldName.SENTENCE_ID] for x in hd_result])
@@ -116,40 +96,34 @@ class HallucinationDetector:
             # step #2.1: detect entities in current sentence send for HD
             sentences, perf_counters["n_entities"] = self._add_entities_to_sentences(sentences)
             # step #2.2: do hallucination detection with extra information
-            hd_result += self.do_hallucation_detection(data_id, source, sentences, perf_counters=perf_counters, sentence_level_hd=False)
+            hd_result += self.do_hallucation_detection(source, sentences, perf_counters=perf_counters, sentence_level_hd=False)
         else:
             perf_counters["n_entities"] = None
 
-        # Sort the hallucinations before passing to requester, since we do not
-        # run medical and numerical at the same time
         hd_result = sorted(
             hd_result,
             key=lambda d: (
-                d[FieldName.DATA_ID],
                 d[FieldName.SENTENCE_ID],
                 d[FieldName.DETECTION_TYPE],
                 d[FieldName.SENTENCE_TEXT]))
-
         return hd_result
     
     def do_hallucation_detection(self, 
-                                 data_id : str, 
                                  source : str,
                                  sentences : List[Dict],
                                  sentence_level_hd : bool,
                                  perf_counters: dict) -> List[Dict]:
         batch_size = self._detection_config.batch_size
-        max_parallelism = self._openai_args.max_parallelism
+        max_parallelism = self._openai_config.max_parallelism
 
         items, results = [], []
-        for data in sentences:
-            sentence_id = data[FieldName.SENTENCE_ID]
-            sentence_text = data[FieldName.SENTENCE_TEXT].strip()
+        for sentence in sentences:
+            sentence_id = sentence[FieldName.SENTENCE_ID]
+            sentence_text = sentence[FieldName.SENTENCE_TEXT].strip()
                 
             # sending one request per entity span
-            for hdEntity in data[FieldName.HD_ENTITY]:
+            for hdEntity in sentence[FieldName.HD_ENTITY]:
                 request = {
-                    'DataId': data_id,
                     'Hypothesis': hdEntity.hypothesis,
                     'DetectedEntityType': hdEntity.entity_type if not sentence_level_hd else '',
                     'DetectionType': hdEntity.detection_type,
@@ -180,7 +154,7 @@ class HallucinationDetector:
                             self.process_payload_by_GPT,
                             payload,
                             self.aoaiUtil,
-                            self._openai_args,
+                            self._openai_config,
                             self._detection_config): payload
                         for payload in gpt_request_payloads
                     }
@@ -214,7 +188,7 @@ class HallucinationDetector:
                     n=detection_config.n)
                 choices = gpt_response['choices']
                 for choice in choices:
-                    outputs.append(gpt_output_utils.clean_for_tsv(choice['message']['content']))
+                    outputs.append(choice.message.content)
                 payload['gpt_raw_output'] = outputs
             else:
                 gpt_response = aoaiUtil.get_completion(
@@ -228,7 +202,7 @@ class HallucinationDetector:
                     n=detection_config.n)
                 choices = gpt_response['choices']
                 for choice in choices:
-                    outputs.append(gpt_output_utils.clean_for_tsv(choice['text']))
+                    outputs.append(choice.text)
                 payload['gpt_raw_output'] = outputs
         except Exception as exc:
             logging.warning(f"Failed to call GPT: output format wrong!")
@@ -247,7 +221,6 @@ class HallucinationDetector:
                 if ans[i]['IsHallucination']:
                     # At this point we think we've found a hallucination
                     gpt_result_cooked.append({
-                        FieldName.DATA_ID: item['DataId'],
                         FieldName.SENTENCE_ID: item['SentenceId'],
                         FieldName.DETECTION_TYPE: item["DetectionType"],
                         FieldName.SENTENCE_TEXT: item['Hypothesis'],

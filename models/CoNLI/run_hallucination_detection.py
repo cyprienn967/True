@@ -144,7 +144,7 @@ def run_hallucination_detection(prompt):
     detection_agent = HallucinationDetector(
         sentence_selector=sentence_selector,
         entity_detector=entity_detector,
-        openai_args=openai_args,
+        openai_config=openai_args,
         detection_config=detection_config,
         entity_detection_parallelism=args.entity_detection_parallelism)
 

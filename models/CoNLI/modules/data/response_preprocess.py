@@ -1,49 +1,38 @@
 import nltk
 from typing import Dict, List
 
-
 class ResponsePreprocess:
-
-    def __init__(self, skip_starts_with_set, replace_set) -> None:
+    def __init__(self, skip_starts_with_set, replace_set):
         nltk.download('punkt')
-        self._break_sentence = nltk.data.load(
-            "tokenizers/punkt/english.pickle")
-        self._skip_starts_with_set = skip_starts_with_set
-        self._replace_set = replace_set
+        self._tokenizer = nltk.data.load("tokenizers/punkt/english.pickle")
+        self._skip_starts = skip_starts_with_set
+        self._replace = replace_set
 
-    def preprocess(self, text: str) -> List[Dict[str,str]]:
-        retval = list()
-        shouldSkip = False
-        sentencesRemoved = 0
-        sentenceId = 0
+    def preprocess(self, text: str) -> List[Dict[str, str]]:
+        sentences = []
+        sentence_id = 0
+
         for line in text.split('\n'):
-            for sent in self._break_sentence.tokenize(line):
-                sent = sent.replace('__lf1__', '').replace('__lf2__', '')
-                sent = sent.strip()
+            for sent in self._tokenizer.tokenize(line):
+                sent = sent.replace('__lf1__', '').replace('__lf2__', '').strip()
 
-                if (sent.startswith('#') and sent.endswith('#')) or (sent.isupper()):
-                    sentencesRemoved += 1
+                if self._should_skip(sent):
                     continue
 
-                for swWord in self._skip_starts_with_set:
-                    if sent.startswith(swWord):
-                        shouldSkip = True
-                        continue
+                sent = self._clean_sentence(sent)
 
-                if shouldSkip:
-                    shouldSkip = False
-                    sentencesRemoved += 1
-                    continue
+                if len(sent) > 3:
+                    sentence_id += 1
+                    sentences.append({'sentence_id': sentence_id, 'text': sent})
 
-                for rWord in self._replace_set:
-                    sent = sent.replace(rWord, '')
+        return sentences
 
-                sent = sent.replace('<|im_end|>','').strip()
+    def _should_skip(self, sentence: str) -> bool:
+        return ((sentence.startswith('#') and sentence.endswith('#')) or
+                sentence.isupper() or
+                any(sentence.startswith(word) for word in self._skip_starts))
 
-                if len(sent) <= 3:
-                    sentencesRemoved += 1
-                    continue
-                sentenceId += 1
-                retval.append({'sentence_id': sentenceId, 'text': sent})
-        # print(f'Sentences Removed: {sentencesRemoved}')
-        return retval
+    def _clean_sentence(self, sentence: str) -> str:
+        for word in self._replace:
+            sentence = sentence.replace(word, '')
+        return sentence.replace('<|im_end|>', '').strip()

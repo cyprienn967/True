@@ -32,7 +32,7 @@ entity_detector = EntityDetectorFactory.create_entity_detector(detection_config.
 detection_agent = HallucinationDetector(
   sentence_selector=sentence_selector,
   entity_detector=entity_detector,
-  openai_args=openai_config,
+  openai_config=openai_config,
   detection_config=detection_config,
   entity_detection_parallelism=1)
 

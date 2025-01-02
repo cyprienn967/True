@@ -18,7 +18,7 @@
         Try your best to give the right answer.
 
         Rules:
-        * You may assume that today is March 24th, 2023. Use this date when analyzing dates and time spans.
+        * You may assume that today is January 2nd, 2025. Use this date when analyzing dates and time spans.
         * Please ignore the age when judging entailment.  If the age is incorrect, and everything else is correct, it is still a factually correct hypothesis that should be marked [C].
         * If the hypothesis only has less than 3 words with no context, mark [C] if you can find those words in the premise without investigating the context.
         * Please only do reasoning and judge the factual correctness of the hypothesis only. Ignore syntax related issues.
