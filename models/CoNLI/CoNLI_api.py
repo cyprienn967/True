@@ -16,7 +16,7 @@ from CoNLI.modules.hallucination_detector import HallucinationDetector
 from CoNLI.modules.hd_constants import AllHallucinations, FieldName
 from CoNLI.modules.utils.conversion_utils import str2bool
 from CoNLI.modules.utils.aoai_utils import AOAIUtil
-from CoNLI.modules.data import hypothesis_preprocess_into_sentences
+from CoNLI.modules.data.response_preprocess import hypothesis_preprocess_into_sentences
 
 app = Flask(__name__)
 
@@ -27,7 +27,7 @@ openai_config = OpenaiConfig()
 ta_config = TAConfig()
 
 sentence_selector = SentenceSelectorFactory.create_sentence_selector(detection_config.sentence_selector_type)
-entity_detector = EntityDetectorFactory.create_entity_detector(detection_config.entity_detector_type, ta_args=ta_config)
+entity_detector = EntityDetectorFactory.create_entity_detector(detection_config.entity_detector_type, ta_config=ta_config)
 
 detection_agent = HallucinationDetector(
   sentence_selector=sentence_selector,

@@ -82,19 +82,17 @@ class EnsembledEntityDetector(EntityDetectorBase) :
                 return False
         return True
 
-
-class GenTAEntityDetector(EntityDetectorBase) :
-    def __init__(self, ta_args : TAConfig) -> None:
+class GenTAEntityDetector(EntityDetectorBase):
+    def __init__(self, ta_config: TAConfig) -> None:
         super().__init__()
-        self.ta_args = ta_args
-        api_key = ta_args.api_key
+        self.ta_config = ta_config
+        api_key = ta_config.api_key
         if not api_key:
             raise ValueError("API_KEY is not defined in the config file and LANGUAGE_KEY is not set in environment")
 
         self.credential = AzureKeyCredential(api_key)
-        self.endpoint = ta_args.endpoint
+        self.endpoint = ta_config.endpoint
 
-        # default to allow all entity types
         self.default_allowed_entity_types = [
             "Quantity_Number",
             "Event",
@@ -105,76 +103,52 @@ class GenTAEntityDetector(EntityDetectorBase) :
             "Skill",
             "Quantity_Currency",
             "DateTime_Duration"
-          ]
+        ]
 
-    # append category + subcategory
     @staticmethod
     def get_general_entity_category(entity):
-        if entity.subcategory:
-            return "{0}_{1}".format(entity.category, entity.subcategory)
-        else:
-            return "{0}".format(
-                entity.category)
+        return f"{entity.category}_{entity.subcategory}" if entity.subcategory else f"{entity.category}"
 
     async def _detect_entities(self, text_contents: List[str]) -> List[List[HdEntity]]:
-        ta_client = TextAnalyticsClient(
-            endpoint=self.endpoint,
-            credential=self.credential
-        )
+        ta_client = TextAnalyticsClient(endpoint=self.endpoint, credential=self.credential)
+        
         async with ta_client:
             while True:
                 try:
-                    result = await ta_client.recognize_entities(
-                        documents=text_contents)
-                    # aggresively not allowing any error in TA.
-                    ta_results = []
-                    for r in result:
-                        assert (not r.is_error), r.error
-                        ta_results.append(r)
-
+                    result = ta_client.recognize_entities(documents=text_contents)
+                    ta_results = [r for r in result if not r.is_error]
                     break
                 except Exception as e:
-                    errStr = str(e).lower()
-
-                    if "invalid subscription key or wrong api endpoint" in errStr:
-                        raise Exception(
-                            f'[TA] Unexpected, unrecoverable error: {errStr}')
+                    error_str = str(e).lower()
+                    if "invalid subscription key or wrong api endpoint" in error_str:
+                        raise Exception(f'[TA] Unexpected, unrecoverable error: {error_str}')
                     else:
-                        logging.info(
-                            f"[TA] Unexpected error, retryable error: {errStr}")
-                        time.sleep(5)
+                        logging.info(f"[TA] Unexpected error, retryable error: {error_str}")
+                        await asyncio.sleep(5)
                         continue
+
         entity_types_allow_list = self.get_entity_types_allow_list()
         return_list = []
+
         for result, text_content_str in zip(ta_results, text_contents):
             def to_hd_entity(text, entity):
-                name_norm = None
-                eType = GenTAEntityDetector.get_general_entity_category(entity)
-                name_org = entity.text
+                eType = self.get_general_entity_category(entity)
                 start_pos = entity.offset
-                end_pos = entity.offset + len(entity.text)
-                hypothesis = f'{text[0:entity.offset]}[ {entity.text} ]{text[end_pos:]}'
-                hd_entity = HdEntity(hypothesis, name_org, eType, name_norm, start_pos, end_pos, f'TA-{eType}')
-                return hd_entity
+                end_pos = start_pos + len(entity.text)
+                hypothesis = f'{text[:start_pos]}[ {entity.text} ]{text[end_pos:]}'
+                return HdEntity(hypothesis, entity.text, eType, None, start_pos, end_pos, f'TA-{eType}')
 
-            if len(entity_types_allow_list) > 0:
-                return_val = [to_hd_entity(
-                    text_content_str, r) for r in result.entities if GenTAEntityDetector.get_general_entity_category(r) in entity_types_allow_list]
-            else:
-                return_val = [to_hd_entity(text_content_str, r) for r in result.entities]
-            return_list.append(return_val)
+            entities = [to_hd_entity(text_content_str, r) for r in result.entities 
+                        if not entity_types_allow_list or self.get_general_entity_category(r) in entity_types_allow_list]
+            return_list.append(entities)
 
         return return_list
 
-    def detect_entities(self, text_content : List[str]) -> List[List[HdEntity]]:
+    def detect_entities(self, text_content: List[str]) -> List[List[HdEntity]]:
         return asyncio.run(self._detect_entities(text_content))
 
-    # dup code - TODO: refactor
     def get_entity_types_allow_list(self) -> List[str]:
-        if self.ta_args.entities is None:
-            return self.default_allowed_entity_types # return default list
-        else:
-            return self.ta_args.entities
+        return self.ta_config.entities or self.default_allowed_entity_types
 
 
 class EntityDetectorFactory:
@@ -194,12 +168,12 @@ class EntityDetectorFactory:
         if entity_detector_type == "pass_through":
             return PassThroughEntityDetector()
         elif entity_detector_type == "ta-general":
-            ta_args = kwargs['ta_args']
-            return GenTAEntityDetector(ta_args)
+            ta_config = kwargs['ta_config']
+            return GenTAEntityDetector(ta_config)
         elif entity_detector_type == "base":
             return EntityDetectorBase() # only used for testing ensembled entity detector
         else:
-            raise ValueError("Unknown entity detector type: {entity_detector_type}")
+            raise ValueError(f"Unknown entity detector type: {entity_detector_type}")
 
     @staticmethod
     def create_ensembled_entity_detector(detectors_to_ensemble : List[str], **kwargs) -> EntityDetectorBase:

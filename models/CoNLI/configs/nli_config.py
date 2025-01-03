@@ -16,7 +16,7 @@ class DetectionConfig:
     batch_size: Optional[int] = 1
     n: Optional[int] = 1
     sentence_selector_type: Optional[str] = "pass_through"
-    entity_detector_type: Optional[str] = "text_analytics"
+    entity_detector_type: Optional[str] = "ta-general"
 
 @dataclass
 class MitigationConfig:

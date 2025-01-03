@@ -9,7 +9,7 @@ class TAConfig:
   """
   configuration for Text Analytics
   """
-  def __init__(self, config_file: Optional[str] = "", endpoint: Optional[str] = "", config_setting: Optional[str] = "ta-general", api_key: Optional[str] = None, entities: Optional[List[str]] = None):
+  def __init__(self, config_file: Optional[str] = "", endpoint: Optional[str] = "https://true.cognitiveservices.azure.com/", config_setting: Optional[str] = "ta-general", api_key: Optional[str] = None, entities: Optional[List[str]] = None):
     self.config_file = config_file
     self.endpoint = endpoint
     self.config_setting = config_setting
