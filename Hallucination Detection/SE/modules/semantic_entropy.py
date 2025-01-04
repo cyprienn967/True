@@ -49,30 +49,6 @@ class EntailmentDeberta(BaseEntailment):
 
 class EntailmentLLM(BaseEntailment):
 
-    # entailment_file = 'entailment_cache.pkl'
-
-    # def __init__(self, entailment_cache_id, entailment_cache_only):
-    #     self.prediction_cache = self.init_prediction_cache(entailment_cache_id)
-    #     self.entailment_cache_only = entailment_cache_only
-
-    # def init_prediction_cache(self, entailment_cache_id):
-    #     if entailment_cache_id is None:
-    #         return dict()
-
-    #     logging.info('Restoring prediction cache from %s', entailment_cache_id)
-
-    #     api = wandb.Api()
-    #     run = api.run(entailment_cache_id)
-    #     run.file(self.entailment_file).download(
-    #         replace=True, exist_ok=False, root=wandb.run.dir)
-
-    #     with open(f'{wandb.run.dir}/{self.entailment_file}', "rb") as infile:
-    #         return pickle.load(infile)
-
-    # def save_prediction_cache(self):
-    #     # Write the dictionary to a pickle file.
-    #     utils.save(self.prediction_cache, self.entailment_file)
-
     def check_implication(self, text1, text2, question=None):
         if question is None:
             raise ValueError
@@ -80,15 +56,6 @@ class EntailmentLLM(BaseEntailment):
 
         logging.info('%s input: %s', self.name, prompt)
 
-        # hashed = oai.md5hash(prompt)
-        # if hashed in self.prediction_cache:
-        #     logging.info('Restoring hashed instead of predicting with model.')
-        #     response = self.prediction_cache[hashed]
-        # else:
-        #     if self.entailment_cache_only:
-        #         raise ValueError
-            
-        #     self.prediction_cache[hashed] = response
         response, logits, embeddings, = self.predict(prompt, temperature=0.02)
 
         logging.info('%s prediction: %s', self.name, response)
@@ -136,6 +103,19 @@ class EntailmentGPT4Turbo(EntailmentGPT4):
     def __init__(self):
         super().__init__()
         self.name = 'gpt-4-turbo'
+        
+class EntailmentGPT4o(EntailmentGPT4):
+
+    def __init__(self):
+        super().__init__()
+        self.name = 'gpt-4o'
+
+
+class EntailmentGPT4oMini(EntailmentGPT4):
+
+    def __init__(self):
+        super().__init__()
+        self.name = 'gpt-4o-mini'
 
 
 class EntailmentLlama(EntailmentLLM):

@@ -18,6 +18,8 @@ from modules.semantic_entropy import EntailmentDeberta
 from modules.semantic_entropy import EntailmentGPT4
 from modules.semantic_entropy import EntailmentGPT35
 from modules.semantic_entropy import EntailmentGPT4Turbo
+from modules.semantic_entropy import EntailmentGPT4o
+from modules.semantic_entropy import EntailmentGPT4oMini
 from modules.semantic_entropy import EntailmentLlama
 from modules.utils import utils
 from modules.utils.SE_config import SEConfig
@@ -36,6 +38,10 @@ def compute_entropy(config: SEConfig, prompt, full_responses, most_likely_answer
     entailment_model = EntailmentGPT35()
   elif config.entailment_model == 'gpt-4-turbo':
     entailment_model = EntailmentGPT4Turbo()
+  elif config.entailment_model == 'gpt-4o':
+    entailment_model = EntailmentGPT4o()
+  elif config.entailment_model == 'gpt-4o-mini':
+    entailment_model = EntailmentGPT4oMini()
   elif 'llama' in config.entailment_model.lower():
     entailment_model = EntailmentLlama(config.entailment_model)
   else:

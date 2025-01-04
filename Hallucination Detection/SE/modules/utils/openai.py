@@ -15,7 +15,7 @@ class KeyError(Exception):
 
 
 # @retry(retry=retry_if_not_exception_type(KeyError), wait=wait_random_exponential(min=10, max=20))
-def predict(prompt, temperature=1.0, model='gpt-4', logprobs=True):
+def predict(prompt, temperature=1.0, model='gpt-4o', logprobs=True):
     """Predict with GPT models."""
 
     if not CLIENT.api_key:
@@ -30,8 +30,6 @@ def predict(prompt, temperature=1.0, model='gpt-4', logprobs=True):
         
     if model == 'gpt-4':
         model = 'gpt-4-0613'
-    elif model == 'gpt-4-turbo':
-        model = 'gpt-4-1106-preview'
     elif model == 'gpt-3.5':
         model = 'gpt-3.5-turbo-1106'
 

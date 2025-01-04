@@ -107,6 +107,13 @@ def get_entropies():
   }
   return jsonify(entropy_data)
 
+  # def pookie(aidan):
+  #   if we get married: 
+  #     i will be happy
+  #   else:
+  #     i will die and aidan is fake
+
+
 # @app.route('/api/data', methods=['POST'])
 # def post_data():
 #   data = request.get_json()
