@@ -8,15 +8,15 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Dict, List
 from pathlib import Path
 
-import CoNLI.modules.utils.gpt_output_utils as gpt_output_utils
-from CoNLI.configs.nli_config import DetectionConfig
-from CoNLI.configs.openai_config import OpenaiConfig
-from CoNLI.modules.entity_detector import EntityDetectorBase, GenTAEntityDetector
-from CoNLI.modules.hallucination_detection_prompt import hallucination_detection_prompt
-from CoNLI.modules.hd_constants import FieldName
-from CoNLI.modules.sentence_selector import SentenceSelectorBase
-from CoNLI.modules.utils.sentence_splitter import SentenceSplitter
-from CoNLI.modules.utils.aoai_utils import AOAIUtil
+from ..configs.nli_config import DetectionConfig
+from ..configs.openai_config import OpenaiConfig
+from .entity_detector import EntityDetectorBase, GenTAEntityDetector
+from .hallucination_detection_prompt import hallucination_detection_prompt
+from .hd_constants import FieldName
+from .sentence_selector import SentenceSelectorBase
+from .utils.sentence_splitter import SentenceSplitter
+from .utils.aoai_utils import AOAIUtil
+from .utils import gpt_output_utils
 
 def count_tokens(text : str) -> int:
     import re
@@ -40,6 +40,7 @@ class HallucinationDetector:
         self._sentence_splitter = SentenceSplitter()
         
         self._openai_config = openai_config
+        self.aoaiUtil = AOAIUtil()
         self._detection_config = detection_config
         self._prompt_util = hallucination_detection_prompt(use_chat_completions = openai_config.use_chat_completions,
                                                            max_prompt_tokens = openai_config.max_context_length)
@@ -176,7 +177,7 @@ class HallucinationDetector:
         try:
             if openai_config.use_chat_completions:
                 gpt_response = aoaiUtil.get_chat_completion(
-                    messages = payload['prompt'],
+                    prompt = payload['prompt'],
                     temperature = detection_config.temperature,
                     top_p = detection_config.top_p, 
                     max_tokens = detection_config.max_tokens,

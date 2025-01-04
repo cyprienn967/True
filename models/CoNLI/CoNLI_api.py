@@ -6,17 +6,16 @@ import os
 from pathlib import Path
 import time
 from tqdm import tqdm
-from CoNLI.configs.nli_config import DetectionConfig
-from CoNLI.configs.openai_config import OpenaiConfig
-from CoNLI.configs.ta_config import TAConfig
-from CoNLI.modules.data.data_loader import DataLoader
-from CoNLI.modules.entity_detector import EntityDetectorFactory
-from CoNLI.modules.sentence_selector import SentenceSelectorFactory
-from CoNLI.modules.hallucination_detector import HallucinationDetector
-from CoNLI.modules.hd_constants import AllHallucinations, FieldName
-from CoNLI.modules.utils.conversion_utils import str2bool
-from CoNLI.modules.utils.aoai_utils import AOAIUtil
-from CoNLI.modules.data.response_preprocess import hypothesis_preprocess_into_sentences
+from .configs.nli_config import DetectionConfig
+from .configs.openai_config import OpenaiConfig
+from .configs.ta_config import TAConfig
+from .modules.entity_detector import EntityDetectorFactory
+from .modules.sentence_selector import SentenceSelectorFactory
+from .modules.hallucination_detector import HallucinationDetector
+from .modules.hd_constants import AllHallucinations, FieldName
+from .modules.utils.conversion_utils import str2bool
+from .modules.utils.aoai_utils import AOAIUtil
+from .modules.data.response_preprocess import hypothesis_preprocess_into_sentences
 
 app = Flask(__name__)
 
@@ -74,7 +73,7 @@ def run_hallucination_detection():
   
   hypotheses = hypothesis_preprocess_into_sentences(response)
   
-  hallucinations = detection_agent.detect_hallucinations(id, prompt, hypotheses)
+  hallucinations = detection_agent.detect_hallucinations(prompt, hypotheses)
   for h in hallucinations:
     allHallucinations.append(h)
   num_sentences = len(hypotheses)
@@ -83,10 +82,10 @@ def run_hallucination_detection():
   hallucinated = num_hallucinations > 0
   retval_jsonl.append(
     {
-      AllHallucinations.DATA_ID: data_id,
       AllHallucinations.HALLUCINATED: hallucinated,
       AllHallucinations.HALLUCINATION_SCORE: hallucination_rate,
       AllHallucinations.HALLUCINATIONS: hallucinations,
       AllHallucinations.NUM_TOTAL_SENTENCES: num_sentences,
       AllHallucinations.NUM_TOTAL_HALLUCINATIONS: num_hallucinations,
     })
+  return jsonify(retval_jsonl)

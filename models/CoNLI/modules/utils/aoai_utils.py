@@ -7,8 +7,8 @@ from openai import OpenAI
 import time
 from pathlib import Path
 
-from CoNLI.modules.utils.gpt_output_utils import certified_gpt_output_prefix
-from CoNLI.configs.openai_config import OpenaiConfig
+from .gpt_output_utils import certified_gpt_output_prefix
+from ...configs.openai_config import OpenaiConfig
 
 
 CLIENT = OpenAI(api_key=os.environ.get('OPENAI_API_KEY', False))
@@ -35,7 +35,7 @@ class AOAIUtil:
     def get_completion(
             self,
             prompt: str,
-            model,
+            model: str = "gpt-4",
             temperature: float = 1.0,
             top_p: float = 0.0,
             max_tokens: int = 100,
@@ -63,7 +63,7 @@ class AOAIUtil:
     def get_chat_completion(
             self,
             prompt: str,
-            model,
+            model: str = "gpt-4",
             temperature: float = 1.0,
             top_p: float = 0.0,
             max_tokens: int = 100,
@@ -73,9 +73,16 @@ class AOAIUtil:
             stop: list() = ["<|im_end|>"],
             n: int = 1,
             ):
+        if isinstance(prompt, str):
+            messages = [
+                {'role': 'user', 'content': prompt},
+            ]
+        else:
+            messages = prompt
+        
         response = CLIENT.chat.completions.create(
                 model=model,
-                messages=prompt,
+                messages=messages,
                 temperature=temperature,
                 top_p=top_p,
                 max_tokens=max_tokens,
@@ -83,8 +90,8 @@ class AOAIUtil:
                 presence_penalty=presence_penalty,
                 stop=stop,
                 n=n)
-        if not certified_gpt_output_prefix(response.choices[0].message.content):
-            raise Exception(f'GPT undesired output due to rpm limit reached, resending current request. \n<GPT_OUTPUT>\n{response.choices[0].message.content}\n</GPT_OUTPUT>')
+        # if not certified_gpt_output_prefix(response.choices[0].message.content):
+        #     raise Exception(f'GPT undesired output due to rpm limit reached, resending current request. \n<GPT_OUTPUT>\n{response.choices[0].message.content}\n</GPT_OUTPUT>')
         return response
 
     def convert_to_chat_format(self, text: str) -> str:

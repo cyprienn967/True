@@ -3,7 +3,7 @@ from typing import Dict, List
 
 class ResponsePreprocess:
     def __init__(self, skip_starts_with_set, replace_set):
-        nltk.download('punkt')
+        nltk.download('punkt_tab')
         self._tokenizer = nltk.data.load("tokenizers/punkt/english.pickle")
         self._skip_starts = skip_starts_with_set
         self._replace = replace_set
