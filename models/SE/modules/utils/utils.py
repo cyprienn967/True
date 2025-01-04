@@ -9,8 +9,8 @@ import wandb
 from evaluate import load
 
 from ..pretrained_models.huggingface_models import HuggingfaceModel
-from uncertainty.utils.SE_config import SEConfig
-from uncertainty.utils import openai as oai
+from modules.utils.SE_config import SEConfig
+from modules.utils import openai as oai
 
 
 BRIEF_PROMPTS = {

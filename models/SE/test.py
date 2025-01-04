@@ -1,9 +1,9 @@
 import torch
 import os
 
-from uncertainty.utils.SE_config import SEConfig
-from uncertainty.utils import utils
-from uncertainty.utils import openai as oai
+from modules.utils.SE_config import SEConfig
+from modules.utils import utils
+from modules.utils import openai as oai
 
 
 
