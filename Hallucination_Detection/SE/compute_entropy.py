@@ -6,23 +6,21 @@ import pickle
 import numpy as np
 import wandb
 
-from analyze_results import analyze_run
-from modules.data.data_utils import load_ds
-from modules.semantic_entropy import get_semantic_ids
-from modules.semantic_entropy import logsumexp_by_id
-from modules.semantic_entropy import predictive_entropy
-from modules.semantic_entropy import predictive_entropy_rao
-from modules.semantic_entropy import cluster_assignment_entropy
-from modules.semantic_entropy import context_entails_response
-from modules.semantic_entropy import EntailmentDeberta
-from modules.semantic_entropy import EntailmentGPT4
-from modules.semantic_entropy import EntailmentGPT35
-from modules.semantic_entropy import EntailmentGPT4Turbo
-from modules.semantic_entropy import EntailmentGPT4o
-from modules.semantic_entropy import EntailmentGPT4oMini
-from modules.semantic_entropy import EntailmentLlama
-from modules.utils import utils
-from modules.utils.SE_config import SEConfig
+from .modules.semantic_entropy import get_semantic_ids
+from .modules.semantic_entropy import logsumexp_by_id
+from .modules.semantic_entropy import predictive_entropy
+from .modules.semantic_entropy import predictive_entropy_rao
+from .modules.semantic_entropy import cluster_assignment_entropy
+from .modules.semantic_entropy import context_entails_response
+from .modules.semantic_entropy import EntailmentDeberta
+from .modules.semantic_entropy import EntailmentGPT4
+from .modules.semantic_entropy import EntailmentGPT35
+from .modules.semantic_entropy import EntailmentGPT4Turbo
+from .modules.semantic_entropy import EntailmentGPT4o
+from .modules.semantic_entropy import EntailmentGPT4oMini
+from .modules.semantic_entropy import EntailmentLlama
+from .modules.utils import utils
+from .modules.utils.SE_config import SEConfig
 
 
 def compute_entropy(config: SEConfig, prompt, full_responses, most_likely_answer):

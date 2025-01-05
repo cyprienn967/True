@@ -6,24 +6,23 @@ import os
 from pathlib import Path
 import time
 from tqdm import tqdm
-from CoNLI.configs.nli_config import DetectionConfig
-from CoNLI.configs.openai_config import OpenaiConfig
-from CoNLI.configs.ta_config import TAConfig
-from CoNLI.modules.data.data_loader import DataLoader
-from CoNLI.modules.entity_detector import EntityDetectorFactory
-from CoNLI.modules.sentence_selector import SentenceSelectorFactory
-from CoNLI.modules.hallucination_detector import HallucinationDetector
-from CoNLI.modules.hd_constants import AllHallucinations, FieldName
-from CoNLI.modules.utils.conversion_utils import str2bool
-from CoNLI.modules.utils.aoai_utils import AOAIUtil
-from CoNLI.modules.data.response_preprocess import hypothesis_preprocess_into_sentences
-from SE.modules.utils.SE_config import SEConfig
-from utils.init_model import init_model
-from SE.compute_entropy import compute_entropy
+from .CoNLI.configs.nli_config import DetectionConfig
+from .CoNLI.configs.openai_config import OpenaiConfig
+from .CoNLI.configs.ta_config import TAConfig
+from .CoNLI.modules.data.data_loader import DataLoader
+from .CoNLI.modules.entity_detector import EntityDetectorFactory
+from .CoNLI.modules.sentence_selector import SentenceSelectorFactory
+from .CoNLI.modules.hallucination_detector import HallucinationDetector
+from .CoNLI.modules.hd_constants import AllHallucinations, FieldName
+from .CoNLI.modules.utils.conversion_utils import str2bool
+from .CoNLI.modules.utils.aoai_utils import AOAIUtil
+from .CoNLI.modules.data.response_preprocess import hypothesis_preprocess_into_sentences
+from .SE.modules.utils.SE_config import SEConfig
+from .SE.compute_entropy import compute_entropy
+from .utils.init_model import init_model
+
 
 app = Flask(__name__)
-
-model = AOAIUtil()
 
 detection_config = DetectionConfig()
 openai_config = OpenaiConfig()
@@ -41,7 +40,6 @@ detection_agent = HallucinationDetector(
 
 
 se_config = SEConfig()
-MODEL = None
 
 @app.route('/')
 def home():
@@ -65,6 +63,7 @@ def initialize_model():
   
   return jsonify({"message": "Model initialized successfully!"})
 
+
 @app.route('/detect', methods=['GET'])
 def run_hallucination_detection():
   request_data = request.get_json()
@@ -81,13 +80,9 @@ def run_hallucination_detection():
   if not prompt:
     return jsonify({"error": "prompt parameter is required"}), 400
   
-  model_name = request_data["model"]
-  if not model_name:
-    return jsonify({"error": "model parameter is required"}), 400
-  
   in_context = request_data.get("in_context", False)
   context = request_data.get("context", None)
-  inference_temperature = request_data.get("inference_temperature", default=1.0, type=float)
+  inference_temperature = request_data.get("inference_temperature", 1.0)
   
   # Check if model is initialized
   model_instance = app.config.get('MODEL')
@@ -133,8 +128,9 @@ def run_hallucination_detection():
     allHallucinations = []
     retval_jsonl = []
     
-    response_raw = model_instance.get_chat_completion(model=model_name, prompt=full_prompt, temperature=inference_temperature)
-    response = response_raw.choices[0].message.content
+    # response_raw = model_instance.get_chat_completion(model=model_name, prompt=full_prompt, temperature=inference_temperature)
+    # response = response_raw.choices[0].message.content
+    response = most_likely_answer_dict['response']
     
     hypotheses = hypothesis_preprocess_into_sentences(response)
     
@@ -153,5 +149,7 @@ def run_hallucination_detection():
         AllHallucinations.NUM_TOTAL_SENTENCES: num_sentences,
         AllHallucinations.NUM_TOTAL_HALLUCINATIONS: num_hallucinations,
       })
+  else:
+    retval_jsonl = "CoNLI not available. Please provide context to detect hallucinations."
   
-  return jsonify(retval_jsonl)
+  return jsonify({"hallucination_data": retval_jsonl, "entropy_data": entropy_data})

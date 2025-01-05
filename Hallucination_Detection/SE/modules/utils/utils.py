@@ -9,8 +9,8 @@ import wandb
 from evaluate import load
 
 from ..pretrained_models.huggingface_models import HuggingfaceModel
-from modules.utils.SE_config import SEConfig
-from modules.utils import openai as oai
+from .SE_config import SEConfig
+from .openai import GPTModel
 
 
 BRIEF_PROMPTS = {
@@ -281,7 +281,7 @@ def init_model(config: SEConfig):
             model_name, stop_sequences='default',
             max_new_tokens=config.model_max_new_tokens)
     elif 'gpt' in model_name.lower():
-        model = oai.GPTModel(model_name)
+        model = GPTModel(model_name)
     else:
         raise ValueError(f'Unknown model_name `{model_name}`.')
     return model

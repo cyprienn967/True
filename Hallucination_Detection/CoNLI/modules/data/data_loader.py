@@ -2,7 +2,7 @@ from glob import glob
 import os
 from typing import Dict, List
 import pandas as pd
-from CoNLI.modules.data.response_preprocess import ResponsePreprocess
+from .response_preprocess import ResponsePreprocess
 
 
 class DataLoader:
