@@ -333,7 +333,11 @@ class HuggingfaceModel(BaseModel):
         last_layer = last_input[-1]
         # Then access last token in input.
         last_token_embedding = last_layer[:, -1, :].cpu()
-
+        
+        # Decode every generated token into a list
+        generated_tokens = outputs.sequences[0][n_input_token:token_stop_index]
+        decoded_tokens = [self.tokenizer.decode(token, skip_special_tokens=True) for token in generated_tokens]
+        
         # Get log_likelihoods.
         # outputs.scores are the logits for the generated token.
         # outputs.scores is a tuple of len = n_generated_tokens.
@@ -355,8 +359,10 @@ class HuggingfaceModel(BaseModel):
 
         if len(log_likelihoods) == 0:
             raise ValueError
+        
+        #return last_token_embedding
 
-        return sliced_answer, log_likelihoods, last_token_embedding
+        return sliced_answer, log_likelihoods, decoded_tokens
 
     # def get_p_true(self, input_data):
     #     """Get the probability of the model anwering A (True) for the given input."""

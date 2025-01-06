@@ -44,7 +44,8 @@ def predict(prompt, temperature=1.0, model='gpt-4o', logprobs=True, max_completi
     
     if logprobs:
         logits = [token_info.logprob for token_info in output.choices[0].logprobs.content]
-        return response, logits, None
+        tokens = [token_info.token for token_info in output.choices[0].logprobs.content]
+        return response, logits, tokens
     else:
         return response, None, None
 

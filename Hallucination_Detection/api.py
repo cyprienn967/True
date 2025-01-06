@@ -20,6 +20,8 @@ from .CoNLI.modules.data.response_preprocess import hypothesis_preprocess_into_s
 from .SemanticEntropy.modules.utils.SE_config import SEConfig
 from .SemanticEntropy.compute_entropy import compute_entropy
 from .utils.init_model import init_model
+from .utils.process_tokens import process_tokens
+from .ConfidenceFilter.extract_keywords import extract_keywords
 
 
 app = Flask(__name__)
@@ -91,6 +93,33 @@ def run_hallucination_detection():
   if model_instance is None:
     return jsonify({"error": "Model not initialized! Please initialize a model through API endpoint /model"}), 500
   
+  response, token_log_likelihoods, tokens_raw = model_instance.predict(prompt, temperature, max_completion_tokens=250)
+  
+  tokens, probs = process_tokens(token_log_likelihoods, tokens_raw)
+  
+  hypotheses = hypothesis_preprocess_into_sentences(response)
+  # sentences = {i: hypothesis for i, hypothesis in enumerate(hypotheses)}
+  keyword_dict = extract_keywords(response)
+  
+  filtered_hypotheses = [] # if keywords have low generated likelihood, they get flagged
+  
+  for i in range(len(hypotheses)):
+    hypothesis = hypotheses[i]
+    keywords = keyword_dict.get(i, [])
+    
+    pointer1 = 0
+    pointer2 = 0
+    while pointer1 < len(hypothesis) and pointer2 < len(keywords):
+      if hypothesis[pointer1] == keywords[pointer2]:
+        if probs[i][pointer1] < 0.8:
+          filtered_hypotheses.append(hypothesis)
+        pointer1 += 1
+        pointer2 += 1
+      else:
+        pointer1 += 1
+
+  
+  
   full_responses = []
   sampled_responses = []
   num_generations = 1 + se_config.num_generations
@@ -100,17 +129,16 @@ def run_hallucination_detection():
     # Temperature for first generation is always `0.1`.
     temperature = 0.1 if i == 0 else inference_temperature
 
-    predicted_answer, token_log_likelihoods, embedding = model_instance.predict(prompt, 
+    predicted_answer, token_log_likelihoods, tokens = model_instance.predict(prompt, 
                                                                                 temperature, 
                                                                                 max_completion_tokens=se_config.max_completion_tokens)
-    embedding = embedding.cpu() if embedding is not None else None
 
     if i == 0:
       most_likely_answer_dict = {
         'response': predicted_answer,
         'token_log_likelihoods': token_log_likelihoods,
-        'embedding': embedding,}
-    full_responses.append((predicted_answer, token_log_likelihoods, embedding))
+        'tokens': tokens,}
+    full_responses.append((predicted_answer, token_log_likelihoods, tokens))
     sampled_responses.append(predicted_answer)
 
   # Append all predictions for this example to `generations`.
@@ -135,8 +163,6 @@ def run_hallucination_detection():
     # response_raw = model_instance.get_chat_completion(model=model_name, prompt=full_prompt, temperature=inference_temperature)
     # response = response_raw.choices[0].message.content
     response = most_likely_answer_dict['response']
-    
-    hypotheses = hypothesis_preprocess_into_sentences(response)
     
     hallucinations = detection_agent.detect_hallucinations(full_prompt, hypotheses)
     for h in hallucinations:
