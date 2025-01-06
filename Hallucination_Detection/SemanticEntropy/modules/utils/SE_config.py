@@ -15,6 +15,7 @@ class SEConfig:
     self.entailment_model = "gpt-4o"
     self.strict_entailment = False
     self.model_max_new_tokens = 500
+    self.max_completion_tokens = 100
     self.compute_context_entails_response = False
 
 

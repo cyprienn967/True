@@ -1,6 +1,6 @@
 from typing import List
-from ..SE.modules.utils.openai import GPTModel
-from ..SE.modules.pretrained_models.huggingface_models import HuggingfaceModel
+from .openai import GPTModel
+from ..SemanticEntropy.modules.pretrained_models.huggingface_models import HuggingfaceModel
 
 def init_model(model_name: str):
   if 'llama' in model_name.lower() or 'falcon' in model_name or 'mistral' in model_name.lower():

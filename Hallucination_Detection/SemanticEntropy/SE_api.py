@@ -13,7 +13,7 @@ import wandb
 from modules.utils.SE_config import SEConfig
 from .compute_entropy import compute_entropy
 from modules.utils import utils
-from modules.utils import openai as oai
+from True.Hallucination_Detection.utils import openai as oai
 from collections import defaultdict
 
 # edit this

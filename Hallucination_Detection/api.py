@@ -17,8 +17,8 @@ from .CoNLI.modules.hd_constants import AllHallucinations, FieldName
 from .CoNLI.modules.utils.conversion_utils import str2bool
 from .CoNLI.modules.utils.aoai_utils import AOAIUtil
 from .CoNLI.modules.data.response_preprocess import hypothesis_preprocess_into_sentences
-from .SE.modules.utils.SE_config import SEConfig
-from .SE.compute_entropy import compute_entropy
+from .SemanticEntropy.modules.utils.SE_config import SEConfig
+from .SemanticEntropy.compute_entropy import compute_entropy
 from .utils.init_model import init_model
 
 
@@ -43,7 +43,7 @@ se_config = SEConfig()
 
 @app.route('/')
 def home():
-  return jsonify({"message": "Welcome to the CoNLI API!"})
+  return jsonify({"message": "Welcome to the Hallucination Detection API!"})
 
 
 # initializes the model that the client wants to query and detect hallucinations on
@@ -81,6 +81,8 @@ def run_hallucination_detection():
     return jsonify({"error": "prompt parameter is required"}), 400
   
   in_context = request_data.get("in_context", False)
+  if isinstance(in_context, str):
+    in_context = in_context.lower() == 'true'
   context = request_data.get("context", None)
   inference_temperature = request_data.get("inference_temperature", 1.0)
   
@@ -98,7 +100,9 @@ def run_hallucination_detection():
     # Temperature for first generation is always `0.1`.
     temperature = 0.1 if i == 0 else inference_temperature
 
-    predicted_answer, token_log_likelihoods, embedding = model_instance.predict(prompt, temperature)
+    predicted_answer, token_log_likelihoods, embedding = model_instance.predict(prompt, 
+                                                                                temperature, 
+                                                                                max_completion_tokens=se_config.max_completion_tokens)
     embedding = embedding.cpu() if embedding is not None else None
 
     if i == 0:
@@ -134,7 +138,7 @@ def run_hallucination_detection():
     
     hypotheses = hypothesis_preprocess_into_sentences(response)
     
-    hallucinations = detection_agent.detect_hallucinations(id, full_prompt, hypotheses)
+    hallucinations = detection_agent.detect_hallucinations(full_prompt, hypotheses)
     for h in hallucinations:
       allHallucinations.append(h)
     num_sentences = len(hypotheses)

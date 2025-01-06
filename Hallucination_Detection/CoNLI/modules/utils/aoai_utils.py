@@ -22,7 +22,7 @@ class AOAIUtil:
     def __init__(self) -> None:
         self.auth_token = None
         self.default_credential = None
-        self.default_model = "gpt-4"
+        self.default_model = "gpt-4o-mini"
         if not CLIENT.api_key:
             raise KeyError('Need to provide OpenAI API key in environment variable `OPENAI_API_KEY`.')
 
@@ -35,7 +35,7 @@ class AOAIUtil:
     def get_completion(
             self,
             prompt: str,
-            model: str = "gpt-4",
+            model: str = "gpt-4o-mini",
             temperature: float = 1.0,
             top_p: float = 0.0,
             max_tokens: int = 100,
@@ -63,7 +63,7 @@ class AOAIUtil:
     def get_chat_completion(
             self,
             prompt: str,
-            model: str = "gpt-4",
+            model: str = "gpt-4o-mini",
             temperature: float = 1.0,
             top_p: float = 0.0,
             max_tokens: int = 100,

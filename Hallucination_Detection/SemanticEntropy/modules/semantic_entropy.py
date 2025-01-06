@@ -11,7 +11,7 @@ import torch.nn.functional as F
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 from .pretrained_models.huggingface_models import HuggingfaceModel
-from .utils import openai as oai
+from ...utils import openai as oai
 from .utils import utils
 
 os.environ['USE_MPS'] = 'true'  # for M3

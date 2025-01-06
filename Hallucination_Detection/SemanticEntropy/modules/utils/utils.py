@@ -10,7 +10,7 @@ from evaluate import load
 
 from ..pretrained_models.huggingface_models import HuggingfaceModel
 from .SE_config import SEConfig
-from .openai import GPTModel
+from ....utils.openai import GPTModel
 
 
 BRIEF_PROMPTS = {
