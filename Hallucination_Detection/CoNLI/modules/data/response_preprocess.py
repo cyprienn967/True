@@ -3,7 +3,6 @@ from typing import Dict, List
 
 class ResponsePreprocess:
     def __init__(self, skip_starts_with_set, replace_set):
-        nltk.download('punkt_tab')
         self._tokenizer = nltk.data.load("tokenizers/punkt/english.pickle")
         self._skip_starts = skip_starts_with_set
         self._replace = replace_set
@@ -21,9 +20,9 @@ class ResponsePreprocess:
 
                 sent = self._clean_sentence(sent)
 
-                if len(sent) > 3:
-                    sentence_id += 1
-                    sentences.append({'sentence_id': sentence_id, 'text': sent})
+            if len(sent) > 3:
+                sentences.append({'sentence_id': sentence_id, 'text': sent})
+                sentence_id += 1
 
         return sentences
 

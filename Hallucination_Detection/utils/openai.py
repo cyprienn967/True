@@ -34,7 +34,6 @@ def predict(prompt, temperature=1.0, model='gpt-4o', logprobs=True, max_completi
     output = CLIENT.chat.completions.create(
         model=model,
         messages=messages,
-        max_tokens=500,
         logprobs=logprobs,
         top_logprobs=1,
         temperature=temperature,

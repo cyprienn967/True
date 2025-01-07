@@ -45,10 +45,10 @@ class hallucination_detection_prompt :
             return content
         raise FileNotFoundError(f'{yamlfile} was not found')
 
-    def _validate_prompt(self, prompt, max_tokens) :
+    def _validate_prompt(self, prompt, max_completion_tokens) :
         if not self._use_chat_completions :
-            if len(self._tokenizer(prompt, truncation=True, max_length=32000)['input_ids']) + max_tokens > self._max_prompt_tokens :
-                raise ValueError(f'len(prompt) ({len(prompt)}) + max_tokens ({max_tokens}) must be less than {self._max_prompt_tokens}') 
+            if len(self._tokenizer(prompt, truncation=True, max_length=32000)['input_ids']) + max_completion_tokens > self._max_prompt_tokens :
+                raise ValueError(f'len(prompt) ({len(prompt)}) + max_completion_tokens ({max_completion_tokens}) must be less than {self._max_prompt_tokens}') 
         return prompt
 
     def _replace(self, promptOrMessageObj, before : str, after : str, simpleReplaceOverride : bool = False) :
@@ -62,10 +62,10 @@ class hallucination_detection_prompt :
     
     # The parameter items is a list of dicts with keys: hypothesis, data_id, sentence_id etc.
     # Here the hypothesis in fact is the whole sentence with entity name highlighted
-    def create_batch_prompt(self, transcript: str, items: list, max_tokens: int):
+    def create_batch_prompt(self, transcript: str, items: list, max_completion_tokens: int):
         sentence = "\n".join([ "("+str(i)+"). " + item["Hypothesis"] for i, item in enumerate(items)])
         prompt = copy.deepcopy(self.prompt)
         prompt = self._replace(prompt, '{{Source}}', transcript)
         prompt = self._replace(prompt, '{{Hypothesis}}', sentence)
-        self._validate_prompt(prompt, max_tokens)
+        self._validate_prompt(prompt, max_completion_tokens)
         return prompt

@@ -180,7 +180,7 @@ class HallucinationDetector:
                     prompt = payload['prompt'],
                     temperature = detection_config.temperature,
                     top_p = detection_config.top_p, 
-                    max_tokens = detection_config.max_tokens,
+                    max_completion_tokens = detection_config.max_completion_tokens,
                     frequency_penalty = detection_config.freq_penalty,
                     presence_penalty = detection_config.presence_penalty,
                     n=detection_config.n)
@@ -191,7 +191,7 @@ class HallucinationDetector:
             else:
                 gpt_response = aoaiUtil.get_completion(
                     prompt = payload['prompt'],
-                    max_tokens = detection_config.max_tokens,
+                    max_completion_tokens = detection_config.max_completion_tokens,
                     temperature = detection_config.temperature,
                     top_p = detection_config.top_p,
                     frequency_penalty = detection_config.freq_penalty,

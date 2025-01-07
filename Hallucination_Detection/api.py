@@ -6,6 +6,7 @@ import os
 from pathlib import Path
 import time
 from tqdm import tqdm
+import nltk
 from .CoNLI.configs.nli_config import DetectionConfig
 from .CoNLI.configs.openai_config import OpenaiConfig
 from .CoNLI.configs.ta_config import TAConfig
@@ -20,11 +21,13 @@ from .CoNLI.modules.data.response_preprocess import hypothesis_preprocess_into_s
 from .SemanticEntropy.modules.utils.SE_config import SEConfig
 from .SemanticEntropy.compute_entropy import compute_entropy
 from .utils.init_model import init_model
-from .utils.process_tokens import process_tokens
+from .utils.process_tokens import process_tokens, filter_hypotheses
 from .ConfidenceFilter.extract_keywords import extract_keywords
 
 
 app = Flask(__name__)
+
+nltk.download('punkt_tab')
 
 detection_config = DetectionConfig()
 openai_config = OpenaiConfig()
@@ -39,7 +42,6 @@ detection_agent = HallucinationDetector(
   openai_config=openai_config,
   detection_config=detection_config,
   entity_detection_parallelism=1)
-
 
 se_config = SEConfig()
 
@@ -93,7 +95,8 @@ def run_hallucination_detection():
   if model_instance is None:
     return jsonify({"error": "Model not initialized! Please initialize a model through API endpoint /model"}), 500
   
-  response, token_log_likelihoods, tokens_raw = model_instance.predict(prompt, temperature, max_completion_tokens=250)
+  full_prompt = context + prompt if in_context else prompt
+  response, token_log_likelihoods, tokens_raw = model_instance.predict(full_prompt, inference_temperature, max_completion_tokens=250)
   
   tokens, probs = process_tokens(token_log_likelihoods, tokens_raw)
   
@@ -101,24 +104,9 @@ def run_hallucination_detection():
   # sentences = {i: hypothesis for i, hypothesis in enumerate(hypotheses)}
   keyword_dict = extract_keywords(response)
   
-  filtered_hypotheses = [] # if keywords have low generated likelihood, they get flagged
-  
-  for i in range(len(hypotheses)):
-    hypothesis = hypotheses[i]
-    keywords = keyword_dict.get(i, [])
-    
-    pointer1 = 0
-    pointer2 = 0
-    while pointer1 < len(hypothesis) and pointer2 < len(keywords):
-      if hypothesis[pointer1] == keywords[pointer2]:
-        if probs[i][pointer1] < 0.8:
-          filtered_hypotheses.append(hypothesis)
-        pointer1 += 1
-        pointer2 += 1
-      else:
-        pointer1 += 1
+  filtered_hypotheses = filter_hypotheses(hypotheses, keyword_dict, probs)
 
-  
+  return jsonify({"hypotheses": hypotheses, "filtered_hypotheses": filtered_hypotheses, "keywords": keyword_dict, "probs": probs})
   
   full_responses = []
   sampled_responses = []
@@ -144,7 +132,7 @@ def run_hallucination_detection():
   # Append all predictions for this example to `generations`.
   # generations['responses'] = full_responses
   
-  entropies, semantic_ids = compute_entropy(se_config, prompt, full_responses, most_likely_answer_dict)
+  entropies, semantic_ids = compute_entropy(se_config, full_prompt, full_responses, most_likely_answer_dict)
 
   # Return data
   entropy_data = {
@@ -156,7 +144,6 @@ def run_hallucination_detection():
   
   # Detect hallucinations with CoNLI
   if (in_context):
-    full_prompt = context + prompt
     allHallucinations = []
     retval_jsonl = []
     
