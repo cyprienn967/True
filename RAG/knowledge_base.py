@@ -1,76 +1,79 @@
-import faiss
-import pickle
 import os
+import pickle
+import faiss
+import pdfplumber
 from sentence_transformers import SentenceTransformer
 from rank_bm25 import BM25Okapi
 
-def build_knowledge_base():
+def extract_text_from_pdf(pdf_path: str) -> str:
     """
-    Builds a larger knowledge base with both BM25 and FAISS indexes.
+    Extract raw text from a PDF file using pdfplumber.
     """
+    text = ""
+    with pdfplumber.open(pdf_path) as pdf:
+        for page in pdf.pages:
+            # Extract text from the page
+            page_text = page.extract_text()
+            if page_text:
+                text += page_text + "\n"
+    return text
 
-    documents = [
-        "The capital of France is Paris.",
-        "The moon is Earth's only natural satellite.",
-        "Mars is uninhabited and has no population.",
-        "Python is a popular programming language created by Guido van Rossum.",
-        "OpenAI created GPT models for language understanding.",
-        "Faiss is a library that supports efficient vector similarity search.",
-        "BM25 is a classical retrieval algorithm based on term frequency.",
-        "JavaScript was originally developed by Brendan Eich.",
-        "Java was originally developed by James Gosling at Sun Microsystems.",
-        "The capital of Germany is Berlin.",
-        "The capital of Italy is Rome.",
-        "The capital of Spain is Madrid.",
-        "The capital of the United Kingdom is London.",
-        "The largest planet in our Solar System is Jupiter.",
-        "Saturn has the most extensive ring system of any planet.",
-        "Neptune is the farthest planet from the Sun in our Solar System.",
-        "Albert Einstein developed the theory of relativity.",
-        "The speed of light in vacuum is approximately 299,792 km/s.",
-        "The official language of Brazil is Portuguese.",
-        "Canada is the second-largest country by land area.",
-        "Mount Everest is the Earth's highest mountain above sea level, located in the Himalayas.",
-        "Bananas are a fruit that are rich in potassium.",
-        "Water boils at 100 degrees Celsius at sea level.",
-        "The capital of Japan is Tokyo.",
-        "K2 is the second-highest mountain on Earth, after Mount Everest.",
-        "The Taj Mahal is located in Agra, India.",
-        "Leonardo da Vinci painted the Mona Lisa.",
-        "Vincent van Gogh painted The Starry Night.",
-        "The Titanic sank in 1912 during its maiden voyage.",
-        "Shakespeare wrote 'Romeo and Juliet'.",
-    ]
+def chunk_text(text: str, max_chars=500) -> list[str]:
+    """
+    Split text into chunks of up to max_chars, trying to chunk by paragraph.
+    """
+    paragraphs = text.split("\n\n")
+    chunks = []
+    current = ""
+    for para in paragraphs:
+        if len(current) + len(para) < max_chars:
+            current += para + "\n\n"
+        else:
+            chunks.append(current.strip())
+            current = para + "\n\n"
+    if current:
+        chunks.append(current.strip())
+    return chunks
 
-    # Save the final knowledge base for reference
-    knowledge_base = documents
+def build_knowledge_base_from_pdfs(pdf_folder="pdf_docs", max_chars=500):
+    """
+    1) Gather all PDFs in pdf_folder
+    2) Extract and chunk text
+    3) Build BM25 + FAISS indexes
+    4) Save them to disk
+    """
+    documents = []
 
-    # 1. Build embeddings for FAISS
-    model = SentenceTransformer("all-MiniLM-L6-v2")
-    embeddings = model.encode(knowledge_base)
+    # 1) Process each PDF
+    for fname in os.listdir(pdf_folder):
+        if fname.lower().endswith(".pdf"):
+            pdf_path = os.path.join(pdf_folder, fname)
+            # 2) Extract text
+            text = extract_text_from_pdf(pdf_path)
+            # 3) Chunk text
+            chunked_list = chunk_text(text, max_chars=max_chars)
+            # 4) Append to documents
+            documents.extend(chunked_list)
 
-    # Create a FAISS index
+    # Build embeddings for FAISS
+    model_sbert = SentenceTransformer("all-MiniLM-L6-v2")
+    embeddings = model_sbert.encode(documents)
     dimension = embeddings.shape[1]
     index = faiss.IndexFlatL2(dimension)
     index.add(embeddings)
-
     faiss.write_index(index, "knowledge_index")
 
-    # 2. Save the knowledge base text in a pickle
-    with open("knowledge_base.pkl", "wb") as f:
-        pickle.dump(knowledge_base, f)
-
-    # 3. Create a BM25 index
-    tokenized_corpus = [doc.split(" ") for doc in knowledge_base]
+    # Build BM25 index
+    tokenized_corpus = [doc.split() for doc in documents]
     bm25 = BM25Okapi(tokenized_corpus)
-
     with open("bm25_index.pkl", "wb") as f:
         pickle.dump(bm25, f)
 
-    print("Knowledge base, FAISS index, and BM25 index have been created.")
+    # Save the chunked documents
+    with open("knowledge_base.pkl", "wb") as f:
+        pickle.dump(documents, f)
+
+    print(f"Knowledge base built with {len(documents)} chunks from PDFs in '{pdf_folder}'.")
 
 if __name__ == "__main__":
-    if not os.path.exists("knowledge_index") or not os.path.exists("knowledge_base.pkl"):
-        build_knowledge_base()
-    else:
-        print("Knowledge base already exists. Delete files if you want to rebuild.")
+    build_knowledge_base_from_pdfs(pdf_folder="pdf_docs", max_chars=1000)

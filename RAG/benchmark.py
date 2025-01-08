@@ -1,182 +1,147 @@
-import requests
-import pickle
-import torch
-from transformers import GPT2Tokenizer, GPT2LMHeadModel
+import os
+import json
+import re
+from bert_score import score as bert_score
+from rouge_score import rouge_scorer
+from bio_gpt_utils import BioGPTGenerator
+from retrieval import hybrid_retrieve
 
-TEST_SAMPLES = [
-    {
-        "query": "What is the capital of France?",
-        "expected_answer": "Paris"
-    },
-    {
-        "query": "What is the capital of Germany?",
-        "expected_answer": "Berlin"
-    },
-    {
-        "query": "Which planet is the largest in our Solar System?",
-        "expected_answer": "Jupiter"
-    },
-    {
-        "query": "Is Mars inhabited by humans?",
-        "expected_answer": "no"
-    },
-    {
-        "query": "Who painted The Starry Night?",
-        "expected_answer": "Vincent van Gogh"
-    },
-    {
-        "query": "Which mountain is the highest on Earth?",
-        "expected_answer": "Everest"
-    },
-    {
-        "query": "What is the official language of Brazil?",
-        "expected_answer": "Portuguese"
-    },
-    {
-        "query": "Who developed JavaScript?",
-        "expected_answer": "Brendan Eich"
-    },
-    {
-        "query": "Where is the Taj Mahal located?",
-        "expected_answer": "Agra"
-    },
-    {
-        "query": "When did the Titanic sink?",
-        "expected_answer": "1912"
-    },
-    {
-        "query": "What is the speed of light?",
-        "expected_answer": "299,792 km/s"
-    },
-    {
-        "query": "Who developed the theory of relativity?",
-        "expected_answer": "Einstein"
-    },
-]
+def calculate_rouge(reference: str, hypothesis: str) -> dict:
+    scorer = rouge_scorer.RougeScorer(["rouge1", "rouge2", "rougeL"], use_stemmer=True)
+    return scorer.score(reference, hypothesis)
 
-def measure_accuracy(generated_text: str, expected: str) -> bool:
-    if not generated_text or not expected:
-        return False
-    return expected.lower() in generated_text.lower()
+def calculate_bertscore(reference: str, hypothesis: str) -> dict:
+    P, R, F1 = bert_score([hypothesis], [reference], lang="en", verbose=False)
+    return {"precision": P.mean().item(), "recall": R.mean().item(), "f1": F1.mean().item()}
 
-def measure_contradiction_or_hallucination(generated_text: str, reference_list: list) -> (bool, bool):
-    # currently ery naive logic:
-    # - contradiction if we find "largest planet is" in gen but it references e.g. 'Saturn' or 'Mars' instead of 'Jupiter' which doesn't
-    # quitttttttteeee work always but oh well
-    # - Hallucination if references random weird stuff but so far so good
-    known_facts = " ".join(reference_list).lower()
-    gen_lower = generated_text.lower()
+def clean_exact_answer(exact_answer):
+    if exact_answer is None:
+        return ""
+    if isinstance(exact_answer, list):
+        exact_answer = " ".join([
+            item for sublist in exact_answer
+            for item in (sublist if isinstance(sublist, list) else [sublist])
+        ])
+    return re.sub(r"\s+", " ", exact_answer.strip())
 
-    contradiction = False
-    # example naive rule:
-    if "largest planet" in gen_lower and "jupiter" not in gen_lower:
-        contradiction = True
 
-    # similarly, if "capital of france" in gen_lower and "paris" not in gen_lower => contradiction
-    if "capital of france" in gen_lower and "paris" not in gen_lower:
-        contradiction = True
-    # lowkey a bit of a hack but works for now will update this logic soon
-    # tbh new logic could be if references something the NLI doesn't consider relevant its a hallucination
-    hallucination = False
-    weird_phrases = ["unicorn", "mermaid city", "alien invasion", "time travel device", "narnia"]
-    for phrase in weird_phrases:
-        if phrase in gen_lower:
-            hallucination = True
+def yes_no_exact_match(gold: str, pred: str) -> float:
+    """
+    Quick hacky measure for yes/no questions: returns 1.0 if they match exactly, else 0.
+    Lowercase both sides for comparison.
+    """
+    gold = gold.strip().lower()
+    pred = pred.strip().lower()
+    # We look for "yes" or "no" in the gold
+    if gold in ["yes", "no"]:
+        return 1.0 if gold == pred else 0.0
+    # fallback if gold isn't strictly "yes"/"no"
+    return 0.0
+
+def test_bioasq_with_biogpt(
+    bioasq_json_path: str = "bioASQ/simple_ID_filtered_bioASQ.json",
+    max_questions: int = None
+):
+    if not os.path.exists(bioasq_json_path):
+        print(f"[ERROR] Could not find: {bioasq_json_path}")
+        return
+
+    with open(bioasq_json_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    questions = data.get("questions", [])
+    num_questions = len(questions)
+    print(f"[INFO] Loaded {num_questions} questions from {bioasq_json_path}")
+
+    # Initialize BioGPT
+    bio_gpt = BioGPTGenerator()
+
+    # Accumulators for overall scores
+    rouge_scores_raw = []
+    rouge_scores_rag = []
+    bert_scores_raw = []
+    bert_scores_rag = []
+    yes_no_matches_raw = []
+    yes_no_matches_rag = []
+
+    for i, q in enumerate(questions):
+        if max_questions is not None and i >= max_questions:
             break
 
-    return contradiction, hallucination
+        question_id = q.get("id", "N/A")
+        question_text = q.get("body", "N/A")
+        exact_answer = clean_exact_answer(q.get("exact_answer", []))
+        ideal_answer = " ".join(q.get("ideal_answer", [])) if q.get("ideal_answer") else ""
 
-def gpt2_generate(query: str) -> str:
+        print("\n" + "=" * 80)
+        print(f"Question #{i + 1} | ID: {question_id}")
+        print(f"Q: {question_text}")
+        print(f"Exact Answer (BioASQ gold): {exact_answer}")
+        print(f"Ideal Answer (BioASQ gold): {ideal_answer}")
 
-    tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
-    model = GPT2LMHeadModel.from_pretrained("gpt2")
-    model.eval()
+        # A) BioGPT Raw
+        bio_gpt_raw_answer = bio_gpt.generate_raw_answer(question_text, max_length=200)
+        print("\n-- BioGPT (Raw) --")
+        print(bio_gpt_raw_answer)
 
-    tokenizer.pad_token_id = tokenizer.eos_token_id
+        # Evaluate Raw w/ ROUGE + BERTScore
+        rouge_raw = calculate_rouge(exact_answer, bio_gpt_raw_answer)
+        bert_raw = calculate_bertscore(exact_answer, bio_gpt_raw_answer)
+        rouge_scores_raw.append(rouge_raw)
+        bert_scores_raw.append(bert_raw)
 
-    encoded = tokenizer(query, return_tensors="pt", padding=True, truncation=True)
-    input_ids = encoded["input_ids"]
-    attention_mask = encoded["attention_mask"]
-    max_length = input_ids.shape[1] + 40
+        # For yes/no questions, do a quick check
+        if exact_answer.lower() in ["yes", "no"]:
+            yes_no_matches_raw.append(yes_no_exact_match(exact_answer, bio_gpt_raw_answer))
 
-    with torch.no_grad():
-        output_ids = model.generate(
-            input_ids,
-            max_length=max_length,
-            do_sample=False,
-            attention_mask=attention_mask,
-            pad_token_id=tokenizer.eos_token_id
-        )
-    return tokenizer.decode(output_ids[0], skip_special_tokens=True)
+        # B) BioGPT + RAG
+        relevant_docs = hybrid_retrieve(question_text, top_k=5) 
+        bio_gpt_rag_answer = bio_gpt.generate_rag_answer(question_text, relevant_docs, max_new_tokens=80)
+        print("\n-- BioGPT (RAG) --")
+        print(bio_gpt_rag_answer)
 
-def run_benchmark(use_api_verification: bool):
-    # 1) for each sample gen gpt2 output
-    # 2) If use_api_verification=True => call /verify_step
-    # 3) measure accuracy, contradiction, hallucination
-    total_samples = len(TEST_SAMPLES)
-    correct_count = 0
-    contradiction_count = 0
-    hallucination_count = 0
+        # Evaluate RAG
+        rouge_rag = calculate_rouge(exact_answer, bio_gpt_rag_answer)
+        bert_rag = calculate_bertscore(exact_answer, bio_gpt_rag_answer)
+        rouge_scores_rag.append(rouge_rag)
+        bert_scores_rag.append(bert_rag)
 
-    with open("knowledge_base.pkl", "rb") as f:
-        knowledge_base = pickle.load(f)
+        if exact_answer.lower() in ["yes", "no"]:
+            yes_no_matches_rag.append(yes_no_exact_match(exact_answer, bio_gpt_rag_answer))
 
-    for i, sample in enumerate(TEST_SAMPLES):
-        query = sample["query"]
-        expected = sample["expected_answer"]
+        # Show partial metrics
+        print("\n[ROUGE Scores]")
+        print(f"Raw: {rouge_raw} | RAG: {rouge_rag}")
+        print("\n[BERT Scores]")
+        print(f"Raw: {bert_raw} | RAG: {bert_rag}")
 
-        raw_gen = gpt2_generate(query)
+        print("=" * 80)
 
-        if use_api_verification:
-            conv_id = f"benchmark-{i}"
-            url = "http://localhost:8000/verify_step"
-            payload = {
-                "conversation_id": conv_id,
-                "partial_text": raw_gen,
-                "auto_correct": True
-            }
-            resp = requests.post(url, json=payload)
-            if resp.status_code != 200:
-                print(f"Error calling API: {resp.status_code} {resp.text}")
-                verified_text = raw_gen
-            else:
-                verified_text = resp.json()["verified_text"]
-        else:
-            verified_text = raw_gen
+    # Summaries
+    num_evaluated = len(rouge_scores_raw)
+    if num_evaluated == 0:
+        print("No questions evaluated.")
+        return
 
-        # measure correctness
-        if measure_accuracy(verified_text, expected):
-            correct_count += 1
+    # Optional: average the BERT/ROUGE
+    # (rouge_raw is a dict of 3 keys, so we can do a simplistic average if we want)
+    # We'll just show how many yes/no matches we got:
+    if len(yes_no_matches_raw) > 0:
+        yn_accuracy_raw = sum(yes_no_matches_raw) / len(yes_no_matches_raw)
+        yn_accuracy_rag = sum(yes_no_matches_rag) / len(yes_no_matches_rag)
+        print(f"\n[Yes/No Accuracy] Raw: {yn_accuracy_raw:.2f} | RAG: {yn_accuracy_rag:.2f}")
 
-        # measure contradiction/hallucination
-        is_contr, is_hall = measure_contradiction_or_hallucination(verified_text, knowledge_base)
-        if is_contr:
-            contradiction_count += 1
-        if is_hall:
-            hallucination_count += 1
+    print("\n[RESULTS]")
+    print(f"Tested {num_evaluated} questions.")
+    # We won't re-print all the ROUGE dicts for brevity.
+    print("Done.")
 
-        # debug print
-        print("\n=======================")
-        print(f"Query: {query}")
-        print(f"Raw GPT-2 Gen: {raw_gen}")
-        print(f"Verified/Final: {verified_text}")
-        print(f"Expected: {expected}")
-        print(f"Correct?: {measure_accuracy(verified_text, expected)}")
-        print(f"Contradiction?: {is_contr}")
-        print(f"Hallucination?: {is_hall}")
 
-    accuracy = correct_count / total_samples
-    contradiction_rate = contradiction_count / total_samples
-    hallucination_rate = hallucination_count / total_samples
-
-    print("\nBenchmark Results:")
-    print(f"Accuracy: {accuracy*100:.2f}%")
-    print(f"Contradiction Rate: {contradiction_rate*100:.2f}%")
-    print(f"Hallucination Rate: {hallucination_rate*100:.2f}%\n")
+def main():
+    test_bioasq_with_biogpt(
+        bioasq_json_path="bioASQ/simple_ID_filtered_bioASQ.json",
+        max_questions=169  # or any subset
+    )
 
 if __name__ == "__main__":
-    print("=== Baseline: GPT-2 only (no verification) ===")
-    run_benchmark(use_api_verification=False)
-
-    print("\n=== With Verification Pipeline ===")
-    run_benchmark(use_api_verification=True)
+    main()

@@ -12,8 +12,7 @@ from critique import correct_after_critique
 from pipeline import chain_of_thought_reader
 
 
-openai.api_key = "" #put a key here
-
+openai.api_key = ""
 app = FastAPI(
     title="Stepwise RAG Verification API",
     version="1.0.0",

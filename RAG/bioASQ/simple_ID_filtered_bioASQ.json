@@ -1,0 +1,2188 @@
+{
+  "questions": [
+    {
+      "id": "51593dc8d24251bc05000099",
+      "body": "Proteomic analyses need prior knowledge of the organism complete genome. Is the complete genome of the bacteria of the genus Arthrobacter available?",
+      "ideal_answer": [
+        "Yes, the complete genome sequence of Arthrobacter (two strains) is deposited in GenBank."
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "531a3fe3b166e2b806000038",
+      "body": "Is pregnancy an additional risk during during H1N1 infection?",
+      "ideal_answer": [
+        "Pregnant women are at increased risk for complications from pandemic influenza H1N1 virus infection. Pregnant women, because of their altered immunity and physiological adaptations, are at higher risk of developing pulmonary complications, especially in the second and third trimesters. Pregnancy, particularly during the third trimester, increases the risk of complications and early antiviral treatment is associated with improved outcomes."
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "571529efcb4ef8864c000001",
+      "body": "Which antibiotics target peptidoglycan biosynthesis?",
+      "ideal_answer": [
+        "Under some conditions, both ramoplanin and vancomycin probes produce helicoid staining patterns along the cylindrical walls of B. subtilis cells. This work has implications for the design of ramoplanin derivatives and may influence how other proposed substrate binding antibiotics are studied. This was confirmed by in vitro studies involving a wall-membrane particulate fraction from Gaffkya homari in which peptidoglycan synthesis from UDP-MurNAc-tetrapeptide was inhibited by ramoplanin but not by vancomycin. New results support a two-state model for septal and peripheral PG synthesis at mid-cell, involvement of essential cell division proteins in PG remodeling, and mid-cell localization of proteins that organize PG biosynthesis and that form the protein translocation apparatus.",
+        "Antibiotics which inhibit bacterial peptidoglycan biosynthesis are the most widely used in current clinical practice. Cells treated with ampicillin, D-cycloserine, or fosfomycin had only one chloroplast after cell division, suggesting that the cells divided without chloroplast division. The antibiotics bacitracin and vancomycin showed no obvious effect. Colchicine inhibits Closterium cell elongation after division.  Surprisingly, also cinnamycin of Streptomyces cinnamoneus cinnamoneus), previously known to bind specifically to phosphatidylethanolamin of biological membranes, provoked strong cell wall biosynthetic stress. Other substances include fluorescent derivatives of two PG-binding antibiotics, vancomycin and ramoplanin. The muraymycins constitute a new antibiotic family whose core structure contains a glycosylated uronic acid derivative joined by an aminopropane group to a hexahydro-2-imino-4-pyrimidylglycyl residue (epicapreomycidine) containing dipeptide that is further extended by a urea-valine moiety. The muraymycins inhibited peptidoglycan biosynthesis. Ramoplanin is a cyclicdepsipeptide antibiotic that inhibits peptidoglycan biosynthesis. The lantibiotic mersacidin inhibits peptidoglycan biosynthesis at the level of transglycosylation. Ramoplanin, a new lipoglycopeptide antibiotic, inhibits cell wall peptidoglycan biosynthesis in gram-positive bacteria."
+      ],
+      "exact_answer": [
+        [
+          "colchicine"
+        ],
+        [
+          "fosfomycin"
+        ],
+        [
+          "bacitracin"
+        ],
+        [
+          "vancomycin"
+        ],
+        [
+          "D-cycloserine",
+          "seromycin"
+        ],
+        [
+          "ampicillin"
+        ],
+        [
+          "cinnamycin"
+        ],
+        [
+          "ramoplanin"
+        ],
+        [
+          "muraymycin"
+        ],
+        [
+          "mersacidin"
+        ]
+      ]
+    },
+    {
+      "id": "56c81fd15795f9a73e00000c",
+      "body": "Are stress granules involved in the pathogenesis of Amyotrophic Lateral Sclerosis?",
+      "ideal_answer": [
+        "Stress granules are cytoplasmic inclusions that repress translation of a subset of RNAs in times of cellular stress, and several proteins implicated in neurodegeneration (i.e. Ataxin-2 and SMN) interact with stress granules. Mutant FUS proteins that cause amyotrophic lateral sclerosis incorporate into stress granules. ALS-linked mutations in profilin 1 alter stress granule dynamics, providing further evidence for the potential role of stress granules in ALS pathogenesis. ALS mutations in FUS NLS can impair FUS nuclear localization, induce cytoplasmic inclusions and stress granules, and potentially perturb RNA metabolism.",
+        "Yes, stress granules (SGs) have been linked to several pathologies including inflammatory diseases, cancer, viral infection, and neurodegenerative diseases such as amyotrophic lateral sclerosis (ALS) and frontotemporal dementia (FTD)."
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "517a8c918ed59a060a000043",
+      "body": "Which viruses are best known to cause myocarditis?",
+      "ideal_answer": [
+        "The most frequent viruses causing myocarditis are Enterovirus, Adenovirus and Coxsackie B viruses."
+      ],
+      "exact_answer": [
+        [
+          "Enterovirus"
+        ],
+        [
+          "Adenovirus"
+        ],
+        [
+          "Coxsackie B virus"
+        ]
+      ]
+    },
+    {
+      "id": "57169662cb4ef8864c000008",
+      "body": "What is the function of 6SRNA in bacteria?",
+      "ideal_answer": [
+        "6S RNA, first described as a ncRNA in E. coli, mimics an open promoter structure, which has a large bulge with two hairpin/stalk structures that regulate transcription through interactions with RNA polymerase. Escherichia coli 6S RNA represents a non-coding RNA (ncRNA), which, based on the conserved secondary structure and previous functional studies, had been suggested to interfere with transcription. The carboxy terminus containing the Arg-Gly-Gly (RGG) repeat domains in these proteins are necessary for cis-repression of transcription activation and HAT activity by the N-terminal glutamine-rich domain.",
+        "Escherichia coli 6S RNA represents a non-coding RNA (ncRNA), which, based on the conserved secondary structure and previous functional studies, had been suggested to interfere with transcription. 6S RNA-deficient cells are at a disadvantage for survival in stationary phase, a time when 6S RNA regulates transcription. 6S RNA regulation of both sigma(70) and sigma(S) activities contributes to increased cell persistence during nutrient deprivation. 6S RNA acts as a template for the transcription of defined RNA molecules in the absence of DNA. 6S RNA, first described as a ncRNA in E. coli, mimics an open promoter structure, which has a large bulge with two hairpin/stalk structures that regulate transcription through interactions with RNA polymerase.",
+        "6S RNA function enhances long-term cell survival. "
+      ],
+      "exact_answer": null
+    },
+    {
+      "id": "5710ade4cf1c32585100002c",
+      "body": "What is the suggested therapy for Mycobacterium avium infection?",
+      "ideal_answer": [
+        "The activity of TLC G-65 (a liposomal gentamicin preparation), alone and in combination with rifapentine, clarithromycin, clofazimine and ethambutol, was evaluated in the beige mouse (C57BL/6J--bgj/bgj) model of disseminated Mycobacterium avium infection. TLC G-65 in combination with rifapentine appears to be an attractive regimen for the treatment of infections caused by bacteria in the M. avium complex. Rifampin 10 mg/kg daily, ciprofloxacin 500 mg twice daily, clofazimine 100 mg every day, and ethambutol 15 mg/kg orally daily for 24 weeks, with or without amikacin 10 mg/kg intravenously or intramuscularly 5 days weekly for the first 4 weeks. In vivo phage treatment may also be used in some cases.",
+        "Rifampin 10 mg/kg daily, ciprofloxacin 500 mg twice daily, clofazimine 100 mg every day, and ethambutol 15 mg/kg orally daily for 24 weeks, with or without amikacin 10 mg/kg intravenously or intramuscularly 5 days weekly for the first 4 weeks",
+        "The activity of TLC G-65 (a liposomal gentamicin preparation), alone and in combination with rifapentine, clarithromycin, clofazimine and ethambutol, was evaluated in the beige mouse (C57BL/6J--bgj/bgj) model of disseminated Mycobacterium avium infection"
+      ],
+      "exact_answer": null
+    },
+    {
+      "id": "515df063298dcd4e51000029",
+      "body": "What is the indication for prophylactic use of antibiotics in COPD?",
+      "ideal_answer": [
+        "In a subset of patients with severe disease and prone to developing infections prophylactic use of antibiotics may reduce number of exacerbations and improve social and health care costs."
+      ],
+      "exact_answer": [
+        "Reduction of number of exacerbations"
+      ]
+    },
+    {
+      "id": "551c2cd26b348bb82c00000d",
+      "body": "Does helicobacter pylori infection increase risk for ischemic stroke?",
+      "ideal_answer": [
+        "Findings regarding association between helicobacter pylori infection and ischemic stroke risk are conflicting. There is evidence to suggest that helicobacter pylori infection is associated with increased risk for ischemic stroke and should be considered stroke risk factors. However, some studies reported no association between helicobacter pylori infection and stroke."
+      ],
+      "exact_answer": null
+    },
+    {
+      "id": "513eec89bee46bd34c00000d",
+      "body": "What is the biological role of expansins in fungi?",
+      "ideal_answer": [
+        "Expansins are extracellular proteins that increase plant cell-wall extensibility. These wall-loosening proteins are involved in cell wall extension and polysaccharide degradation. In fungi expansins and expansin-like proteins have been found to localize in the conidial cell wall and are probably involved in cell wall remodeling during germination."
+      ],
+      "exact_answer": null
+    },
+    {
+      "id": "5719f5c67de986d80d00000d",
+      "body": "What distinguishes lantibiotics from antibiotics?",
+      "ideal_answer": [
+        "Lantibiotic compounds are ribosomally synthesized antimicrobial peptides against which bacteria are not able to produce resistance, hence making them a good alternative to antibiotics. It is interesting that low levels of resistance have been reported for lantibiotics compared with commercial antibiotics. Given that there are very few examples of naturally occurring lantibiotic resistance, attempts have been made to deliberately induce resistance phenotypes in order to investigate this phenomenon. Other general forms of resistance include the formation of spores or biofilms, which are a common mechanistic response to many classes of antimicrobials.",
+        "One potentially interesting class of antimicrobials are the modified bacteriocins termed lantibiotics, which are bacterially produced, posttranslationally modified, lanthionine/methyllanthionine-containing peptides. Low levels of resistance have been reported for lantibiotics compared with commercial antibiotics. Nisin is the oldest and the most widely used lantibiotic, in food preservation, without having developed any significant resistance against it.",
+        "One potentially interesting class of antimicrobials are the modified bacteriocins termed lantibiotics, which are bacterially produced, posttranslationally modified, lanthionine/methyllanthionine-containing peptides."
+      ],
+      "exact_answer": [
+        "Lantibiotics are post-translationally modified natural peptides containing lanthionine"
+      ]
+    },
+    {
+      "id": "530f685c329f5fcf1e000002",
+      "body": "Is there an association between borna virus and brain tumor?",
+      "ideal_answer": [
+        "There is no data to suggest an association between borna virus and brain tumor. Borna disease virus establishes a persistent infection in the central nervous system of vertebrate animal species as well as in tissue cultures causing cellular damage. Infected neural cells, include astrocytes, neurons, oligodendroglioma cell line. Borna disease virus replicates and can cause damage of brain cells."
+      ],
+      "exact_answer": "no"
+    },
+    {
+      "id": "52bf1cad03868f1b0600000a",
+      "body": "Which virus is Cidofovir (Vistide) indicated for?",
+      "ideal_answer": [
+        "Cidofovir is commonly used in the treatment of cytomegalovirus (CMV) infection and disease."
+      ],
+      "exact_answer": [
+        "cytomegalovirus"
+      ]
+    },
+    {
+      "id": "55451e53bf90a13052000003",
+      "body": "Which proteins act as factors that promote transcription-coupled repair in bacteria?",
+      "ideal_answer": [
+        "Transcription coupled nucleotide excision repair (TC-NER or TCR) is a cellular process by which UV-induced damage and other road-blocks encountered in the transcribed strand are restored. Bacterial transcription-coupled repair is initiated when RNA polymerase stalled at a DNA lesion is removed by Mfd (Mutation frequency decline), an ATP-dependent DNA translocase. Mfd is the major transcription repair coupling factor in bacteria. Also, the transcription elongation factor NusA, in addition to its role in recruiting translesion synthesis (TLS) DNA polymerases to gaps encountered during transcription,  promotes an alternative class of TCR involved in the identification and removal of a class of lesion, such as the N(2)-f-dG lesion."
+      ],
+      "exact_answer": [
+        [
+          "Mfd"
+        ],
+        [
+          "NusA"
+        ]
+      ]
+    },
+    {
+      "id": "551ae6c564b14b4618000001",
+      "body": "Are people with blood group O protected against severe Malaria?",
+      "ideal_answer": [
+        "It appears that individuals who are of blood-group O are relatively resistant to the severe disease caused by P. falciparum infection."
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "5710a650cf1c32585100002b",
+      "body": "Is Mycobacterium avium less susceptible to antibiotics than Mycobacterium tuberculosis?",
+      "ideal_answer": [
+        "Mycobacterium avium causes disseminated infection in patients with acquired immune deficiency syndrome. M tuberculosis disease is preventable and curable and yet communicable, physicians should maintain a high degree of suspicion for tuberculosis in HIV-infected adults. In comparison, the goal of treating M avium complex in patients with advanced HIV disease is to reduce constitutional symptoms and improve survival. Patients who were suspected to have disseminated mycobacterial infection, presenting fever and (preferably) a CD4 T cell count<100.0 cell/mL were investigated. Twelve (15%) of the 80 blood cultures were positive for mycobacteria, with Mycobacterium avium being identified in 7 (8.8%) samples and M. tuberculosis in 5 (6.2%).  The antimycobacterial activities of RS-112997, RS-124922 and RS-118641, three capuramycin analogues that inhibit phospho-N-acetylmuramyl-pentapeptide translocase, were tested against clinical isolates of Mycobacterium tuberculosis, Mycobacterium avium and Mycobacterium intracellulare. The MIC50/90 (mg/L) results for RS-118641 were: M. tuberculosis, 1/2; multidrug-resistant (MDR) M. tuberculosis, 0.5/2; M. avium, 4/8; and M. intracellulare, 0.06/0.5"
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "571cdd227de986d80d00000f",
+      "body": "Which bacteria caused plague?",
+      "ideal_answer": [
+        "Yersinia pestis is the causative bacteria of the plague."
+      ],
+      "exact_answer": [
+        "Yersinia pestis"
+      ]
+    },
+    {
+      "id": "513efe01bee46bd34c00000e",
+      "body": "Is paramyxovirus involved in human subacute thyroiditis?",
+      "ideal_answer": [
+        "There is no evidence that paramyxovirus are involved in etiology of subacute thyroiditis."
+      ],
+      "exact_answer": "no"
+    },
+    {
+      "id": "5314ad66dae131f847000004",
+      "body": "Why does cranberry juice help combat urinary tract infections?",
+      "ideal_answer": [
+        "Cranberry products affect the surface properties, such as fimbriae and lipopolysaccharides, and adhesion of fimbriated and nonfimbriated E. coli."
+      ],
+      "exact_answer": null
+    },
+    {
+      "id": "56b76d916e3f8eaf4c000001",
+      "body": "To which family does the Zika virus belong?",
+      "ideal_answer": [
+        "The Zika virus belongs to the family Flaviviridae."
+      ],
+      "exact_answer": [
+        "Flaviviridae"
+      ]
+    },
+    {
+      "id": "56a37e33496b62f23f000003",
+      "body": "List types of avoided words in bacterial genomes",
+      "ideal_answer": [
+        "Short palindromic sequences (4, 5 and 6 bp palindromes) are avoided at a statistically significant level in the genomes of several bacteria, including the completely sequenced Haemophilus influenzae and Synechocystis sp. genomes and in the complete genome of the archaeon Methanococcus jannaschii. Palindromes corresponding to sites for restriction enzymes from other species are also avoided, albeit less significantly, suggesting that in the course of evolution bacterial DNA has been exposed to a wide spectrum of restriction enzymes, probably as the result of lateral transfer mediated by mobile genetic elements, such as plasmids and prophages. Palindromic words appear to accumulate in DNA once it becomes isolated from restriction-modification systems, as demonstrated by the case of organellar genomes."
+      ],
+      "exact_answer": [
+        [
+          "Short palindromic sequences (4, 5 and 6 bp palindromes)"
+        ],
+        [
+          "Palindromes corresponding to sites for restriction enzymes from other species"
+        ]
+      ]
+    },
+    {
+      "id": "52ce531f03868f1b06000031",
+      "body": "Are retroviruses used for gene therapy?",
+      "ideal_answer": [
+        "Gene therapy is one of the most promising and active fields in therapeutic research. Gene therapy is a treatment option that introduces genetic material in vivo or ex vivo into the cells of an affected organism in order to: exchange a defective gene; manipulate a disease-related gene; or introduce an additional gene copy for overexpression of the encoded protein to generate a curative biological effect. Somatic gene therapy is gene transfer by a specific vector to a somatic cell; in contrast to germline gene therapy, the modification of the cell is restricted to the recipient and cannot be passed to her/his progeny. High efficiency of gene transfer, high specificity for the target cells, long-lasting expression of the transgene and safety without adverse reactions are the desired characteristics of an ideal vector for gene transfer.\nRetroviral (gretroviral and lentiviral) vectors have now been used in more than 350 gene-therapy studies. Retroviral vectors are particularly suited for gene-correction of cells due to long-term and stable expression of the transferred transgene(s), and also because little effort is required for their cloning and production. Several monogenic inherited diseases, mostly immunodeficiencies, can now be successfully treated."
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "533c3533c45e133714000004",
+      "body": "Which micro-RNAs have been associated in the pathogenesis of Rheumatoid Arthritis?",
+      "ideal_answer": [
+        "Different expression patterns of mir-146a, miRNA-155, miRNA-124a, mir-203, mir-223, mir-346, mir-132, mir-363, mir-498, mir-15a, and mir-16 were documented in several tissue sample types of RA patients."
+      ],
+      "exact_answer": [
+        [
+          "miR-155"
+        ],
+        [
+          "miR-146a"
+        ],
+        [
+          "miR-124a"
+        ],
+        [
+          "miR-222"
+        ],
+        [
+          "miR-223"
+        ],
+        [
+          "miR-203"
+        ],
+        [
+          "miR-346"
+        ],
+        [
+          "miR-132"
+        ],
+        [
+          "miR-363"
+        ],
+        [
+          "miR-498"
+        ],
+        [
+          "miR-15a"
+        ],
+        [
+          "miR-16"
+        ],
+        [
+          "miR-18a"
+        ]
+      ]
+    },
+    {
+      "id": "56e0447a51531f7e3300000b",
+      "body": "Which are the smallest known subviral pathogens of plants?",
+      "ideal_answer": [
+        "Contrary to earlier beliefs, viruses are not the smallest causative agents of infectious diseases. Single-stranded RNAs as small as 246 nucleotides exist in certain higher plants and cause more than a dozen crop diseases. These RNAs have been termed viroids. Viroids are plant subviral pathogens whose genomes are constituted by a single-stranded and covalently closed small RNA molecule that does not encode for any protein.",
+        "Since the discovery of non-coding, small, highly structured, satellite RNAs (satRNAs) and viroids as subviral pathogens of plants , have been of great interest to molecular biologists as possible living fossils of pre-cellular evolution in an RNA world."
+      ],
+      "exact_answer": [
+        "Viroids"
+      ]
+    },
+    {
+      "id": "55439140ed966d112c00000a",
+      "body": "Which are the major phycobiliproteins present in cyanobacteria?",
+      "ideal_answer": [
+        "Phycobiliproteins are derived from the photosynthetic apparatus of cyanobacteria and eukaryotic algae, and form their large extrinsic antenna complexes called phycobilisomes. Phycobilisomes have a core composed from allophycocyanin (APC) and rods, which are of variable phycobiliprotein composition. C-Phycocyanin (C-Pc) is one of the major light harvesting biliprotein pigments constitutively produced by many cyanobacteria, such as Spirulina platenesis (a blue-green alga). B-Phycoerythrin (B-PE) is an other major light-harvesting pigment found in red algae and cyanobacteria. R-phycoerythrin (R-PE) is the major light-harvesting pigment protein of most red algal phycobilisomes."
+      ],
+      "exact_answer": [
+        [
+          "allophycocyanin (APC)"
+        ],
+        [
+          "C-Phycocyanin (C-Pc)"
+        ],
+        [
+          "B-Phycoerythrin (B-PE)"
+        ],
+        [
+          "R-phycoerythrin (R-PE)"
+        ]
+      ]
+    },
+    {
+      "id": "54edf72c94afd61504000013",
+      "body": "What is the presumed key event in Fanconi anemia pathogenesis?",
+      "ideal_answer": [
+        "Monoubiquitination of the Fanconi anaemia protein FANCD2 is a key event leading to repair of interstrand cross-links. Failure of FANCD2 monoubiquitination by the nuclear FA protein complex has a severe impact on the DNA repair functions of cells."
+      ],
+      "exact_answer": [
+        "FANCD2 monoubiquitination"
+      ]
+    },
+    {
+      "id": "553babc0f321868558000007",
+      "body": "Which types of bacterial microflora are associated with the progression of peri-implantitis?",
+      "ideal_answer": [
+        "Bacteria such as A. actinomycetemcomitans, P. gingivalis, T. forsythensis, T. denticola, P. intermedia and F. nucleatum are associated with the progression of peri-implantitis."
+      ],
+      "exact_answer": [
+        [
+          "A. actinomycetemcomitans"
+        ],
+        [
+          "P. gingivalis"
+        ],
+        [
+          "T. denticola"
+        ],
+        [
+          "T. forsythia"
+        ],
+        [
+          "P. intermedia"
+        ],
+        [
+          "F. nucleatum"
+        ]
+      ]
+    },
+    {
+      "id": "513711055274a5fb0700000e",
+      "body": "Are viruses involved in the etiology of human subacute thyroiditis?",
+      "ideal_answer": [
+        "Subacute thyroiditis (SAT) is an inflammatory disorder of the thyroid caused probably by viruses\nThe principal classes of viruses involed  in SAT include Epstein Barr and Retroviridae"
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "530cf54dab4de4de0c000009",
+      "body": "What is the reason for the narcolepsy cases developed after H1N1 influenza vaccination?",
+      "ideal_answer": [
+        "The proposed mechanism for postvaccination narcolepsy is one in which an environmental trigger causes or enhances an antibody-mediated autoimmune response in patients with a preexisting genetic susceptibility."
+      ],
+      "exact_answer": null
+    },
+    {
+      "id": "5547a7e9f35db75526000006",
+      "body": "Which enzymes are involved in global genome nucleotide excision repair (GG-NER) in bacteria?",
+      "ideal_answer": [
+        "Nucleotide excision repair (NER) is universally used to recognize and remove many types of DNA damage. In eubacteria, the NER system typically consists of UvrA, UvrB, UvrC, the UvrD helicase, DNA polymerase I, and ligase.  Damage recognition during bacterial NER depends upon UvrA, which binds to the damage and loads UvrB onto the DNA. Subsequently, UvrA, UvrB and UvrC form the excinuclease protein UvrABC endonuclease, a multi-enzymatic complex which carries out repair of damaged DNA in sequential manner. In some cases, Cho may be the effective nuclease for NER, rather than UvrC. UvrC nuclease and the short oligonucleotide that contains the DNA lesion are removed from the post-incision complex by UvrD, a superfamily 1A helicase. In gram-positive organisms, PcrA helicase can also displace UvrC and the excised oligonucleotide from a post-incision NER complex."
+      ],
+      "exact_answer": [
+        [
+          "UvrA"
+        ],
+        [
+          "UvrB"
+        ],
+        [
+          "UvrC nuclease"
+        ],
+        [
+          "UvrD 1A helicase"
+        ],
+        [
+          "DNA polymerase I"
+        ],
+        [
+          "Ligase"
+        ],
+        [
+          "Cho nuclease (instead of UvrC)"
+        ],
+        [
+          "PcrA helicase (instead of Uvrd, in gram-positive bacteria)"
+        ]
+      ]
+    },
+    {
+      "id": "533aaab6d6d3ac6a34000062",
+      "body": "How is yellow fever virus transmitted?",
+      "ideal_answer": [
+        "Yellow fever virus is transmitted by mosquitoes and is restricted to Africa, Central and South America and the Caribbean. \nYellow fever virus is a flavivirus, and there is only one antigenic type. It was taken to the Americas by the early slave traders, and nowadays reported in Africa, America, Asia and Europe. Yellow fever virus is transmitted by two different cycles: \n-from human to human by the mosquito Aedes aegypti; which is well-adapted to breeding around human habitations; the infection can be maintained in this way as \u2018urban\u2019 yellow fever.\n-from infected monkeys to humans by mosquitoes such as Haemagogus. This is \u2018jungle\u2019 yellow fever and is seen in Africa and South America.\n\nYellow fever is not transmitted directly from human to human by day-to-day contact, but transmission from ill patients to healthcare workers has been reported, notably after needlestick injury."
+      ],
+      "exact_answer": null
+    },
+    {
+      "id": "515870cdd24251bc0500008f",
+      "body": "Carbapenemase-producing gram-negative bacteria is a major health concern because their resistance to antibiotics.\nList the most frequent carbapenemases found in Enterobacteriaceae.",
+      "ideal_answer": [
+        "The most frequent carbapenemases in Enterobacteriaceae  are OXA-48, KPC, VIM, NDM, IMP, SME, NMC, GES, IMI and MBL."
+      ],
+      "exact_answer": [
+        [
+          "OXA-48"
+        ],
+        [
+          "KPC"
+        ],
+        [
+          "VIM"
+        ],
+        [
+          "NDM"
+        ],
+        [
+          "IMP"
+        ],
+        [
+          "SME"
+        ],
+        [
+          "NMC"
+        ],
+        [
+          "GES"
+        ],
+        [
+          "IMI"
+        ],
+        [
+          "MBL"
+        ]
+      ]
+    },
+    {
+      "id": "52ed264a98d023950500002f",
+      "body": "Provide examples of how molecular transporters contribute to multi-drug resistance in bacteria.",
+      "ideal_answer": [
+        "MDR efflux pumps began causing clinical problems relatively recently, in parallel with the extensive use of antibiotics in medicine and as supplements in animal feeds. However, our analyses indicate that these MDR efflux pumps did not arise through recent mutations in genes encoding transporters that changed their substrate specificities.\n\nInstead, such MDR pumps are encoded within the genomes of virtually all microorganisms, so these genes are present and thus need only to be activated to become problematic. Moreover, lateral transfer of genes among bacteria has occurred frequently, particularly for plasmid-encoded systems, suggesting that such genes can be acquired fairly readily even if they are not initially present. Finally, although mutations that enable transporters to act on different types of substrate are rare, experiments and phylogenetic analyses indicate that simple point mutations can readily narrow or broaden a particular transporter's specificity toward a single class of compounds (e.g., sugars, amino acids, or drugs)."
+      ],
+      "exact_answer": null
+    },
+    {
+      "id": "54edaee3445c3b5a5f000003",
+      "body": "List the three most prevalent pathogenic species of Borrelia in Europe.",
+      "ideal_answer": [
+        "The most prevalent pathogenic species of Borrelia in Europe are: B. afzelii, B. garinii and B. burgdorferi ss."
+      ],
+      "exact_answer": [
+        [
+          "B. afzelii"
+        ],
+        [
+          "B. garinii"
+        ],
+        [
+          "B. burgdorferi ss."
+        ]
+      ]
+    },
+    {
+      "id": "530cf4fe960c95ad0c00000a",
+      "body": "Is zolpidem an antibiotic?",
+      "ideal_answer": [
+        "No, zolpidem is a short-acting imidazopyridine hypnotic drug"
+      ],
+      "exact_answer": "no"
+    },
+    {
+      "id": "553fbe9fe00431e071000001",
+      "body": "Is the regulation of Vsr endonuclease independent of the growth phase of bacteria?",
+      "ideal_answer": [
+        "The regulation of Vsr endonuclease levels is growth phase dependent."
+      ],
+      "exact_answer": "no"
+    },
+    {
+      "id": "5549de44f35db7552600000c",
+      "body": "By which mechanism MutT proteins act against DNA lesions in bacteria?",
+      "ideal_answer": [
+        "MutT proteins belong to a class of Nudix hydrolases. The common substrate structure for the proteins of the functionally diverse Nudix superfamily is nucleotide-diphosphate-X, where X is a large variety of leaving groups. The activities of Nudix hydrolases usually result in the release of an inorganic phosphate ion or of a product bearing a terminal phosphate moiety. MutT proteins hydrolyze 8-oxo-G nucleoside triphosphates/diphosphates to the corresponding nucleoside monophosphates and sanitize the nucleotide pool. MutT proteins cleave 8-oxo-dGTP (8-oxo-7,8-dihydro-2'-deoxyguanosine 5'-triphosphate) at the \u03b1-\u03b2 position; they also cleave 8-oxo-dGTP at the \u03b2-\u03b3 phosphate bond at a rate of 3% of that recorded for hydrolysis at the \u03b1-\u03b2 position. 8-oxo-dGTP induces A to C transversions when misincorporated in DNA opposite to template A. By hydrolyzing 8-oxo-dGTP before their incorporation into DNA, MutT proteins play a critical role in allowing bacteria to avoid A-to-C mutations, which are a hallmark of MutT deficiency. Thus, MutT proteins prevent oxidative DNA lesions, as part of the GO system. Oxidized nucleotides can occur when bacteria are exposed to reactive oxygen species. Also, reactive oxygen species are produced as side products of oxygen utilization, leading to the oxidation of nucleic acids and their precursor nucleotides. Distinct from the Escherichia coli MutT, which hydrolyzes 8-oxo-dGTP and 8-oxo-GTP, the mycobacterial proteins hydrolyze not only 8-oxo-dGTP and 8-oxo-GTP but also dCTP and 5-methyl-dCTP. Moreover, the hydrolysis of 8-oxo-dGTP and 8-oxo-GTP in mycobacteria seems to be catalysed in a two-stage mechanism, since MutT converts these oxidized nucleoside triphosphates to their corresponding nucleoside diphosphates, and not to monophosphates."
+      ],
+      "exact_answer": null
+    },
+    {
+      "id": "530a3e18970c65fa6b000005",
+      "body": "List bacteria that may be useful in uranium bioremediation.",
+      "ideal_answer": [
+        "The main bacteria studied in uranium bioremediation are Geobacteraceae. Other bacteria are: \nFirmicutes, \nShewanella oneidensis\nPseudomonas aeruginosa\nAnaeromyxobacter dehalogenans  \nstrain Rf4T"
+      ],
+      "exact_answer": [
+        [
+          "Betaproteobacteria"
+        ],
+        [
+          "Firmicutes"
+        ],
+        [
+          "Geobacter",
+          "Geobacteraceae",
+          "Geobacter uraniireducens"
+        ],
+        [
+          "Shewanella oneidensis"
+        ],
+        [
+          "Pseudomonas aeruginosa"
+        ],
+        [
+          "Anaeromyxobacter dehalogenans"
+        ],
+        [
+          "strain Rf4T"
+        ]
+      ]
+    },
+    {
+      "id": "56c58f1b5795f9a73e000001",
+      "body": "Which species of bacteria did the mitochondria originate from?",
+      "ideal_answer": [
+        "Biologists agree that the ancestor of mitochondria was an alpha-proteobacterium. Although the Alphaproteobacteria are thought to be the closest relatives of the mitochondrial progenitor, there is dispute as to what its particular sister group is. Accumulating evolutionary data point to a monophyletic origin of mitochondria from the order Rickettsiales. Phylogenetic analyses indicate that R. prowazekii is more closely related to mitochondria than is any other microbe studied so far."
+      ],
+      "exact_answer": [
+        "Biologists agree that the ancestor of mitochondria was an alpha-proteobacterium."
+      ]
+    },
+    {
+      "id": "5710eec5a5ed216440000004",
+      "body": "How does Hst5 (histatin 5) affect infections by Candida glabrata?",
+      "ideal_answer": [
+        "Human salivary histatins, including histatin 5 (Hst 5), are small cationic proteins that are the major source of fungicidal activity of saliva",
+        "Human salivary histatins, including histatin 5 (Hst 5), are small cationic proteins that are the major source of fungicidal activity of saliva. We found that Hst 54-15-Spd was significantly more effective in killing C. albicans and Candida glabrata than Hst 5 alone in both planktonic and biofilm growth and that Hst 54-15-Spd retained high activity in both serum and saliva. Histatin 5 (Hst 5) is a small cationic human salivary peptide with high fungicidal activity against C. albicans, however many strains of C. glabrata are resistant. We constructed a conjugate peptide using spermidine (Spd) linked to the active fragment of Hst 5 (Hst 54-15), based upon our findings that C. albicans spermidine transporters are required for Hst 5 uptake and fungicidal activity.",
+        "Our results, taken together, demonstrated that histatin-5 possessed the fungicidal activity against Candida species other than C. glabrata. ",
+        "Human salivary histatins, including histatin 5 (Hst 5), are small cationic proteins that are the major source of fungicidal activity of saliva. Histatin 5, a human salivary protein with broad-spectrum antifungal activity, is remarkably ineffective against Candida glabrata. Histatin 5 (Hst 5) is a small cationic human salivary peptide with high fungicidal activity against C. albicans, however many strains of C. glabrata are resistant. Since Hst 5 requires fungal binding to cell wall components prior to intracellular translocation, reduced Hst 5 binding to C. glabrata may be the reason for its insensitivity. Hst 5 enters C. albicans cell through polyamine transporters Dur3p and Dur31p that are uncharacterized in C. glabrata. The crucial rate limiting step is reduced uptake that can be overcome by expression of C. albicans Dur proteins in C. glabrata."
+      ],
+      "exact_answer": null
+    },
+    {
+      "id": "55425615ed966d112c000003",
+      "body": "Are genes symmetrically distributed between leading and lagging DNA strand in bacteria?",
+      "ideal_answer": [
+        "In most bacteria, genes are preferentially encoded on the leading strand than on the lagging strand. This avoids the potentially detrimental head-on collisions that occur between the replication and transcription machineries when genes are encoded on the lagging strand. Head-on collisions are more deleterious than codirectional collisions, and may lead to replication fork arrest and genomic instability. Genes of some functional categories such as ribosome have higher preferences to be on the leading strands, while genes of other functional categories such as transcription factor have higher preferences on the lagging strands. Strand-biased gene distribution correlates with replication-associated purine asymmetry and the presence or absence of polC. Especially essential and highly transcribed genes and genes whose expression is important for fitness are more preferentially situated at the leading strand in bacteria."
+      ],
+      "exact_answer": "no"
+    },
+    {
+      "id": "55181d1e6487737b43000008",
+      "body": "What are the breath test biomarkers of pulmonary tuberculosis",
+      "ideal_answer": [
+        "Nitric oxide, urea, volatile organic compounds, hydrogen peroxide and end products of lipid peroxidation are the breath test biomarkers of pulmonary tuberculosis."
+      ],
+      "exact_answer": [
+        [
+          "nitric oxide"
+        ],
+        [
+          "urea"
+        ],
+        [
+          "volatile organic compounds"
+        ],
+        [
+          "hydrogen peroxide"
+        ],
+        [
+          "end products of lipid peroxidation"
+        ]
+      ]
+    },
+    {
+      "id": "535917f3c95abccd6f000001",
+      "body": "Which is the mechanism used by bacteria to induce tumors in Arabidopsis?",
+      "ideal_answer": [
+        "The bacteria Agrobacterium tumefaciens infects Arabidopsis, as well as other plants, and induces the formation of tumors by integrating the transferred-DNA (T-DNA) region of the Ti-plasmid into the plant nuclear genome."
+      ],
+      "exact_answer": null
+    },
+    {
+      "id": "5540eda30083d1bf0e000006",
+      "body": "Which proteins constitute the methyl-directed mismatch repair system (MMR) in bacteria?",
+      "ideal_answer": [
+        "The mismatch repair system (MMR) recognizes and corrects mismatched or unpaired bases caused mainly by DNA polymerase, and contributes to the fidelity of DNA replication in living cells. In bacteria, the methyldirected mismatch repair (MMR) is comprised of MutS and MutL proteins, encoded by the mutS/L operon."
+      ],
+      "exact_answer": [
+        [
+          "mutS"
+        ],
+        [
+          "mutL"
+        ],
+        [
+          "mutH"
+        ]
+      ]
+    },
+    {
+      "id": "51716e808ed59a060a00000b",
+      "body": "Which is the vector of Louping ill virus?",
+      "ideal_answer": [
+        "Louping ill virus (LIV) belongs to the mammalian tick-borne virus group of the genus Flavivirus  which cause central nervous system disease. LIV infects the red grouse Lagopus lagopus scoticus, causing high mortality. LIV is transmitted by the tick Ixodes ricinus.",
+        "Deer are the key hosts of the vector (Ixodes ricinus) that transmits LIV to red grouse Lagopus lagopus scoticus, causing high mortality. (PMID: 22939093)"
+      ],
+      "exact_answer": [
+        "Ixodes ricinus"
+      ]
+    },
+    {
+      "id": "5541ffc3472cfd8617000004",
+      "body": "What is the role of the Ada O6-alkylguanine alkyltransferase in bacteria?",
+      "ideal_answer": [
+        "The Ada O6-methylguanine-DNA methyltransferase is a multifunctional protein, product of the ada gene. Ada functions in DNA repair by direct dealkylation of alkylated DNA lesions, such as the toxic, mutagenic and carcinogenic O6-alkylguanine (O6-AlkG) and O4-alkylthymine (O4-AlkT) which are restored to guanine and thymine. Ada accepts stoichiometrically the alkyl group from O6-alkylguanine in DNA at the Cys-321 residue and from alkyl phosphotriester at the Cys-69 residue. When methylated at Cys-69, Ada becomes a transcriptional activator of the genes in the ada regulon, including its own. The ada gene controls the inducible resistance to alkylation mutagenesis and killing (the adaptive response). Ada alkyltransferase (ATase) is induced by exposure to low doses of methylating agents. During exponential growth, Ada removes lesions responsible for G:C to A:T transitions and G:C to C:G transversions, while in stationary populations it removes lesions causing G:C to A:T and A:T to G:C transitions, and G:C to C:G, A:T to C:G, and A:T to T:A transversions. Thus, Ada protein acts both as a positive regulator of the ada response and as a DNA repair enzyme."
+      ],
+      "exact_answer": null
+    },
+    {
+      "id": "517194ef8ed59a060a000011",
+      "body": "Which is the causative agent of malaria?",
+      "ideal_answer": [
+        "Four Plasmodium species commonly infect humans (Plasmodium falciparum, Plasmodium vivax, Plasmodium malariae and Plasmodium ovale). Plasmodium falciparum infects about 5-10% of the world human population per year and it is the causative agent of the most severe and lethal form of malaria. P. falciparum  causes fatal cerebral malaria and is responsible for most deaths, particularly in pregnant women and children under the age of five. P. falciparum is transmitted to the human host by Anopheles mosquitoes and is the most tremendous malaria vector in sub-Saharan Africa. Plasmodium vivax is the causative agent of benign malaria in more temperate climates of the world. Plasmodium gallinaceum is the main bird malaria causative agent and  Plasmodium yoelli is the principle rodent malaria agent."
+      ],
+      "exact_answer": [
+        "Plasmodium species",
+        "Plasmodium spp."
+      ]
+    },
+    {
+      "id": "54dfce9b1388e8454a00000b",
+      "body": "What is the mechanism by which HIV-1-encoded Vif protein allows virus replication?",
+      "ideal_answer": [
+        "The HIV-1 Vif protein counteracts the antiviral activity of the APOBEC3 family by targeting the proteins for degradation through the ubiquitin-proteasome pathway. More specifically, Vif, serving as a substrate receptor, facilitates ubiquitination of APOBEC3 proteins by forming a Cullin5-based E3 ubiquitin ligase complex, which targets APOBEC3 proteins for rapid proteasomal degradation."
+      ],
+      "exact_answer": null
+    },
+    {
+      "id": "5542644fed966d112c000004",
+      "body": "Which are the methods for in silico prediction of the origin of replication (ori) among bacteria?",
+      "ideal_answer": [
+        "Several in silico methods have been applied for prediction of the origin of replication (ori). DNA base composition asymmetry, such as GC skew, is the basis of numerous in silico methods used to detect the ori in prokaryotes. The Z curve analysis is also used for ori identification. Comparative genomics, by BLAST analyses of the intergenic sequences compared to related species have been applied in ori prediction. The finding of the dnaA gene and its binding sites, DnaA boxes, as well as the finding of the binding sites of other proteins, such as CtrA and IHF, are fundamental characteristics used for in silico prediction of the ori. Also, the localization of boundary genes, such as cell division cycle (cdc6) gene, and consensus origin recognition box (ORB) sequences have been employed for ori detection. The study of the gene order around the origin sequence and the distribution of the genes encoded in the leading versus the lagging strand are also used for in silico detection of the ori."
+      ],
+      "exact_answer": [
+        [
+          "GC skew analysis"
+        ],
+        [
+          "Z curve analysis"
+        ],
+        [
+          "comparative genomics"
+        ],
+        [
+          "dnaA gene location"
+        ],
+        [
+          "localization of dnaA binding sites (DnaA boxes)"
+        ],
+        [
+          "localization of CtrA binding sites"
+        ],
+        [
+          "localization of IHF binding sites"
+        ],
+        [
+          "localization of cell division cycle (cdc6) gene"
+        ],
+        [
+          "localization of other boundary genes"
+        ],
+        [
+          "localization of other consensus origin recognition box (ORB) sequences"
+        ],
+        [
+          "the gene order around the ori"
+        ],
+        [
+          "gene distribution in leading versus lagging strand"
+        ]
+      ]
+    },
+    {
+      "id": "5178444e8ed59a060a000037",
+      "body": "What is the main mechanism by which human papillomavirus proteins E6 and E7 contribute to cell transformation?",
+      "ideal_answer": [
+        "Although they may have other targets, human papillomavirus proteins E6 and E7 interact with and block the function of p53 and pRb, respectively, therefore deregulating cell cycle and leading to cellular transformation."
+      ],
+      "exact_answer": null
+    },
+    {
+      "id": "56d1fd67f22319765a000002",
+      "body": "List bacterial species identified in the iceman tissues.",
+      "ideal_answer": [
+        "Spirochete Treponema denticola\nClostridium perfringens\nClostridium ghonii\nClostridium sordellii\nEubacterium tenue\nBacteroides sp\nVibrio\nSphingomonas\nAfipia\nCurtobacterium\nMicrobacterium\nAgromyces"
+      ],
+      "exact_answer": [
+        [
+          "Spirochete Treponema denticola"
+        ],
+        [
+          "Clostridium perfringens"
+        ],
+        [
+          "Clostridium ghonii"
+        ],
+        [
+          "Clostridium sordellii"
+        ],
+        [
+          "Eubacterium tenue"
+        ],
+        [
+          "Bacteroides sp"
+        ],
+        [
+          "Vibrio"
+        ],
+        [
+          "Sphingomonas"
+        ],
+        [
+          "Afipia"
+        ],
+        [
+          "Curtobacterium"
+        ],
+        [
+          "Microbacterium"
+        ],
+        [
+          "Agromyces"
+        ]
+      ]
+    },
+    {
+      "id": "53340ca4d6d3ac6a34000042",
+      "body": "How Flaviviridae family of viruses infects vertebrates?",
+      "ideal_answer": [
+        "A wide range of about 500 different viruses is transmitted by arthropods such as ticks, mosquitoes and sandflies. These arboviruses multiply in the arthropod vector, and for each virus there is a natural cycle involving vertebrates (various birds or mammals) and arthropods. The virus enters the arthropod when the latter takes a blood meal from the infected vertebrate, and passes through the gut wall to reach the salivary gland where replication takes place. Once this has occurred, 1\u20132 weeks after ingesting the virus, the arthropod becomes infectious, and can transmit the virus to another vertebrate during a blood meal. Certain arboviruses that infect ticks are also transmitted directly from adult tick to egg (transovarial transmission), so that future generations of ticks are infected without the need for a vertebrate host."
+      ],
+      "exact_answer": null
+    },
+    {
+      "id": "52f124a12059c6d71c000006",
+      "body": "What is the molecular pathogenesis of Spinal Muscular Atrophy?",
+      "ideal_answer": [
+        "Spinal muscular atrophy is an autosomal recessive neurodegenerative disease characterised by degeneration of spinal cord motor neurons, atrophy of skeletal muscles, and generalised weakness. It is caused by homozygous disruption of the survival motor neuron 1 (SMN1) gene by deletion, conversion, or mutation, resulting in downregulated biogenesis of uridine-rich small nuclear RNAs (U snRNAs), which are major components of the splicing machinery."
+      ],
+      "exact_answer": null
+    },
+    {
+      "id": "58a989571978bbde22000002",
+      "body": "What are the birth defects associated with Zika-virus infection?",
+      "ideal_answer": [
+        "Although the full spectrum of adverse reproductive outcomes caused by Zika virus infection is not yet determined, a distinctive phenotype-the congenital Zika syndrome-has emerged. Zika virus infection during pregnancy is a cause of microcephaly and other severe birth defects."
+      ],
+      "exact_answer": null
+    },
+    {
+      "id": "58a3275960087bc10a00000f",
+      "body": "What are some of the effects of Zika Virus in infected individuals?",
+      "ideal_answer": [
+        "While most of the symptoms of zika virus are relatively mild, zika virus in pregnant mothers can cause microcephaly and other congenital defects in the fetus."
+      ],
+      "exact_answer": null
+    },
+    {
+      "id": "58bbbe6822d300530900001a",
+      "body": "List the three most abundant bacterial phyla present in mouse feces.",
+      "ideal_answer": [
+        "Firmicutes\nProteobacteria \nBacteroidetes"
+      ],
+      "exact_answer": [
+        [
+          "Firmicutes"
+        ],
+        [
+          "Proteobacteria"
+        ],
+        [
+          "Bacteroidetes"
+        ]
+      ]
+    },
+    {
+      "id": "58a6d89660087bc10a00002b",
+      "body": "Could plasmepsins be used as targets for developing anti-malaria drugs?",
+      "ideal_answer": [
+        "Yes, plasmepsins, which are essential Plasmodium proteases, could be highly promising anti-malarial drug targets."
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "5880b812c872c95565000006",
+      "body": "Which infection can be prevented with Dapivirine?",
+      "ideal_answer": [
+        "Vaginal ring containing Dapivirine is used for HIV prevention in women."
+      ],
+      "exact_answer": [
+        "HIV"
+      ]
+    },
+    {
+      "id": "5890eb22621ea6ff7e000006",
+      "body": "Can Pentraxin 3 predict outcomes of sepsis?",
+      "ideal_answer": [
+        "Yes, Pentraxin 3 s an objective biochemical marker in diagnosis of sepsis; it is helpful in assessment of severity and prognosis of sepsis; it also has a certain clinical value in the assessment of sepsis cardiovascular function damage."
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "58b548d722d3005309000005",
+      "body": "Which bacteria cause diphtheria?",
+      "ideal_answer": [
+        "Diphtheria is caused by the bacteria:\n1) Corynebacterium ulcerans and \n2) Corynebacterium diphtheriae."
+      ],
+      "exact_answer": [
+        [
+          "Corynebacterium ulcerans",
+          "C. ulcerans"
+        ],
+        [
+          "Corynebacterium diphtheriae",
+          "C. diphtheriae"
+        ]
+      ]
+    },
+    {
+      "id": "58bfd0db02b8c60953000017",
+      "body": "Which virus type causes Molluscum contagiosum?",
+      "ideal_answer": [
+        "Molluscum contagiosum virus (MCV) is a human poxvirus that causes tumor-like skin lesions."
+      ],
+      "exact_answer": [
+        "human poxvirus"
+      ]
+    },
+    {
+      "id": "58caf86f02b8c60953000030",
+      "body": "Does Yersinia pestis causes a respiratory infection?",
+      "ideal_answer": [
+        "Inhalation of Yersinia pestis results in primary pneumonic plague."
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "58e120036fddd3e83e00000d",
+      "body": "Is Cryptococcus neoformans a frequent cause of isolated skin infections in immunocompromised individuals",
+      "ideal_answer": [
+        "Primary cutaneous cryptococcosis (PCC) without systemic infection is rare."
+      ],
+      "exact_answer": "no"
+    },
+    {
+      "id": "58f4b85f70f9fc6f0f000015",
+      "body": "How are Arboviruses transmitted?",
+      "ideal_answer": [
+        "Arboviruses are transmitted by arthropods."
+      ],
+      "exact_answer": [
+        "By arthropods"
+      ]
+    },
+    {
+      "id": "58dd2cb08acda34529000029",
+      "body": "Is autophagy the process where bacteria ingest viral particles?",
+      "ideal_answer": [
+        "Autophagy, a cellular degradation process"
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "58ea521d3e8b6dc87c00000f",
+      "body": "What is the link between TB (Turbeculosis) infection and TNFa inhibition?",
+      "ideal_answer": [
+        "The occurrence of tuberculosis (TB) in patients treated with immunosuppressive drugs (ISD) is an old problem that has been highlighted by cases occurring in patients using anti-TNFalpha drugs."
+      ],
+      "exact_answer": null
+    },
+    {
+      "id": "58f3ca5c70f9fc6f0f00000d",
+      "body": "The pathogen Fusarium graminearum affects what type of plant species?",
+      "ideal_answer": [
+        "Fusarium graminearum is a broad host pathogen threatening cereal crops in temperate regions around the world.",
+        "Fusarium graminearum is a broad host pathogen threatening cereal crops in temperate regions around the world. "
+      ],
+      "exact_answer": [
+        "cereal crops"
+      ]
+    },
+    {
+      "id": "58dbbdac8acda3452900001e",
+      "body": "Is hydroxyurea usually used to treated infectious disease?",
+      "ideal_answer": [
+        "Hydroxyurea represents the only available disease-modifying therapy for Sickle Cell Anemia (SCA)."
+      ],
+      "exact_answer": "no"
+    },
+    {
+      "id": "58f3c4b970f9fc6f0f00000a",
+      "body": "What type of genome, (RNA or DNA, double stranded single stranded) is found in the the virus that causes blue tongue disease?",
+      "ideal_answer": [
+        "The Bluetongue virus (BTV) genome contains ten double-stranded RNA segments.",
+        "Bluetongue virus (BTV) genome contains ten double-stranded RNA segments. ",
+        "Bluetongue virus (BTV) genome contains ten double-stranded RNA segments.",
+        "Bluetongue virus (BTV) genome contains ten double-stranded RNA segments",
+        "bluetongue virus (btv) genome contains ten double-stranded rna segments."
+      ],
+      "exact_answer": [
+        "double stranded, segmented RNA"
+      ]
+    },
+    {
+      "id": "58f4b73b70f9fc6f0f000014",
+      "body": "The MMR vaccine protects against what 3 viruses?",
+      "ideal_answer": [
+        "The MMR vaccine provides immunity to measles, mumps and rubella.",
+        " measles, mumps and rubella (mmr) vaccine ."
+      ],
+      "exact_answer": [
+        [
+          "Measles"
+        ],
+        [
+          "Mumps"
+        ],
+        [
+          "Rubella"
+        ]
+      ]
+    },
+    {
+      "id": "58edfaf4eda5a57672000012",
+      "body": "What is the function of the dormancy survival regulator (DosR) in Mycobacterium tuberculosis?",
+      "ideal_answer": [
+        "During this phase, at least 48 genes, collectively named Dormancy survival regulator (DosR) regulon, are important for the long-term survival of bacilli under a non-respiring state.",
+        "The dormancy survival regulator (DosR) regulon, composed of 48 co-regulated genes, is held as essential for Mtb persistence to anti-tuberculosis drugs. The DosR regulon enables the pathogen to persist during lengthy hypoxia. Upon oxygen shift-down, Mycobacterium tuberculosis complex bacteria can induce a genetic program characterized by halted duplication, which is called Non-replicating persistence (NRP). During this phase, at least 48 genes, collectively named Dormancy survival regulator (DosR) regulon, are important for the long-term survival of bacilli under a non-respiring state, a condition that bacilli encounter inside granulomatous lesions."
+      ],
+      "exact_answer": null
+    },
+    {
+      "id": "5916f14070f9fc6f0f00001f",
+      "body": "What is the role of the positive effector of transcription (pet) in the hepatitis B virus?",
+      "ideal_answer": [
+        "This element, which we have named pet (positive effector of transcription), exerts its effect in cis in a position and orientation-dependent manner, suggesting that it may function as part of the nascent pregenome transcript.  In the presence of this region, deletion of pet activates transcription from downstream promoters, suggesting that pregenome transcription complexes fail to reach the downstream promoters. In vitro transcription experiments support the model that pet is required for transcription elongation on the DHBV template. We speculate that pet is required to suppress transcription termination during the first passage of pregenome transcription complexes through a viral termination region on the circular viral DNA.",
+        "PET (positive effector of transcription), exerts its effect in cis in a position and orientation-dependent manner, suggesting that it may function as part of the nascent pregenome transcript. In the presence of this region, deletion of pet activates transcription from downstream promoters, suggesting that pregenome transcription complexes fail to reach the downstream promoters. In vitro transcription experiments support the model that pet is required for transcription elongation on the DHBV template. We speculate that pet is required to suppress transcription termination during the first passage of pregenome transcription complexes through a viral termination region on the circular viral DNA.",
+        "In the presence of this region, deletion of pet activates transcription from downstream promoters, suggesting that pregenome transcription complexes fail to reach the downstream promoters. In vitro transcription from downstream promoters, suggesting that pregenome transcription complexes fail to reach the downstream promoters. We speculate that pet is required to suppress transcription termination during the first passage of pregenome transcription complexes through a viral termination region on the circular viral DNA. In vitro transcription experiments support the model that pet is required for transcription elongation on the DHBV template. This element, which we have named pet , exerts its effect in cis in a position and orientation-dependent manner, suggesting that pregenome transcription complexes fail to reach the downstream promoters. We speculate that pet , exerts its effect in cis in a position and orientation-dependent manner, suggesting that it may function as part of the nascent pregenome transcript. ",
+        "This element, which we have named pet (positive effector of transcription), exerts its effect in cis in a position and orientation-dependent manner, suggesting that it may function as part of the nascent pregenome transcript.In the presence of this region, deletion of pet activates transcription from downstream promoters, suggesting that pregenome transcription complexes fail to reach the downstream promoters.In vitro transcription experiments support the model that pet is required for transcription elongation on the DHBV template.We speculate that pet is required to suppress transcription termination during the first passage of pregenome transcription complexes through a viral termination region on the circular viral DNA.",
+        "This element, which we have named pet (positive effector of transcription), exerts its effect in cis in a position and orientation-dependent manner, suggesting that it may function as part of the nascent pregenome transcript.  In the presence of this region, deletion of pet activates transcription from downstream promoters, suggesting that pregenome transcription complexes fail to reach the downstream promoters. In vitro transcription experiments support the model that pet is required for transcription elongation on the DHBV template.",
+        "This element, which we have named pet (positive effector of transcription), exerts its effect in cis in a position and orientation-dependent manner, suggesting that it may function as part of the nascent pregenome transcript.",
+        "This element, which we have named pet (positive effector of transcription), exerts its effect in cis in a position and orientation-dependent manner, suggesting that it may function as part of the nascent pregenome transcript. ",
+        "This element, which we have named pet , exerts its effect in cis in a position and orientation-dependent manner, suggesting that it may function as part of the nascent pregenome transcript. In vitro transcription experiments support the model that pet is required for transcription elongation on the DHBV template. We speculate that pet is required to suppress transcription termination during the first passage of pregenome transcription complexes through a viral termination region on the circular viral DNA. In the presence of this region, deletion of pet activates transcription from downstream promoters, suggesting that pregenome transcription complexes fail to reach the downstream promoters. "
+      ],
+      "exact_answer": null
+    },
+    {
+      "id": "58edf567eda5a57672000011",
+      "body": "How many genes constitute the DosR regulon, controlled by the dormancy survival regulator (DosR) in Mycobacterium tuberculosis?",
+      "ideal_answer": [
+        "The Mycobacterium dormancy survival regulator (DosR) regulon is composed of 48 co-regulated genes.",
+        "During this phase, at least 48 genes, collectively named Dormancy survival regulator (DosR) regulon, are important for the long-term survival of bacilli under a non-respiring state, a condition that bacilli encounter inside granulomatous lesions.  DosR/DevR of M. tuberculosis is a two component dormancy survival response regulator which induces the expression of 48 genes. ",
+        "During this phase, at least 48 genes, collectively named Dormancy survival regulator (DosR) regulon, are important for the long-term survival of bacilli under a non-respiring state, a condition that bacilli encounter inside granulomatous lesions. The dormancy survival regulator (DosR) regulon, composed of 48 co-regulated genes, is held as essential for Mtb persistence.",
+        "The dormancy survival regulator  regulon, composed of 48 co-regulated genes, is held as essential for Mtb persistence. The two component sensor/regulator dosRS is a major mediator in the transcriptional response of M. tuberculosis to hypoxia and controls a regulon of approximately 50 genes that are induced under this condition. ",
+        "During this phase, at least 48 genes, collectively named Dormancy survival regulator (DosR) regulon, are important for the long-term survival of bacilli under a non-respiring state, a condition that bacilli encounter inside granulomatous lesions.",
+        "The dormancy survival regulator (DosR) regulon, composed of 48 co-regulated genes, is held as essential for Mtb persistence. During this phase, at least 48 genes, collectively named Dormancy survival regulator (DosR) regulon, are important for the long-term survival of bacilli under a non-respiring state, a condition that bacilli encounter inside granulomatous lesions."
+      ],
+      "exact_answer": [
+        "48 genes"
+      ]
+    },
+    {
+      "id": "58ee2515eda5a57672000016",
+      "body": "Which individuals show preferential colonization of the Prevotellaceae bacteria in their guts?",
+      "ideal_answer": [
+        "Although the distinction of enterotypes as either discrete clusters or a continuum will require additional investigation, numerous studies have demonstrated the co-exclusion of the closely related Prevotellaceae and Bacteroides genera in the gut microbiota of healthy human subjects where Prevotella appears to be a discriminatory taxon for residence in more agrarian societies."
+      ],
+      "exact_answer": [
+        "members of agrarian societies"
+      ]
+    },
+    {
+      "id": "5a679875b750ff4455000004",
+      "body": "Do bacteria from the genus Morexella cause respiratory infections?",
+      "ideal_answer": [
+        "Bacteria from the genus Morexella can cause respiratory infections"
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "5a690487b750ff445500001f",
+      "body": "Which virus can be diagnosed with the monospot test?",
+      "ideal_answer": [
+        "Epstein-Barr virus (EBV) can be detected with the monospot test. EBV is a highly prevalent virus, transmitted via saliva, which often causes asymptomatic infection in children but frequently results in infectious mononucleosis in adolescents."
+      ],
+      "exact_answer": [
+        "Epstein-Barr virus"
+      ]
+    },
+    {
+      "id": "5a68f448b750ff4455000018",
+      "body": "Which bacteria causes erythrasma?",
+      "ideal_answer": [
+        "Corynebacterium minutissimum is the bacteria that leads to cutaneous eruptions of erythrasma and is the most common cause of interdigital foot infections."
+      ],
+      "exact_answer": [
+        "Corynebacterium minutissimum"
+      ]
+    },
+    {
+      "id": "5a679be1b750ff4455000005",
+      "body": "Are organisms in the genus Morexella associated with sepsis?",
+      "ideal_answer": [
+        "Moraxella species may cause neonatal sepsis"
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "5a8b1264fcd1d6a10c00001d",
+      "body": "Fusarium oxysporum f. sp lycopersici. is a plant pathogen in plants producing what common food?",
+      "ideal_answer": [
+        "Fusarium oxysporum f. sp lycopersici.produces causes vascular wilt disease in tomatoes.",
+        "Fusarium wilt caused by Fusarium oxysporum f. sp lycopersici (Fol) is one of the main diseases affecting tomatoes. "
+      ],
+      "exact_answer": [
+        "Tomato"
+      ]
+    },
+    {
+      "id": "5a75f1f383b0d9ea66000006",
+      "body": "Can Logic Alignment Free (LAF) be used for bacterial genomes classification?",
+      "ideal_answer": [
+        "Yes. Logic Alignment Free (LAF), a method that combines alignment-free techniques and rule-based classification algorithms can be used in order to assign biological samples to their taxa."
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "5a68f965b750ff445500001a",
+      "body": "Clue cells are characteristics to which causative bacteria of vaginitis?",
+      "ideal_answer": [
+        "Clue cells are characteristic to Gardnerella vaginalis vaginitis (bacterial vaginosis). Depopulation of lactobacilli from the normal vaginal flora and overgrowth of Gardnerella vaginalis and other anaerobic species are the presumed etiology. The diagnosis is confirmed when at least three of the following four findings are present (Amsel's criteria): 1) thin, homogenous discharge, 2) pH greater than 4.5, 3) positive amine test, and 4) presence of clue cell."
+      ],
+      "exact_answer": [
+        "Gardnerella vaginalis"
+      ]
+    },
+    {
+      "id": "5aa3fa73d6d6b54f79000008",
+      "body": "Is subacute sclerosing panencephalitis caused by the Measles vaccine?",
+      "ideal_answer": [
+        "Subacute sclerosing panencephalitis is caused by the Measles and can be prevented by the measles vaccine.",
+        "Subacute sclerosing panencephalitis (SSPE) is a potentially fatal complication of measles. "
+      ],
+      "exact_answer": "no"
+    },
+    {
+      "id": "5a67c497b750ff4455000012",
+      "body": "Which method is available for whole genome identification of pathogenic regulatory variants in mendelian disease?",
+      "ideal_answer": [
+        "Genomiser"
+      ],
+      "exact_answer": [
+        "Genomiser"
+      ]
+    },
+    {
+      "id": "5aa4faaed6d6b54f7900000b",
+      "body": "Is Citrobacter rodentium pathogenic?",
+      "ideal_answer": [
+        "Yes, the mouse pathogen Citrobacter rodentium, colonize the gut mucosa via attaching and effacing lesion formation and cause diarrheal diseases."
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "5a7347a02dc08e987e00001b",
+      "body": "Gallbladder carriage is a well recognised means of spread of which bacteria?",
+      "ideal_answer": [
+        "Gallbladder carriage is associated with spread of Salmonella Typhi."
+      ],
+      "exact_answer": [
+        "Salmonella Typhi"
+      ]
+    },
+    {
+      "id": "5aa3fb7ad6d6b54f79000009",
+      "body": "What drug cures hepatitis C?",
+      "ideal_answer": [
+        "Sofosbuvir-based therapy cures hepatitis C virus infection"
+      ],
+      "exact_answer": [
+        "Sofosbuvir based therapy"
+      ]
+    },
+    {
+      "id": "5ab147edfcf4565872000013",
+      "body": "The Mantoux test detects what latent infection/disease?",
+      "ideal_answer": [
+        "screened for TB infection with a Mantoux tuberculin skin testtuberculin skin test (TST) performed according to the Mantoux method.",
+        "screened for TB infection with a Mantoux tuberculin skin test ",
+        "The Mantoux tuberculin skin test tests for latent tuberculosis",
+        "screened for TB infection with a Mantoux tuberculin skin test. "
+      ],
+      "exact_answer": [
+        "tuberculosis"
+      ]
+    },
+    {
+      "id": "5abd5a62fcf4565872000031",
+      "body": "Which bacteria was EcoRI, restriction endonuclease isolated from?",
+      "ideal_answer": [
+        "Among hundreds of restriction endonucleases, the Eco R1 enzyme is the most useful and widely investigated enzyme and was isolated from E. coli RY 13"
+      ],
+      "exact_answer": [
+        "E coli"
+      ]
+    },
+    {
+      "id": "5abd2ce0fcf456587200002a",
+      "body": "Which are the two main bacterial phyla in human gut?",
+      "ideal_answer": [
+        "Out of thousands of bacterial species-level phylotypes inhabiting the human gut, the majority belong to two dominant phyla, the Bacteroidetes and Firmicutes"
+      ],
+      "exact_answer": [
+        "Bacteroidetes and Firmicutes"
+      ]
+    },
+    {
+      "id": "5ab2cc66fcf4565872000015",
+      "body": "Cytochrome p450 CYP3A is induced by rifampicin  and compounds used to treat what virus?",
+      "ideal_answer": [
+        "Etravirine is an effective and well-tolerated recently approved non-nucleoside reverse transcriptase inhibitor (NNRTI) for HIV type-1-infected patients with previous antiretroviral treatment experience.  Etravirine is a weak inducer of cytochrome P450 (CYP)3A",
+        "Four CYP3A inducers were used: rifampicin, rifabutin, carbamazepine, and efavirenz Etravirine is an effective and well-tolerated recently approved non-nucleoside reverse transcriptase inhibitor (NNRTI) for HIV type-1-infected patients with previous antiretroviral treatment experience."
+      ],
+      "exact_answer": [
+        "HIV"
+      ]
+    },
+    {
+      "id": "5be44ed3133db5eb78000016",
+      "body": "What is the origin of human breast milk bacteria?",
+      "ideal_answer": [
+        "It is believed that certain bacteria from the maternal gastrointestinal tract could translocate through a mechanism involving mononuclear immune cells, migrate to the mammary glands via an endogenous cellular route (the bacterial entero-mammary pathway), and subsequently colonize the gastrointestinal tract of the breast-fed neonate"
+      ],
+      "exact_answer": [
+        "Bacterial endero-mammary pathway"
+      ]
+    },
+    {
+      "id": "5ad83cd6133db5eb78000010",
+      "body": "Which species is the carrier of the SFTS ( severe fever with thrombocytopenia syndrome) virus?",
+      "ideal_answer": [
+        "The possibility that SFTSV transmission may occur by both the transstadial and transovarial routes was suggested by the fact that viral RNA was detected in Haemaphysalis longicornis at all developmental stages. Tick-derived sequences shared over 95.6% identity with human- and animal-derived isolates. This study provides evidence that implicates ticks as not only vectors but also, reservoirs of SFTSV.",
+        "Seroprevalence in animal species were: goats (66.8%), cattle (28.2%), dogs (7.4%), pigs (4.7%), chickens (1.2%), geese (1.7%), rodents (4.4%) and hedgehogs (2.7%). The possibility that SFTSV transmission may occur by both the transstadial and transovarial routes was suggested by the fact that viral RNA was detected in H. longicornis at all developmental stages. Tick-derived sequences shared over 95.6% identity with human- and animal-derived isolates.",
+        "The possibility that SFTSV transmission may occur by both the transstadial and transovarial routes was suggested by the fact that viral RNA was detected in H. longicornis at all developmental stages. Severe fever with thrombocytopenia syndrome (SFTS) is a new emerging zoonosis."
+      ],
+      "exact_answer": [
+        "Haemaphysalis longicornis"
+      ]
+    },
+    {
+      "id": "5be47df8133db5eb78000019",
+      "body": "Which bacteria are enriched in the gut microbiome of infants following exposure to fury pets?",
+      "ideal_answer": [
+        "Pre- and postnatal pet exposure enriched the abundance of Oscillospira and/or Ruminococcus in infants."
+      ],
+      "exact_answer": [
+        [
+          "Oscillospira"
+        ],
+        [
+          "Ruminococcus"
+        ]
+      ]
+    },
+    {
+      "id": "5c58a74e86df2b917400000d",
+      "body": "Is Baloxavir effective for influenza?",
+      "ideal_answer": [
+        "Yes. Baloxavir is approved for influenza A or B virus infections."
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "5c011448133db5eb78000027",
+      "body": "What does gepotidacin do to bacteria?",
+      "ideal_answer": [
+        "Gepotidacin inhibits bacterial DNA replication."
+      ],
+      "exact_answer": [
+        "Inhibits bacterial DNA replication"
+      ]
+    },
+    {
+      "id": "5c58923c86df2b9174000005",
+      "body": "Is Tecovirimat effective for smallpox?",
+      "ideal_answer": [
+        "Yes, tecovirimat FDA approved for treatment of smallpox."
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "5c5f2b771a4c55d80b000020",
+      "body": "Is P. gingivalis bacteria found in brain?",
+      "ideal_answer": [
+        "Yes"
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "5c0114ec133db5eb78000028",
+      "body": "Does gepotidacin activate bacterial topoisomerase?",
+      "ideal_answer": [
+        "No, gepotidacin is a bacterial topoisomerase inhibitor."
+      ],
+      "exact_answer": "no"
+    },
+    {
+      "id": "5ad3130c0340b9f05800001d",
+      "body": "Are gut proteobacteria associated with inflammatory disease?",
+      "ideal_answer": [
+        "The onset of inflammatory bowel disease is associated with enteric proteobacterial infection, yet the mechanistic basis for this association is unclear."
+      ],
+      "exact_answer": null
+    },
+    {
+      "id": "5be44d8b133db5eb78000015",
+      "body": "What are the 3 main bacteria found in human milk?",
+      "ideal_answer": [
+        "Human milk is rich in diverse bacteria, particularly Staphylococcus, Streptococcus and Pseudomonas genera."
+      ],
+      "exact_answer": [
+        [
+          "Staphylococcus"
+        ],
+        [
+          "Streptococcus"
+        ],
+        [
+          "Pseudomonas"
+        ]
+      ]
+    },
+    {
+      "id": "5c57031107647bbc4b000014",
+      "body": "Has Glyceraldehyde 3-phosphate dehydrogenase (GAPDH) been reported to be a plasminogen receptor in pathogenic bacteria?",
+      "ideal_answer": [
+        "Glyceraldehyde 3-phosphate dehydrogenase (GAPDH) has been reported to be a plasminogen receptor in many pathogenic bacteria."
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "5c6549e1e842deac67000022",
+      "body": "Can CPX-351 be used for the treatment of tuberculosis?",
+      "ideal_answer": [
+        "No, CPX-351 is a novel liposomal formulation of cytarabine and daunorubicin which has recently been FDA approved for treatment of acute myeloid leukemia (AML)."
+      ],
+      "exact_answer": "no"
+    },
+    {
+      "id": "5c53131e7e3cb0e231000012",
+      "body": "Please list symptoms of measles.",
+      "ideal_answer": [
+        "The leading symptoms of the disease are high fever that presents after an incubation period of 9-10 days and the red rash that begins several days after the fever starts. Beyond specific generalized symptoms, measles may have ocular symptoms. The most commonly occuring satellite symptoms are conjunctivitis, coryza and cough."
+      ],
+      "exact_answer": [
+        [
+          "red rash on skin"
+        ],
+        [
+          "high fever"
+        ],
+        [
+          "conjunctivitis"
+        ],
+        [
+          "coryza"
+        ],
+        [
+          "cough"
+        ]
+      ]
+    },
+    {
+      "id": "5c5312097e3cb0e231000011",
+      "body": "Where, in what US state, was there a measles outbreak in an Amish community",
+      "ideal_answer": [
+        "The measles outbreak started an Amish community in Ohio"
+      ],
+      "exact_answer": [
+        "Ohio"
+      ]
+    },
+    {
+      "id": "5c5f2d5a1a4c55d80b000023",
+      "body": "What is known about the gut bacteria and depression.",
+      "ideal_answer": [
+        "Evidence indicates that major depression is accompanied by increased translocation of gut commensal Gram-negative bacteria (leaky gut) and consequent activation of oxidative and nitrosative (O&NS) pathways.\n\nMajor depressive disorder (MDD) is a highly prevalent and debilitating mental illness, which is associated with disorder of gut microbiota."
+      ],
+      "exact_answer": null
+    },
+    {
+      "id": "5c0119f3133db5eb7800002b",
+      "body": "List bacterial families for which delafloxacin has been shown to be effective.",
+      "ideal_answer": [
+        "Delafloxacin has been shown to be effective against multiple gram-positive and gram-negative bacteria, including Strepotococcus pneumoniae, Haemophilus influenzae, Moraxella atarrhalis, Staphylococcus aureus, Klebsiella pneumoniae and more."
+      ],
+      "exact_answer": [
+        [
+          "Streptococcus pneumoniae"
+        ],
+        [
+          "Haemophilus influenzae"
+        ],
+        [
+          "Moraxella catarrhalis"
+        ],
+        [
+          "Staphylococcus aureus"
+        ],
+        [
+          "Klebsiella pneumoniae"
+        ]
+      ]
+    },
+    {
+      "id": "5c5f2cef1a4c55d80b000022",
+      "body": "There is no drug available to prevent HIV infection, Pre-exposure prophylaxis (PrEP), yes or no?",
+      "ideal_answer": [
+        "Pre-exposure prophylaxis (PrEP) with the drug combination Truvada can substantially decrease HIV transmission in individuals at risk.",
+        "The antiviral agent tenofovir is highly effective for the treatment of HIV and hepatitis B virus infections, and the older prodrug tenofovir disoproxil fumarate (TDF) is also a component of daily preexposure prophylaxis (PrEP) to reduce the risk of HIV infection in high-risk populations."
+      ],
+      "exact_answer": "no"
+    },
+    {
+      "id": "5c6e05f37c78d69471000049",
+      "body": "RV3-BB vaccine is used for prevention of which viral infection?",
+      "ideal_answer": [
+        "The RV3-BB human neonatal rotavirus vaccine aims to provide protection from severe rotavirus disease from birth."
+      ],
+      "exact_answer": [
+        "rotavirus disease"
+      ]
+    },
+    {
+      "id": "5c71d6d27c78d6947100006a",
+      "body": "Fecal transplantation is used to treat infection with what bacteria?",
+      "ideal_answer": [
+        "Fecal microbiota transplantation is used to treat Clostridium difficile infection"
+      ],
+      "exact_answer": [
+        "Clostridium difficile"
+      ]
+    },
+    {
+      "id": "5c0117fd133db5eb7800002a",
+      "body": "When did delafloxacin receive its first approval in the USA for acute bacterial skin and skin structure infections?",
+      "ideal_answer": [
+        "Delafoxacin received approval in the USA for the treatment of acute bacterial skin and skin structure infections in 2017."
+      ],
+      "exact_answer": [
+        "2017"
+      ]
+    },
+    {
+      "id": "5c53191a7e3cb0e231000016",
+      "body": "What periodontal disease associated bacteria is also associated with Alzheimer's disease?",
+      "ideal_answer": [
+        "Porphyromonas gingivalis, a keystone pathogen in chronic periodontitis, has been found to associate with remote body organ inflammatory pathologies, including atherosclerosis and Alzheimer's disease (AD).",
+        "Among bacteria special attention is focused on spirochetes family and on periodontal pathogens such as Porphyromonas gingivalis or Treponema denticola that could cause chronic periodontitis and possibly contribute to the clinical onset of AD."
+      ],
+      "exact_answer": [
+        "Porphyromonas gingivalis"
+      ]
+    },
+    {
+      "id": "5c7813f57c78d694710000b0",
+      "body": "How does the Cholera toxin enter a cell?",
+      "ideal_answer": [
+        "Cholera toxin (CT), which is secreted by V. cholerae, can enter host cells by binding to GM1, a monosialoganglioside widely distributed on the plasma membrane surface of various animal epithelial cells."
+      ],
+      "exact_answer": [
+        "Cholera toxin (CT) can enter host cells by binding to GM1, a monosialoganglioside widely distributed on the plasma membrane surface of various animal epithelial cells."
+      ]
+    },
+    {
+      "id": "5c72bd967c78d69471000078",
+      "body": "What is the role of CD28 with respect to bacterial superantigen toxins?",
+      "ideal_answer": [
+        "CD28 is a direct receptor of bacterial superantigen toxins.",
+        "cd28 is a homodimer expressed on t cells that functions as the principal costimulatory ligand in the immune response"
+      ],
+      "exact_answer": null
+    },
+    {
+      "id": "5c85234775a4a5d219000007",
+      "body": "What antibiotic is currently used as the standard of care for Clostridium Difficile infection as of 2018",
+      "ideal_answer": [
+        "Fidaxomicin has recently been introduced as a new antibiotic that has been shown to significantly reduce the recurrence of this infection. Fidaxomicin is a new antibiotic used to treat Clostridium difficile infection (CDI).",
+        "Fidaxomicin has recently been introduced as a new antibiotic that has been shown to significantly reduce the recurrence of this infection.Fidaxomicin is a new antibiotic used to treat Clostridium difficile infection (CDI)",
+        "fidaxomicin has recently been introduced as a new antibiotic that has been shown to significantly reduce the recurrence of this infection. fidaxomicin is a new antibiotic used to treat clostridium difficile infection (cdi).",
+        "Clostridium difficile continues to be one of the most prevalent hospital-acquired bacterial infections in the developed world, despite the recent introduction of a novel and effective antibiotic agent  fidaxomicin"
+      ],
+      "exact_answer": [
+        "Fidaxomicin"
+      ]
+    },
+    {
+      "id": "5c92871decadf2e73f000016",
+      "body": "What is the name of the Cas13 based diagnostic test for the Zika and dengue viruses?",
+      "ideal_answer": [
+        "The Cas13-based platform that can detect Zika and dengue viruses is called SHERLOCK (specific high-sensitivity enzymatic reporter unlocking)."
+      ],
+      "exact_answer": [
+        "SHERLOCK (specific high-sensitivity enzymatic reporter unlocking)"
+      ]
+    },
+    {
+      "id": "5c851c2675a4a5d219000006",
+      "body": "Please list 2 antitoxin antibodies approved by the FDA for reducing the recurrence of Clostridium difficile infection",
+      "ideal_answer": [
+        "The antitoxin antibodies actoxumab and bezlotoxumab bind to and neutralize TcdA and TcdB, respectively. Bezlotoxumab was recently approved by the FDA for reducing the recurrence of CDI."
+      ],
+      "exact_answer": [
+        [
+          "bezlotoxumab"
+        ],
+        [
+          "actoxumab"
+        ]
+      ]
+    },
+    {
+      "id": "5c978924ecadf2e73f000023",
+      "body": "What is Quorum Sensing in bacteria?",
+      "ideal_answer": [
+        "In many pathogenic microorganisms, communication systems, collectively termed quorum sensing (QS),",
+        "In many pathogenic microorganisms, communication systems, collectively termed quorum sensing (QS), have been observed",
+        "In most bacteria, a global level of regulation, termed quorum sensing (QS), exists involving intercellular communication via the production and response to cell density-dependent signal molecules."
+      ],
+      "exact_answer": null
+    },
+    {
+      "id": "5c9791d2ecadf2e73f000026",
+      "body": "Rickettsia felis was described as a human pathogen almost two decades ago, what is it's main arthropod vector?",
+      "ideal_answer": [
+        "Cat fleas (Ctenocephalides felis) carry Rickettsia felis",
+        "Cat fleas (Ctenocephalides felis) carrying Rickettsia felis and Bartonella species in Hong Kong.",
+        "Cat fleas (Ctenocephalides felis) carrying Rickettsia felis and Bartonella species in Hong Kong"
+      ],
+      "exact_answer": [
+        "Cat fleas (Ctenocephalides felis)"
+      ]
+    },
+    {
+      "id": "5c897555d558e5f232000009",
+      "body": "Which was the first adeno-associated virus vector gene therapy product approved in the United States?",
+      "ideal_answer": [
+        "The first adeno-associated virus vector gene therapy product in the United States was Luxturna."
+      ],
+      "exact_answer": [
+        "Luxturna"
+      ]
+    },
+    {
+      "id": "5c979383ecadf2e73f000027",
+      "body": "What is the role of Acyl-Homoserine Lactone  in bacteria?",
+      "ideal_answer": [
+        "A number of bacteria use a class of chemical compounds called acyl-homoserine lactones (AHLs) as quorum sensing (QS) signals to coordinate their behavior at the population level, including pathogens like Pseudomonas aeruginosa.",
+        "Some bacteria use a class of chemical compounds called acyl-homoserine lactones (AHLs) as quorum sensing (QS) signals to coordinate their behavior at the population level.",
+        "tructural analogues of acyl homoserine lactones with Quorum Sensing antagonist activity."
+      ],
+      "exact_answer": null
+    },
+    {
+      "id": "5e7f5b43835f4e4777000014",
+      "body": "List the attenuated live viruses contained in the Fluzone intradermal quadrivalent vaccine.",
+      "ideal_answer": [
+        "The Fluzone Intradermal Quadrivalent vaccine contains 9 ug hemagglutinin per strain of the two A-strain viruses and both B-strain lineage viruses (Victoria and Yamagata)."
+      ],
+      "exact_answer": [
+        [
+          "strain of A/H1N1"
+        ],
+        [
+          "strain of A/H3N2"
+        ],
+        [
+          "B Victoria lineage"
+        ],
+        [
+          "B Yamagata lineage"
+        ]
+      ]
+    },
+    {
+      "id": "5e30fa32fbd6abf43b000048",
+      "body": "Which bacteria causes rat bite fever?",
+      "ideal_answer": [
+        "Rat bite fever is caused by Streptobacillus moniliformis. Infection induces typical but not pathognomonic clinical signs, such as local purulent wound infection followed by maculopapular exanthema, myalgia as well as purulent joint infections."
+      ],
+      "exact_answer": [
+        "Streptobacillus moniliformis"
+      ]
+    },
+    {
+      "id": "5e64f1921af46fc130000018",
+      "body": "Is there a vaccine for rotavirus?",
+      "ideal_answer": [
+        "Effectiveness of rotavirus pentavalent vaccine  rotavirus pentavalent vaccine (RotaTeq(r)) as a sole vaccine",
+        "safety and immunogenicity of pentavalent rotavirus vaccine (rv5 )",
+        "Yes, there is a vaccine against rotavirus infection that is approved for Europe, Canada and Australia.",
+        "Yes, there is a human neonatal rotavirus vaccine against serogroup B Rotavirus.",
+        "Yes, there is a 4-component vaccine against capsular rotavirus vaccine.",
+        "Effectiveness of rotavirus pentavalent vaccine",
+        "Yes, there is a human neonatal rotavirus vaccine.",
+        "Yes, there is a pentavalent vaccine for Rotavirus",
+        "yes,  rotavirus pentavalent vaccine (RotaTeq(r)) as a sole vaccine",
+        "High effectiveness of RotaTeq as the sole rotavirus vaccine in a universal immunization programme was demonstrated in a high-income country.",
+        " rotavirus pentavalent vaccine (RotaTeq(r)) as a sole vaccine"
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "5e776541835f4e4777000009",
+      "body": "Can MVA85A confer immunity against smallpox?",
+      "ideal_answer": [
+        "No MVA85A is a candidate tuberculosis vaccine."
+      ],
+      "exact_answer": "no"
+    },
+    {
+      "id": "5e3eba5548dab47f26000009",
+      "body": "The virus that causes FIP, Feline Infectious Peritonitis belongs to what family?",
+      "ideal_answer": [
+        "The virus that causes FIP, Feline Infectious Peritonitis belongs to the family coronavirus.",
+        "Feline coronavirus (fcov) is an etiological agent that causes a benign enteric illness and the fatal systemic disease feline infectious peritonitis (fip).",
+        "Feline coronavirus (FCoV) is an etiological agent that causes a benign enteric illness and the fatal systemic disease feline infectious peritonitis (FIP)",
+        "Feline Infectious Peritonitis (FIP) belongs to the family of coronavirus.",
+        "Feline infectious peritonitis (FIP) is a common and highly lethal coronavirus disease of domestic cats.",
+        "Feline infectious peritonitis (FIP) is a common and highly lethal coronavirus disease of domestic cats",
+        "Feline Infectious Peritonitis virus (FIP) belongs to the coronavirus family of the genus Flavivirus which cause central nervous system disease.",
+        "Feline infectious peritonitis (FIP) is a cat virus caused by a member of the coronavirus family coronaviruses."
+      ],
+      "exact_answer": [
+        "Coronavirus"
+      ]
+    },
+    {
+      "id": "5e80675d835f4e4777000026",
+      "body": "Is SARS virus interacting with ACE2 encoded protein?",
+      "ideal_answer": [
+        "Yes,\nThe infection of target cells by the SARS CoV is mediated through the interaction of the viral Spike (S) protein (1255 amino acids) and its cellular receptor, angiotensin-converting enzyme 2 (ACE2)."
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "5e3ebaa348dab47f2600000a",
+      "body": "Is the FIP virus thought to be a mutated strain for the Feline enteric Coronavirus?",
+      "ideal_answer": [
+        "yes, Feline infectious peritonitis (FIP) results from mutations in the viral genome during a common feline enteric coronavirus (FECV) infection.",
+        "Yes. The FIP virus is a mutated strain of the Feline enteric Coronavirus (FECV) causing infectious peritonitis and neoplasia",
+        " Feline infectious peritonitis (FIP) results from mutations in the viral genome during a common feline enteric coronavirus (FECV) infection.",
+        "  Feline infectious peritonitis (FIP) results from mutations in the viral genome during a common feline enteric coronavirus (FECV) infection.",
+        "Feline infectious peritonitis (FIP) results from mutations in the viral genome during a common feline enteric coronavirus (FECV) infection.",
+        "Yes. The FIP virus is a mutated strain of the Feline enteric coronavirus (FECV) infects cats, and is thought to be a newly identified strain with heterozygous mutations that create a K27M amino acid substitution."
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "5e3d8edf48dab47f26000003",
+      "body": "Autophagy is the process where a virus obtains nutrients from it's host, yes or no?",
+      "ideal_answer": [
+        "No, autophagy is important in cellular homeostasis for the cell survival mechanism and is involved apoptosis.",
+        "Autophagy is a cellular survival pathway that is necessary for the degradation of cellular constituents such as long-lived proteins and damaged organelles.",
+        "Autophagy is important in cellular homeostasis for the cell survival mechanism."
+      ],
+      "exact_answer": "no"
+    },
+    {
+      "id": "5e7659db835f4e4777000001",
+      "body": "Name two rotavirus vaccines.",
+      "ideal_answer": [
+        "Two rotavirus vaccines licensed for global use are RotaTeq and Rotarix."
+      ],
+      "exact_answer": [
+        [
+          "Rotateq"
+        ],
+        [
+          "Rotarix"
+        ]
+      ]
+    },
+    {
+      "id": "5e2f43bafbd6abf43b000029",
+      "body": "Please list 2 human diseases caused by a coronavirus.",
+      "ideal_answer": [
+        "Middle East respiratory syndrome (MERS) and SARS are diseases caused by a coronavirus.",
+        "MERS and SARS are 2 human diseases caused by coronaviruses"
+      ],
+      "exact_answer": [
+        [
+          "MERS"
+        ],
+        [
+          "SARS"
+        ]
+      ]
+    },
+    {
+      "id": "5e30f23cfbd6abf43b000042",
+      "body": "Is modified vaccinia Ankara effective for smallpox?",
+      "ideal_answer": [
+        "Yes, modified vaccinia Ankara is effective for smallpox."
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "5e5b8170b761aafe09000010",
+      "body": "Which diagnostic test is approved for coronavirus infection screening?",
+      "ideal_answer": [
+        "Real-time reverse transcription-PCR (rRT-PCR) is mostly used as the lab test for screening coronaviral infection."
+      ],
+      "exact_answer": [
+        "real-time reverse transcription-PCR"
+      ]
+    },
+    {
+      "id": "5e3c6c9eb5b409ea53000022",
+      "body": "What bacteria is associated with Gastric cancer and peptic ulcers?",
+      "ideal_answer": [
+        "Helicobacter pylori (H. pylori), a gram-negative microaerophilic bacterial pathogen that colonizes the stomachs of more than half of all humans, is linked to chronic gastritis, peptic ulcers and gastric cancer.",
+        "Peptic ulcer and gastric cancer are caused by the same bacteria, Helicobacter pylori."
+      ],
+      "exact_answer": [
+        "helicobacter pylori"
+      ]
+    },
+    {
+      "id": "5e4fd4d56d0a277941000034",
+      "body": "Is Impetigo a viral infection that affects the skin?",
+      "ideal_answer": [
+        "No, impetigo is a highly contagious bacterial skin infection"
+      ],
+      "exact_answer": "no"
+    },
+    {
+      "id": "5e5d27531af46fc130000007",
+      "body": "Has the Spanich flu virus been reconstructed?",
+      "ideal_answer": [
+        "Tes,\nReconstruction of the 1918 influenza virus has facilitated considerable advancements in our understanding of this extraordinary pandemic virus."
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "5e5d2b4c1af46fc130000008",
+      "body": "What is a zoonotic virus?",
+      "ideal_answer": [
+        "A zoonotic disease is a disease that can be passed from animals to humans. Zoonotic viruses may adapt to a human host eventually becoming endemic in humans, but before doing so punctuated outbreaks of the zoonotic virus may be observed."
+      ],
+      "exact_answer": null
+    },
+    {
+      "id": "5e76452fc6a8763d23000015",
+      "body": "What is the protective efficacy of vaxchora against moderate to severe cholera?",
+      "ideal_answer": [
+        "The protective efficacy of vaxchora  against moderate to severe cholera is 80-100%."
+      ],
+      "exact_answer": [
+        "80-100%"
+      ]
+    },
+    {
+      "id": "5e7641a0c6a8763d23000011",
+      "body": "Which was the first cholera vaccine approved in the US?",
+      "ideal_answer": [
+        "Vaxchora is the first vaccine approved by the Food and Drug Administration for the prophylaxis of cholera infection."
+      ],
+      "exact_answer": [
+        "Vaxchora"
+      ]
+    },
+    {
+      "id": "5e3df59348dab47f26000006",
+      "body": "What virus is the  Gardisil vaccine used for?",
+      "ideal_answer": [
+        "Gardisil is a quadrivalent HPV vaccine would have been useful in the prevention of infections with human papillomavirus.",
+        "Gardisil is a 4-component vaccine against capsular HPV 16 (4C HPV16), which has recently been licensed in Europe, Canada and Australia.",
+        "Gordisil is a 4-component vaccine against capsular Meningococcus serogroup B (4CMenB), which has recently been licensed in Europe, Canada and Australia.",
+        "Gardisil, the quadrivalent HPV vaccine would have been useful in the prevention of 28% (13/46) of these infections ",
+        "Gardisil is a 16-component vaccine against human papillomavirus (HPV), which has recently been licensed in Europe, Canada and Australia.",
+        "Gardisil, the quadrivalent HPV vaccine would have been useful in the prevention of 28% (13/46) of these infections"
+      ],
+      "exact_answer": null
+    },
+    {
+      "id": "5e2f4a8bfbd6abf43b00002a",
+      "body": "What animal is thought to be the host for the Coronavirus causing MERS?",
+      "ideal_answer": [
+        "The animal thought to be the host for the Coronavirus causing MERS is camels.",
+        "The Virus causing MERS is though to have originated in dromedary camels"
+      ],
+      "exact_answer": [
+        "camel"
+      ]
+    },
+    {
+      "id": "5e4163b848dab47f2600000f",
+      "body": "List 3 human diseases caused by  viruses in the family Paramyxoviridae.",
+      "ideal_answer": [
+        "Measles, mumps and encephalitis are diseases caused by viruses in the family Paramyxoviridae.",
+        "Viruses in the family Paramyxoviridae can cuase , measles, mumps and encephalitis as well as respiratory illness in humans."
+      ],
+      "exact_answer": [
+        [
+          "measles"
+        ],
+        [
+          "mumps"
+        ],
+        [
+          "encephalitis"
+        ],
+        [
+          "respiratory disease"
+        ],
+        [
+          "newcastle disease"
+        ]
+      ]
+    },
+    {
+      "id": "5e722812c6a8763d2300000a",
+      "body": "What do HA and NA stand for with respect to the flue virus, e.g. H1N1?",
+      "ideal_answer": [
+        "VaxArray assays for influenza hemagglutinin (HA) and neuraminidase (NA) have been developed to address this need.",
+        "HA and NA stand for  hemagglutinin (HA) and neuraminidase (NA), two components of the flue virus genome.",
+        "HA and NA, (sometimes H or N) refer to influenza surface proteins neuraminidase (NA) and hemagglutinin (HA)."
+      ],
+      "exact_answer": null
+    },
+    {
+      "id": "5e76611b835f4e4777000002",
+      "body": "Which are the predominant rotavirus genotypes around the world?",
+      "ideal_answer": [
+        "The predominant RV genotypes circulating all over the world are G1P[8], G2P[4], G3P[8], G4P[8], and G9P[8], while G12[P6] and G12[P8] are emerging genotypes."
+      ],
+      "exact_answer": [
+        [
+          "G1P[8]"
+        ],
+        [
+          "G2P[4]"
+        ],
+        [
+          "G3P[8]"
+        ],
+        [
+          "G4P[8]"
+        ],
+        [
+          "G9P[8]"
+        ]
+      ]
+    },
+    {
+      "id": "5e6f774ec6a8763d23000009",
+      "body": "Are bacteria in the genus Clostridium facultative anaerobes?",
+      "ideal_answer": [
+        "Clostridia belong to those bacteria which are considered as obligate anaerobe, e.g. oxygen is harmful or lethal to these bacteria.",
+        "No, bacteria in the genus Clostridium are obligate anaerobes"
+      ],
+      "exact_answer": "no"
+    },
+    {
+      "id": "5e92005c2d3121100d000003",
+      "body": "List the deadliest viruses in the world.",
+      "ideal_answer": [
+        "The filoviruses, Ebola virus (EBOV) and Marburg virus (MARV), are among the deadliest viruses that cause disease in humans, with reported case fatality rates of up to 90% in some outbreaks.\r\nWHO ranks HIV as one of the deadliest diseases.\r\nInfluenza virus"
+      ],
+      "exact_answer": [
+        [
+          "Ebola virus"
+        ],
+        [
+          "Marburg virus"
+        ],
+        [
+          "Influenza virus"
+        ],
+        [
+          "HIV"
+        ]
+      ]
+    },
+    {
+      "id": "5e7667b1835f4e4777000004",
+      "body": "What was the predominant rotavirus genotype in the pre-vaccine era, in Australia?",
+      "ideal_answer": [
+        "G1P[8] was the dominant genotype in Australia in the prevaccine era (1995-2006)."
+      ],
+      "exact_answer": [
+        "G1P[8]"
+      ]
+    },
+    {
+      "id": "5e766256835f4e4777000003",
+      "body": "Have the rotavirus vaccines changed the predominant rotavirus genotypes?",
+      "ideal_answer": [
+        "The increased diversity and differences in genotype dominance observed in states using RotaTeq (G12P[8]), and in states and territories using Rotarix (equine-like G3P[8] and G2P[4]), suggest that these vaccines exert different immunological pressures that influence the diversity of rotavirus strains."
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "5e29f732aa19d74431000003",
+      "body": "List as many European influenza vaccines as possible.",
+      "ideal_answer": [
+        "Three split-virion vaccines (Vaxigrip, Begrivac, and Influsplit/Fluarix) and three subunit vaccines containing only viral surface glycoproteins (Influvac, Agrippal, and Fluvirin)."
+      ],
+      "exact_answer": [
+        [
+          "Vaxigrip"
+        ],
+        [
+          "Begrivac"
+        ],
+        [
+          "Influsplit",
+          "Fluarix"
+        ],
+        [
+          "Influvac"
+        ],
+        [
+          "Agrippal"
+        ],
+        [
+          "Fluvirin"
+        ]
+      ]
+    },
+    {
+      "id": "5e64f11a1af46fc130000017",
+      "body": "Is the Paramyxovirus geneome segmented, negative-sense RNA?",
+      "ideal_answer": [
+        "The paramyxovirus family has a genome consisting of a SINGLE STRAND of negative sense RNA",
+        "The paramyxovirus family has a genome consisting of a single strand of negative sense RNA.",
+        "The paramyxovirus family has a genome consisting of a single strand of negative sense RNA"
+      ],
+      "exact_answer": "no"
+    },
+    {
+      "id": "601f105e1cb411341a000071",
+      "body": "Herpes viruses have what type of genome?",
+      "ideal_answer": [
+        "The Herpesviridae are a family of viruses which have a large genome of linear, double-stranded DNA (> 120 kb)",
+        "The genome of Herpes viruses is composed of linear, double-stranded DNA.",
+        "Herpes simplex virus 1 (HSV-1) and HSV-2 are nuclear-replicating viruses composed of a double-stranded DNA genome",
+        "Herpes simplex virus 1 (HSV-1) has a double-stranded linear DNA genome that is approximately 152 kbp in length.",
+        "Herpesviridae are a family of viruses which have a large genome of linear, double-stranded DNA.",
+        "Herpes viruses have a linear, double-stranded DNA genome."
+      ],
+      "exact_answer": [
+        "double stranded DNA"
+      ]
+    },
+    {
+      "id": "606081e594d57fd879000041",
+      "body": "Which bioconductor tool has been developed for accessing bacterial regulatory networks?",
+      "ideal_answer": [
+        "The Regutools R package to facilitates programmatic access to RegulonDB data in computational biology. regutools gives researchers the possibility of writing reproducible workflows with automated queries to RegulonDB. The regutools package serves as a bridge between RegulonDB data and the Bioconductor ecosystem by reusing the data structures and statistical methods powered by other Bioconductor packages.",
+        "RegulonDB has collected, harmonized and centralized data from hundreds of experiments for nearly two decades and is considered a point of reference for transcriptional regulation in Escherichia coli K12. The regutools package serves as a bridge between RegulonDB data and the Bioconductor ecosystem by reusing the data structures and statistical methods powered by other Bioconductor packages."
+      ],
+      "exact_answer": [
+        "regutools"
+      ]
+    },
+    {
+      "id": "601f10b71cb411341a000072",
+      "body": "How many groups of viruses exist  in the Baltimore Classification?",
+      "ideal_answer": [
+        "There are seven \"Baltimore classes\" (BCs) that define the major features of virus reproduction.",
+        "seven \"Baltimore classes\" (BCs) that define the major features of virus reproduction",
+        "The Baltimore Classification system consists of seven classes (A, B, C, D, E, F, G, C and D) that are classified into seven different regions based on sequence similarity."
+      ],
+      "exact_answer": [
+        "7",
+        "seven"
+      ]
+    },
+    {
+      "id": "6032866a1cb411341a000142",
+      "body": "What are commensal bacteria?",
+      "ideal_answer": [
+        "The gut microbiota is composed of a large number of microbes, usually regarded as commensal bacteria. Maintenance of the commensal bacteria that comprise the gut microbiome is essential to both gut and systemic health."
+      ],
+      "exact_answer": null
+    },
+    {
+      "id": "6081af3c4e6a4cf630000008",
+      "body": "Is colistin an antibiotic?",
+      "ideal_answer": [
+        "Yes,\ncolistin is an antibiotic."
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "6020a9f11cb411341a000080",
+      "body": "Which animal bite can cause Capnocytophaga canimorsus infection?",
+      "ideal_answer": [
+        "Capnocytophaga canimorsus infection is typically associated with dog bites, especially in asplenic or immunocompromised patients, and typically manifest as sepsis and/or bacteremia."
+      ],
+      "exact_answer": [
+        "Dog"
+      ]
+    },
+    {
+      "id": "6032187e1cb411341a000132",
+      "body": "Are Gram positive bacteria able to release extracellular vesicles?",
+      "ideal_answer": [
+        "Yes, Gram-negative and Gram-positive bacteria release a variety of membrane vesicles through different formation routes."
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "603213ea1cb411341a000131",
+      "body": "Do bacteria release extracellular vesicles?",
+      "ideal_answer": [
+        "Yes, Bacterial extracellular vesicles (EVs) are bilayered lipid membrane structures, bearing integral proteins and able to carry diverse cargo outside the cell to distant sites."
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "5e4e3cee6d0a277941000030",
+      "body": "Which component of the Influenza A Virus affects mRNA transcription termination?",
+      "ideal_answer": [
+        "Defective Pol II termination occurs independently of the ability of the viral NS1 protein to interfere with host mRNA processing. Instead, this termination defect is a common effect of diverse cellular stresses and underlies the production of previously reported downstream-of-gene transcripts (DoGs).",
+        "Influenza A virus (IAV) infection induces global transcriptional defects at the 3' ends of active host genes and RNA polymerase II (RNAPII) run-through into extragenic regions. This phenomenon occurs with multiple strains of IAV, is dependent on influenza NS1 protein, and can be modulated by SUMOylation of an intrinsically disordered region (IDR) of NS1 expressed by the 1918 pandemic IAV strain"
+      ],
+      "exact_answer": [
+        "NS1",
+        "The IAV NS1 protein"
+      ]
+    },
+    {
+      "id": "61f7fca6882a024a10000039",
+      "body": "Which processes are affected by pathogenic SPTBN1 variants?",
+      "ideal_answer": [
+        "SPTBN1 variants lead to effects that affect \u03b2II-spectrin stability, disrupt binding to key molecular partners, and disturb cytoskeleton organization and dynamics."
+      ],
+      "exact_answer": [
+        [
+          "\u03b2II-spectrin stability"
+        ],
+        [
+          "Disrupt binding to key molecular partners"
+        ],
+        [
+          "Disturb cytoskeleton organization and dynamics"
+        ]
+      ]
+    },
+    {
+      "id": "6217db763a8413c653000028",
+      "body": "Is Mycobacterium abscessus a human pathogen?",
+      "ideal_answer": [
+        "Yes,\nMycobacterium abscessus is unique in terms of its high morbidity and treatment failure rates."
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "61f56284882a024a10000005",
+      "body": "Which syndrome is caused by pathogenic COL4A3-COL4A5 variants?",
+      "ideal_answer": [
+        "Massively parallel sequencing identifies pathogenic variants in the genes affected in Alport syndrome (COL4A3-COL4A5) in as many as 30% of individuals with focal and segmental glomerulosclerosis (FSGS), 10% of those with kidney failure of unknown cause, and 20% with familial immunoglobulin A (IgA) glomerulonephritis. The population frequencies for Alport syndrome are suggested by the frequencies of predicted pathogenic COL4A3-COL4A5 variants, but must be adjusted for the disease penetrance of individual variants and for the likelihood of already diagnosed disease and non-Gly substitutions.",
+        "Pathogenic variants in the genes in Alport Syndrome (COL4A3-C4A5) are found in as many as 30% of individuals with focal and segmental glomerulosclerosis (FSGS), and 20% with familial immunoglobulin A (IGA) Glomerulonephritis. The population frequencies for Alport syndrome are suggested to be higher than the frequencies of predicted pathogenic variants, but must be adjusted for the disease penetrance individual variants and for the likelihood of already diagnosed disease and non-Gly substitutions.",
+        "Massively parallel sequencing identifies pathogenic variants in the genes affected in Alport syndrome (COL4A3-COL4A5) in as many as 30% of individuals with focal and segmental glomerulosclerosis (FSGS), 10% of those with kidney failure of unknown cause, and 20% with familial immunoglobulin A (IgA) glomerulonephritis."
+      ],
+      "exact_answer": [
+        "Alport syndrome"
+      ]
+    },
+    {
+      "id": "61f52f22882a024a10000002",
+      "body": "Which disease do pathogenic NR2F1 variants cause?",
+      "ideal_answer": [
+        "Bosch-Boonstra-Schaaf optic atrophy syndrome (BBSOAS) is an autosomal-dominant disorder characterized by optic atrophy and intellectual disability caused by loss-of-function mutations in NR2F1.",
+        "Bosch-Boonstra-Schaaf optic atrophy syndrome",
+        "Bosch-Boonstra-Schaaf Optic Atrophy Syndrome"
+      ],
+      "exact_answer": [
+        "Bosch-Boonstra-Schaaf optic atrophy syndrome",
+        "BBSOAS"
+      ]
+    },
+    {
+      "id": "625ba1fae764a5320400002d",
+      "body": "List biomarkers for sepsis.",
+      "ideal_answer": [
+        "HCK, PRKCD, SIRPA, DOK3, ITGAM, LTB4R, MAPK14, MALT1, NLRC3, LCK\nC-Reactive Protein (CRP), Procalcitonin (PCT) and Interleukin 6 (IL-6)\nsTM"
+      ],
+      "exact_answer": [
+        [
+          "CRP"
+        ],
+        [
+          "PCT"
+        ],
+        [
+          "IL-6"
+        ],
+        [
+          "HCK"
+        ],
+        [
+          "PRKCD"
+        ],
+        [
+          "SIRPA"
+        ],
+        [
+          "DOK3"
+        ],
+        [
+          "ITGAM"
+        ],
+        [
+          "LTB4R"
+        ],
+        [
+          "MAPK14"
+        ],
+        [
+          "MALT1"
+        ],
+        [
+          "NLRC3"
+        ],
+        [
+          "LCK"
+        ],
+        [
+          "sTM"
+        ]
+      ]
+    },
+    {
+      "id": "627926bc56bf9aee6f00001a",
+      "body": "Is there a way to distinguish COVID-19 clinically from other respiratory illnesses, particularly influenza?",
+      "ideal_answer": [
+        "No, the clinical features of COVID-19 overlap substantially with influenza and other respiratory viral illnesses. There is no way to distinguish among them without testing.",
+        "Findings indicate that clinical symptoms alone would be insufficient to distinguish between coronavirus disease 2019 and other respiratory infections (eg, influenza) and/or to evaluate the effects of preventive interventions (eg, vaccinations)",
+        "Findings indicate that clinical symptoms alone would be insufficient to distinguish between coronavirus disease 2019 and other respiratory infections (eg, influenza) and/or to evaluate the effects of preventive interventions (eg, vaccinations). At present, clinical workup of COVID-19 remains a hard task to accomplish."
+      ],
+      "exact_answer": "no"
+    },
+    {
+      "id": "622f6ad13a8413c6530000aa",
+      "body": "Can parasite infections by Schistosoma japonicum prevent or improve asthma?",
+      "ideal_answer": [
+        "A peptide named as SJMHE1 from Schistosoma japonicum can suppress asthma in mice."
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "643c446357b1c7a31500002f",
+      "body": "Can reinfection occur after SARS-CoV-2 infection?",
+      "ideal_answer": [
+        "Protective and detectable immune responses are induced after SARS-CoV-2 infection but it is not yet established to what degree and for how long protection against reinfection lasts. Evidence suggests that some of these responses can be detected for at least a year following infection.\n\nThe short-term risk of reinfection (e.g., within the first several months after initial infection) is low. Several studies estimated the risk of reinfection to be less than 1 percent in the subsequent 5-8 months following initial infection. The risk of reinfection may be greater with the Omicron variant."
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "64299b6a57b1c7a315000001",
+      "body": "Is COVID-19 caused by the Omicron variant less severe than infection caused by other variants?",
+      "ideal_answer": [
+        "Multiple contexts indicate that infection caused by the Omicron variant of COVID-19 is less severe than infection caused by other variants. Studies have shown that Omicron is associated with milder symptoms and a lower risk of hospitalization compared to previous variants such as Delta. However, it is important to note that not all infected individuals experience a mild Omicron infection, and the severity of the illness can still vary depending on factors such as age and comorbidities.",
+        "Early data suggest that COVID-19 caused by the Omicron variant is less severe than infection caused by prior variants. Some studies have shown a reduced risk of hospitalization, intensive care unit admission, and in-hospital mortality. The relative mildness of disease reported in these studies may reflect the younger age of individuals impacted at this stage of the surge or a higher proportion of reinfections.",
+        "COVID-19 caused by the Omicron variant appears to be less severe than infections caused by previous variants. Studies have reported milder symptoms and reduced hospitalization rates associated with Omicron infections. For instance, one study found a two-thirds reduction in the risk of COVID-19 hospitalization compared to the Delta variant. Another study comparing first-time SARS-CoV-2 infections during the emergence of Omicron and Delta variants found significantly less severe outcomes for Omicron cases. After adjusting for various factors, the 3-day risks of emergency department visits, hospitalizations, ICU admissions, and mechanical ventilation were consistently lower in the Omicron cohort compared to the Delta cohort. Furthermore, a large national cohort study assessing relative risks of hospital attendance, admission, or death showed that the risk of severe outcomes following SARS-CoV-2 infection is substantially lower for Omicron than for Delta. However, it is important to note that not all individuals infected with Omicron experience mild illness."
+      ],
+      "exact_answer": "yes"
+    },
+    {
+      "id": "64240f33690f196b51000049",
+      "body": "What drugs are used to treat FIP, Feline Infectious Peritonitis in cats?",
+      "ideal_answer": [
+        "Drugs used to treat Feline Infectious Peritonitis (FIP) in cats include immune suppressive drugs such as prednisone or cyclophosphamide, recombinant feline interferon, glucocorticoids, antibiotics, passive immunization with Feliserin, Propentofylline (PPF), Polyprenyl Immunostimulant, antiviral RNAi, viroporin inhibitors, a broad-spectrum coronavirus protease inhibitor GC376, anti-feline TNF-alpha monoclonal antibody, the adenosine nucleoside analogue GS-441524, mefloquine, itraconazole, and remdesivir.",
+        "Adalimumab (an anti-human-TNF-alpha monoclonal antibody) and itraconazole (ICZ) are used to treat FIP, Feline Infectious Peritonitis in cats.",
+        "The most commonly used drugs to treat FIP in cats are Glucocorticoids, Interferon Omega, and Polyprenyl Immunostimulant (PI).",
+        "While there are a few drugs like Propentofylline, Feline interferon-omega that have been shown to be ineffective for treatment of FIP Feline Infectious Peritonitis, therapies with GC 376, GS-441524, Mutian\u00ae Xraphconn (Mutian X), Mefloquine, Anti TNF alpha Antibody, remdesivir, and siRNA show promising results while the efficacy of treatment with viroporin inhibitors, itraconazole, prednisolone, and Polyprenyl Immunostimulant is inconclusive",
+        "Prednisone and Cyclophosphamide are immune suppressive drugs used to treat Feline Infectious Peritonitis (FIP) in cats.",
+        "Adalimumab (an anti-human-TNF-alpha monoclonal antibody) and itraconazole are used to treat FIP, Feline Infectious Peritonitis in cats.",
+        "Feline infectious peritonitis (FIP) is considered a fatal disease, but treatment options are available to help control the immune response triggered by the infection with the feline coronavirus (FCoV). Immune suppressive drugs such as prednisone or cyclophosphamide may slow disease progression, while a combination of recombinant feline interferon and glucocorticoid, Feliserin, Polyprenyl Immunostimulant, protease inhibitors, antiviral RNAi, viroporin inhibitors, anti-fTNF-alpha antibody, GS-441524, Mutian\u00ae Xraphconn (Mutian X), mefloquine, and remdesivir have all been used to treat FIP in cats with varying degrees of success. Itraconazole in combination with prednisolone has also been used to treat effusive FIP.",
+        "The drugs used to treat Feline Infectious Peritonitis (FIP) in cats include antiviral drugs such as interferon omega, lopinavir/ritonavir, and GS-441524, as well as immunomodulatory drugs such as glucocorticoids and cyclosporine.",
+        "Glucocorticoids, immune modulators, and immune suppressive drugs such as prednisone or cyclophosphamide are used to treat FIP in cats."
+      ],
+      "exact_answer": [
+        [
+          "Prednisolone",
+          "immune suppressive drugs",
+          "glucocorticoid"
+        ],
+        [
+          "Cyclophosphamide"
+        ],
+        [
+          "Feline interferon-omega",
+          "FeIFN-omega"
+        ],
+        [
+          "Propentofylline",
+          "PPF"
+        ],
+        [
+          "Polyprenyl Immunostimulant"
+        ],
+        [
+          "GC376",
+          "3C-like protease (3CLpro) inhibitors"
+        ],
+        [
+          "siRNA"
+        ],
+        [
+          "viroporin inhibitor",
+          "HMA",
+          "DIDS"
+        ],
+        [
+          "anti-feline TNF-alpha monoclonal antibody"
+        ],
+        [
+          "GS-441524"
+        ],
+        [
+          "Mutian\u00ae",
+          "Xraphconn",
+          "(Mutian X)"
+        ],
+        [
+          "Mefloquine"
+        ],
+        [
+          "itraconazole"
+        ],
+        [
+          "remdesivir"
+        ]
+      ]
+    },
+    {
+      "id": "6428da98690f196b51000053",
+      "body": "Is there a way to distinguish COVID-19 clinically from other respiratory illnesses, such as influenza?",
+      "ideal_answer": [
+        "No, the clinical features of COVID-19 overlap substantially with influenza and other respiratory viral illnesses. There is no way to distinguish among them without testing.",
+        "No, there isn't a definitive way to distinguish COVID-19 clinically from other respiratory illnesses, such as influenza, as they share many similar symptoms. Proper testing, such as PCR or antibody tests, is required for accurate diagnosis."
+      ],
+      "exact_answer": "no"
+    }
+  ]
+}
