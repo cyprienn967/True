@@ -17,3 +17,4 @@ protobuf
 nltk 
 rouge-score
 bert_score
+accelerate

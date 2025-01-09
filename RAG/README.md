@@ -20,4 +20,4 @@ python knowledge_base.py to build knowledge base
 uvicorn server:app --host 0.0.0.0 --port 8000 --reload
 
 in another terminal:
-python benchmark.py
+python benchmark_bioGPT.py
