@@ -20,16 +20,17 @@ class ResponsePreprocess:
 
                 sent = self._clean_sentence(sent)
 
-            if len(sent) > 3:
-                sentences.append({'sentence_id': sentence_id, 'text': sent})
-                sentence_id += 1
+                if len(sent) > 3:
+                    sentences.append({'sentence_id': sentence_id, 'text': sent})
+                    sentence_id += 1
 
         return sentences
 
     def _should_skip(self, sentence: str) -> bool:
-        return ((sentence.startswith('#') and sentence.endswith('#')) or
-                sentence.isupper() or
-                any(sentence.startswith(word) for word in self._skip_starts))
+        # return ((sentence.startswith('#') and sentence.endswith('#')) or
+        #         sentence.isupper() or
+        #         any(sentence.startswith(word) for word in self._skip_starts))
+        return False
 
     def _clean_sentence(self, sentence: str) -> str:
         for word in self._replace:
@@ -39,7 +40,7 @@ class ResponsePreprocess:
 def hypothesis_preprocess_into_sentences(hypothesis: str) -> List[Dict[str, str]]:
     # Configure response preprocessing module
     # There is an expectation that the input data is cleaned before running Hallucination Detection
-    preprocess_skipStartsWithSet = set(['#'])
+    preprocess_skipStartsWithSet = set([])
     preprocess_replaceWordSet = set([])
     rp = ResponsePreprocess(
         skip_starts_with_set=preprocess_skipStartsWithSet,

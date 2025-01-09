@@ -2,7 +2,7 @@ import openai
 from retrieval import hybrid_retrieve
 
 def chain_of_thought_reader(query: str, top_k: int = 3) -> str:
-    # example retriever-reader pipeline that uses chain-of-thought prompting.
+    # example retriever-reader pipeline that uses chain-of-thought prompting. yes
     # 1) retrieve top_k docs 2) provide them as context to an LLM 3) ask LLM to reason step-by-step internally but provide a final concise answer
     relevant_docs = hybrid_retrieve(query, top_k=top_k)
     system_prompt = (

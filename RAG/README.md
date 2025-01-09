@@ -1,6 +1,5 @@
 step-byu-step retrieval and verification API
 
-
 1. Hybrid Retrieval (FAISS + BM25)  
 2. Multi-Document Aggregator for NLI Verification  
 3. Retriever–Reader Pipeline with Chain-of-Thought Prompting  

@@ -9,3 +9,11 @@ torch>=1.9.0
 transformers==4.31.0
 
 pydantic==1.10.8
+pdfplumber
+metapub
+requests
+sacremoses 
+protobuf
+nltk 
+rouge-score
+bert_score

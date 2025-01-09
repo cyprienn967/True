@@ -23,7 +23,7 @@ from .modules.utils import utils
 from .modules.utils.SE_config import SEConfig
 
 
-def compute_entropy(config: SEConfig, prompt, full_responses, most_likely_answer):
+def compute_entropy(config: SEConfig, prompt, full_responses):
   entropies = defaultdict(list)
   result_dict = {}
   result_dict['semantic_ids'] = []

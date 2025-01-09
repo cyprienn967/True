@@ -21,9 +21,13 @@ from .CoNLI.modules.data.response_preprocess import hypothesis_preprocess_into_s
 from .SemanticEntropy.modules.utils.SE_config import SEConfig
 from .SemanticEntropy.compute_entropy import compute_entropy
 from .utils.init_model import init_model
-from .utils.process_tokens import process_tokens, filter_hypotheses
+from .ConfidenceFilter.process_tokens import process_tokens, filter_hypotheses
+from .ConfidenceFilter.create_validation import get_topic, generate_validation_prompt
 from .ConfidenceFilter.extract_keywords import extract_keywords
+from .SelfContradiction.self_contradiction import check_contradiction
 
+# logging.basicConfig(filename="newfile.log", filemode='w')
+# logger = logging.getLogger()
 
 app = Flask(__name__)
 
@@ -101,47 +105,81 @@ def run_hallucination_detection():
   tokens, probs = process_tokens(token_log_likelihoods, tokens_raw)
   
   hypotheses = hypothesis_preprocess_into_sentences(response)
+  num_hypotheses = len(hypotheses)
   # sentences = {i: hypothesis for i, hypothesis in enumerate(hypotheses)}
-  keyword_dict = extract_keywords(response)
+  keyword_dict = extract_keywords("gpt-4o-mini", response)
+  # print(keyword_dict)
+  # for i in range(len(probs)):
+  #   print(f"{tokens[i]}: {probs[i]}")
   
-  filtered_hypotheses = filter_hypotheses(hypotheses, keyword_dict, probs)
-
-  return jsonify({"hypotheses": hypotheses, "filtered_hypotheses": filtered_hypotheses, "keywords": keyword_dict, "probs": probs})
+  hypothesis_evaluations, hallucinated_keywords = filter_hypotheses(hypotheses, keyword_dict, probs)
+  print(hallucinated_keywords)
   
-  full_responses = []
-  sampled_responses = []
-  num_generations = 1 + se_config.num_generations
+  # flags hypotheses that contain low likelihood keywords
+  labeled_hypotheses = {i: {"hypothesis": hypotheses[i]['text'], "is_hallucinated": hypothesis_evaluations[i], "hallucinated_keywords": hallucinated_keywords[i]} for i in range(num_hypotheses)}
 
-  # Generate responses to calculate semantic entropy
-  for i in range(num_generations):
-    # Temperature for first generation is always `0.1`.
-    temperature = 0.1 if i == 0 else inference_temperature
-
-    predicted_answer, token_log_likelihoods, tokens = model_instance.predict(prompt, 
-                                                                                temperature, 
-                                                                                max_completion_tokens=se_config.max_completion_tokens)
-
+  # return jsonify({"hallucinations": hallucinated_keywords, "response": response, "hypotheses": hypotheses, "filtered_hypotheses": filtered_hypotheses, "keywords": keyword_dict, "probs": probs})
+  is_hallucinated_se = [False for i in range(num_hypotheses)]
+  hallucinated_keywords_se = {i: [] for i in range(num_hypotheses)}
+  
+  topic = get_topic(prompt)
+  print(f"Topic: {topic}")
+  
+  # computes semantic entropy for flagged hypotheses
+  for i in range(num_hypotheses):
+    
+    if not hypothesis_evaluations[i]:  # no possible hallucination flagged
+      labeled_hypotheses[i]["semantic_entropy"] = None
+      continue
+    
+    labeled_hypotheses[i]["semantic_entropy"] = []
+    labeled_hypotheses[i]["validation_prompts"] = []
+    hypothesis = hypotheses[i]["text"]
+    
+    # use previous sentence as context if available
     if i == 0:
-      most_likely_answer_dict = {
-        'response': predicted_answer,
-        'token_log_likelihoods': token_log_likelihoods,
-        'tokens': tokens,}
-    full_responses.append((predicted_answer, token_log_likelihoods, tokens))
-    sampled_responses.append(predicted_answer)
+      hypothesis_context = ""
+    else:
+      hypothesis_context = hypotheses[i-1]["text"]
+    
+    for hallucination in hallucinated_keywords[i]:
+      
+      validation_prompt = generate_validation_prompt(hypothesis, hypothesis_context, topic, hallucination[0])
+    
+      full_responses = []
+      sampled_responses = []
 
-  # Append all predictions for this example to `generations`.
-  # generations['responses'] = full_responses
-  
-  entropies, semantic_ids = compute_entropy(se_config, full_prompt, full_responses, most_likely_answer_dict)
+      # Generate responses to calculate semantic entropy
+      for j in range(se_config.num_generations):
+        predicted_answer, sample_logits, sample_tokens = model_instance.predict(validation_prompt, inference_temperature, max_completion_tokens=se_config.max_completion_tokens)
 
-  # Return data
-  entropy_data = {
-    "output": most_likely_answer_dict['response'],
-    "all responses": json.dumps(sampled_responses),
-    "semantic ids": json.dumps(semantic_ids),
-    "entropies": json.dumps(entropies)
-  }
+        full_responses.append((predicted_answer, sample_logits, sample_tokens))
+        sampled_responses.append(predicted_answer)
+        
+        print(predicted_answer)
+
+      entropies, semantic_ids = compute_entropy(se_config, validation_prompt, full_responses)
+      entropy_data = {
+        "all responses": json.dumps(sampled_responses),
+        "semantic ids": json.dumps(semantic_ids),
+        "entropies": json.dumps(entropies)
+      }
+      
+      full_responses.append((response, token_log_likelihoods, tokens))
+      
+      labeled_hypotheses[i]["semantic_entropy"].append(entropies["semantic_entropy"][0])
+      labeled_hypotheses[i]["validation_prompts"].append(validation_prompt)
+      
+      # if entropy is above the threshold or responses are contradictory, then the response is hallucinated
+      if (entropies["semantic_entropy"][0] > se_config.entropy_threshold) or \
+         (entropies["semantic_entropy"][0] < se_config.contradiction_threshold and 
+          check_contradiction(hypothesis, sampled_responses, se_config.contradiction_num_samples)):
+        is_hallucinated_se[i] = True
+        hallucinated_keywords_se[i].append(hallucination)
   
+      
+  return jsonify({"response": response, "hallucinations": hallucinated_keywords_se, "is_hallucinated_se": is_hallucinated_se, "hallucination_data": labeled_hypotheses})
+    
   # Detect hallucinations with CoNLI
   if (in_context):
     allHallucinations = []
