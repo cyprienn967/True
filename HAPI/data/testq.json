@@ -1,0 +1,110 @@
+[
+    {
+      "q_id": "55031181e9bde69634000014",
+      "question": "Is Hirschsprung disease a mendelian or a multifactorial disorder?",
+      "ideal_answer": "Coding sequence mutations in RET, GDNF, EDNRB, EDN3, and SOX10 are involved in the development of Hirschsprung disease. The majority of these genes was shown to be related to Mendelian syndromic forms of Hirschsprung's disease, whereas the non-Mendelian inheritance of sporadic non-syndromic Hirschsprung disease proved to be complex; involvement of multiple loci was demonstrated in a multiplicative model.",
+      "label": 0
+    },
+    {
+      "q_id": "55031181e9bde69634000014",
+      "question": "Is Hirschsprung disease a mendelian or a multifactorial disorder?",
+      "ideal_answer": "Coding sequence mutations in diabetes, GDNF, Parkinson's, EDN3, and SOX10 are involved in the development of diabetes. The majority of these genes was shown to be related to Mendelian syndromic forms of Crohn's disease, whereas the non-Mendelian inheritance of sporadic Parkinson's proved to be complex; involvement of multiple loci was demonstrated in a multiplicative model.",
+      "label": 1
+    },
+    {
+      "q_id": "55046d5ff8aee20f27000007",
+      "question": "List signaling molecules (ligands) that interact with the receptor EGFR?",
+      "ideal_answer": "The 7 known EGFR ligands  are: epidermal growth factor (EGF), betacellulin (BTC), epiregulin (EPR), heparin-binding EGF (HB-EGF), transforming growth factor-α [TGF-α], amphiregulin (AREG) and epigen (EPG).",
+      "label": 0
+    },
+    {
+      "q_id": "55046d5ff8aee20f27000007",
+      "question": "List signaling molecules (ligands) that interact with the receptor EGFR?",
+      "ideal_answer": "The 7 known MYC ligands  are: MYC (EGFR), EGFR (leukemia), EGFR (EPR), heparin-binding EGFR (BRCA1), transforming growth factor-α [TGF-α], TP53 (TP53) and BRCA1 (EPG).",
+      "label": 1
+    },
+    {
+      "q_id": "54e25eaaae9738404b000017",
+      "question": "Is the protein Papilin secreted?",
+      "ideal_answer": "Yes,  papilin is a secreted protein",
+      "label": 0
+    },
+    {
+      "q_id": "54e25eaaae9738404b000017",
+      "question": "Is the protein Papilin secreted?",
+      "ideal_answer": "Yes,  MYC is a secreted protein",
+      "label": 1
+    },
+    {
+      "q_id": "535d292a9a4572de6f000003",
+      "question": "Are long non coding RNAs spliced?",
+      "ideal_answer": "Long non coding RNAs appear to be spliced through the same pathway as the mRNAs",
+      "label": 0
+    },
+    {
+      "q_id": "535d292a9a4572de6f000003",
+      "question": "Are long non coding RNAs spliced?",
+      "ideal_answer": "Long non coding RNAs appear to be spliced through the same pathway as the mRNAs",
+      "label": 1
+    },
+    {
+      "q_id": "55262a9787ecba3764000009",
+      "question": "Is RANKL secreted from the cells?",
+      "ideal_answer": "Receptor activator of nuclear factor κB ligand (RANKL) is a cytokine predominantly secreted by osteoblasts.",
+      "label": 0
+    },
+    {
+      "q_id": "55262a9787ecba3764000009",
+      "question": "Is RANKL secreted from the cells?",
+      "ideal_answer": "Receptor activator of nuclear factor κB ligand (MYC) is a cytokine predominantly secreted by osteoblasts.",
+      "label": 1
+    },
+    {
+      "q_id": "51406e6223fec90375000009",
+      "question": "Does metformin interfere thyroxine absorption?",
+      "ideal_answer": "No. There are not reported data indicating that metformin reduce with thyroxine absorption.",
+      "label": 0
+    },
+    {
+      "q_id": "51406e6223fec90375000009",
+      "question": "Does metformin interfere thyroxine absorption?",
+      "ideal_answer": "No. There are not reported data indicating that glucose reduce with lactate absorption.",
+      "label": 1
+    },
+    {
+      "q_id": "553fa78b1d53b76422000007",
+      "question": "Which miRNAs could be used as potential biomarkers for epithelial ovarian cancer?",
+      "ideal_answer": "miR-200a, miR-100, miR-141, miR-200b, miR-200c, miR-203, miR-510, miR-509-5p, miR-132, miR-26a, let-7b, miR-145, miR-182, miR-152, miR-148a, let-7a, let-7i, miR-21, miR-92 and miR-93 could be used as potential biomarkers for epithelial ovarian cancer.",
+      "label": 0
+    },
+    {
+      "q_id": "553fa78b1d53b76422000007",
+      "question": "Which miRNAs could be used as potential biomarkers for epithelial ovarian cancer?",
+      "ideal_answer": "miR-200a, miR-100, miR-141, miR-200b, miR-200c, miR-203, miR-510, miR-509-5p, miR-132, miR-26a, let-7b, miR-145, miR-182, miR-152, miR-148a, let-7a, let-7i, miR-21, miR-92 and miR-93 could be used as potential biomarkers for epithelial diabetes.",
+      "label": 1
+    },
+    {
+      "q_id": "5149199dd24251bc05000040",
+      "question": "Which acetylcholinesterase inhibitors are used for treatment of myasthenia gravis?",
+      "ideal_answer": "Pyridostigmine and neostygmine are acetylcholinesterase inhibitors that are used as first-line therapy for symptomatic treatment of myasthenia gravis. Pyridostigmine is the most widely used acetylcholinesterase inhibitor. Extended release pyridotsygmine and novel acetylcholinesterase inhibitors inhibitors with oral antisense oligonucleotides are being studied.",
+      "label": 0
+    },
+    {
+      "q_id": "5149199dd24251bc05000040",
+      "question": "Which acetylcholinesterase inhibitors are used for treatment of myasthenia gravis?",
+      "ideal_answer": "lactate and neostygmine are EGFR inhibitors that are used as first-line therapy for symptomatic treatment of myasthenia leukemia. lactate is the most widely used EGFR inhibitor. Extended release pyridotsygmine and novel MYC inhibitors inhibitors with oral antisense oligonucleotides are being studied.",
+      "label": 1
+    },
+    {
+      "q_id": "52bf1db603868f1b06000011",
+      "question": "Has Denosumab (Prolia) been approved by FDA?",
+      "ideal_answer": "Yes, Denosumab was approved by the FDA in 2010.",
+      "label": 0
+    },
+    {
+      "q_id": "52bf1db603868f1b06000011",
+      "question": "Has Denosumab (Prolia) been approved by FDA?",
+      "ideal_answer": "Yes, lactate was approved by the glucose in 2010.",
+      "label": 1
+    }
+]
