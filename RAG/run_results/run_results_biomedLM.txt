@@ -1,0 +1,316 @@
+[INFO] Loaded 169 questions from bioASQ/simple_ID_filtered_bioASQ.json
+[BioMedLM] Loading model stanford-crfm/BioMedLM on device=cpu ...
+
+================================================================================
+Question #1 | ID: 51593dc8d24251bc05000099
+Q: Proteomic analyses need prior knowledge of the organism complete genome. Is the complete genome of the bacteria of the genus Arthrobacter available?
+Exact Answer (BioASQ gold): yes
+Ideal Answer (BioASQ gold): Yes, the complete genome sequence of Arthrobacter (two strains) is deposited in GenBank.
+
+-- BioMedLM (Raw) --
+No.
+
+The authors would like to thank Dr. Suzanne Bowen, Dr. Lucia Bello, Dr. Karen Harris for her valuable comments and suggestions on the article.
+
+**Publisher's Note:**
+
+**[www.ncbi.nlm.nih.org/cgi-bin/paper?sj5444&checkcif=yes)
+
+*Journal Reports {#sec1_3}
+===================
+
+-- BioMedLM (RAG) --
+No, it is not possible to answer this question, it is not possible to answer it!" > "This is a very interesting and important question, but I amnot possible!" These results are veryinteresting!" > "Is it possible to transform!" > > "Genome" >
+
+[ROUGE Scores]
+Raw: {'rouge1': Score(precision=0.023255813953488372, recall=1.0, fmeasure=0.04545454545454545), 'rouge2': Score(precision=0.0, recall=0.0, fmeasure=0.0), 'rougeL': Score(precision=0.023255813953488372, recall=1.0, fmeasure=0.04545454545454545)} | RAG: {'rouge1': Score(precision=0.0, recall=0.0, fmeasure=0.0), 'rouge2': Score(precision=0.0, recall=0.0, fmeasure=0.0), 'rougeL': Score(precision=0.0, recall=0.0, fmeasure=0.0)}
+
+[BERT Scores]
+Raw: {'precision': 0.7315943837165833, 'recall': 0.8071967363357544, 'f1': 0.76753830909729} | RAG: {'precision': 0.7614285945892334, 'recall': 0.7957881689071655, 'f1': 0.778229296207428}
+================================================================================
+
+================================================================================
+Question #2 | ID: 531a3fe3b166e2b806000038
+Q: Is pregnancy an additional risk during during H1N1 infection?
+Exact Answer (BioASQ gold): yes
+Ideal Answer (BioASQ gold): Pregnant women are at increased risk for complications from pandemic influenza H1N1 virus infection. Pregnant women, because of their altered immunity and physiological adaptations, are at higher risk of developing pulmonary complications, especially in the second and third trimesters. Pregnancy, particularly during the third trimester, increases the risk of complications and early antiviral treatment is associated with improved outcomes.
+
+-- BioMedLM (Raw) --
+Yes, I think it is not a problem.
+The aim of this study was to investigate the effect of a single-dose pharmacokinetics of intravenous (IV) administration of a new method for the determination of the pharmacokinetics and pharmacodynamics of the new oral contraceptive on the pharmacokinetics of theophylline in human plasma by liquid chromatography-tandem mass spectrometry (LC-MS/MS method for the determination of theophylline in the presence of a single-shot technique for the determination of the pharmacokinetics of theophylline in the plasma of healthy volunteers.
+A sensitive and specific method for the determination of the in vitro and in vivo assessment of the interaction between the human epidermal growth factor receptor 2 (HER2/neu and its ligand in human plasma using a novel method for the detection of
+
+-- BioMedLM (RAG) --
+No, I don't think it is not a risk. The answer is no, it is not clear whether the pandemic H1N1 2009 influenza A (H1N1) 2009 H1N1 2009 influenza A (H1N1) 2009 H1N1 virus was detected in the first trimester of pregnancy. The authors thank the World Health Organization for the
+
+[ROUGE Scores]
+Raw: {'rouge1': Score(precision=0.007575757575757576, recall=1.0, fmeasure=0.015037593984962407), 'rouge2': Score(precision=0.0, recall=0.0, fmeasure=0.0), 'rougeL': Score(precision=0.007575757575757576, recall=1.0, fmeasure=0.015037593984962407)} | RAG: {'rouge1': Score(precision=0.0, recall=0.0, fmeasure=0.0), 'rouge2': Score(precision=0.0, recall=0.0, fmeasure=0.0), 'rougeL': Score(precision=0.0, recall=0.0, fmeasure=0.0)}
+
+[BERT Scores]
+Raw: {'precision': 0.7231460809707642, 'recall': 0.805958092212677, 'f1': 0.7623096108436584} | RAG: {'precision': 0.7126012444496155, 'recall': 0.8042846918106079, 'f1': 0.7556721568107605}
+================================================================================
+
+================================================================================
+Question #3 | ID: 571529efcb4ef8864c000001
+Q: Which antibiotics target peptidoglycan biosynthesis?
+Exact Answer (BioASQ gold): colchicine fosfomycin bacitracin vancomycin D-cycloserine seromycin ampicillin cinnamycin ramoplanin muraymycin mersacidin
+Ideal Answer (BioASQ gold): Under some conditions, both ramoplanin and vancomycin probes produce helicoid staining patterns along the cylindrical walls of B. subtilis cells. This work has implications for the design of ramoplanin derivatives and may influence how other proposed substrate binding antibiotics are studied. This was confirmed by in vitro studies involving a wall-membrane particulate fraction from Gaffkya homari in which peptidoglycan synthesis from UDP-MurNAc-tetrapeptide was inhibited by ramoplanin but not by vancomycin. New results support a two-state model for septal and peripheral PG synthesis at mid-cell, involvement of essential cell division proteins in PG remodeling, and mid-cell localization of proteins that organize PG biosynthesis and that form the protein translocation apparatus. Antibiotics which inhibit bacterial peptidoglycan biosynthesis are the most widely used in current clinical practice. Cells treated with ampicillin, D-cycloserine, or fosfomycin had only one chloroplast after cell division, suggesting that the cells divided without chloroplast division. The antibiotics bacitracin and vancomycin showed no obvious effect. Colchicine inhibits Closterium cell elongation after division.  Surprisingly, also cinnamycin of Streptomyces cinnamoneus cinnamoneus), previously known to bind specifically to phosphatidylethanolamin of biological membranes, provoked strong cell wall biosynthetic stress. Other substances include fluorescent derivatives of two PG-binding antibiotics, vancomycin and ramoplanin. The muraymycins constitute a new antibiotic family whose core structure contains a glycosylated uronic acid derivative joined by an aminopropane group to a hexahydro-2-imino-4-pyrimidylglycyl residue (epicapreomycidine) containing dipeptide that is further extended by a urea-valine moiety. The muraymycins inhibited peptidoglycan biosynthesis. Ramoplanin is a cyclicdepsipeptide antibiotic that inhibits peptidoglycan biosynthesis. The lantibiotic mersacidin inhibits peptidoglycan biosynthesis at the level of transglycosylation. Ramoplanin, a new lipoglycopeptide antibiotic, inhibits cell wall peptidoglycan biosynthesis in gram-positive bacteria.
+
+-- BioMedLM (Raw) --
+Yes, we have provided a list of the most recent evidence-based review of the evidence for the use of antibiotics in the treatment of acute bacterial meningitis in the treatment of patients with chronic obstructive pulmonary disease (COPD) exacerbations in the past few years.
+
+Introduction {#s1}
+========================================================================================
+
+-- BioMedLM (RAG) --
+The aim of this study was to investigate the effect of antibiotics on the susceptibility of groups of genes involved in the biosynthesis of the bacterial cell wall precursor? - 1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1
+
+[ROUGE Scores]
+Raw: {'rouge1': Score(precision=0.0, recall=0.0, fmeasure=0.0), 'rouge2': Score(precision=0.0, recall=0.0, fmeasure=0.0), 'rougeL': Score(precision=0.0, recall=0.0, fmeasure=0.0)} | RAG: {'rouge1': Score(precision=0.0, recall=0.0, fmeasure=0.0), 'rouge2': Score(precision=0.0, recall=0.0, fmeasure=0.0), 'rougeL': Score(precision=0.0, recall=0.0, fmeasure=0.0)}
+
+[BERT Scores]
+Raw: {'precision': 0.7663915157318115, 'recall': 0.7111744284629822, 'f1': 0.7377511858940125} | RAG: {'precision': 0.7767037749290466, 'recall': 0.6917219161987305, 'f1': 0.7317537665367126}
+================================================================================
+
+================================================================================
+Question #4 | ID: 56c81fd15795f9a73e00000c
+Q: Are stress granules involved in the pathogenesis of Amyotrophic Lateral Sclerosis?
+Exact Answer (BioASQ gold): yes
+Ideal Answer (BioASQ gold): Stress granules are cytoplasmic inclusions that repress translation of a subset of RNAs in times of cellular stress, and several proteins implicated in neurodegeneration (i.e. Ataxin-2 and SMN) interact with stress granules. Mutant FUS proteins that cause amyotrophic lateral sclerosis incorporate into stress granules. ALS-linked mutations in profilin 1 alter stress granule dynamics, providing further evidence for the potential role of stress granules in ALS pathogenesis. ALS mutations in FUS NLS can impair FUS nuclear localization, induce cytoplasmic inclusions and stress granules, and potentially perturb RNA metabolism. Yes, stress granules (SGs) have been linked to several pathologies including inflammatory diseases, cancer, viral infection, and neurodegenerative diseases such as amyotrophic lateral sclerosis (ALS) and frontotemporal dementia (FTD).
+
+-- BioMedLM (Raw) --
+No, we are not.
+
+The authors have no other competing interests.
+
+**Authors' contributions {#Sec1}
+===================================================================================================================
+
+-- BioMedLM (RAG) --
+No. The authors present a case of a patient with a history of chronic lymphocytic leukemia (CLL) with a large mediastinal mass: a rare case of primary hyperparathyroidism: a rare case of a patient with a large mediastinal mass. Introduction {#sec1-1} =======================
+
+[ROUGE Scores]
+Raw: {'rouge1': Score(precision=0.0, recall=0.0, fmeasure=0.0), 'rouge2': Score(precision=0.0, recall=0.0, fmeasure=0.0), 'rougeL': Score(precision=0.0, recall=0.0, fmeasure=0.0)} | RAG: {'rouge1': Score(precision=0.0, recall=0.0, fmeasure=0.0), 'rouge2': Score(precision=0.0, recall=0.0, fmeasure=0.0), 'rougeL': Score(precision=0.0, recall=0.0, fmeasure=0.0)}
+
+[BERT Scores]
+Raw: {'precision': 0.7702266573905945, 'recall': 0.8293147683143616, 'f1': 0.7986792922019958} | RAG: {'precision': 0.7365517020225525, 'recall': 0.8161994814872742, 'f1': 0.7743328213691711}
+================================================================================
+
+================================================================================
+Question #5 | ID: 517a8c918ed59a060a000043
+Q: Which viruses are best known to cause myocarditis?
+Exact Answer (BioASQ gold): Enterovirus Adenovirus Coxsackie B virus
+Ideal Answer (BioASQ gold): The most frequent viruses causing myocarditis are Enterovirus, Adenovirus and Coxsackie B viruses.
+
+-- BioMedLM (Raw) --
+No, we have shown that the authors have a competing interest statement in the manuscript.
+
+The authors would like to thank the reviewers for the suggestion.
+
+We have added the following text to the manuscript:
+
+"The authors declare that there is no conflict of interest was given to the following:
+
+"Introduction {#s1}
+========================================================================
+
+-- BioMedLM (RAG) --
+Human endogenous retroviruses (HERVs) are the remnants of ancient retroviral sequences are DNA sequences that are integrated into the human genome and are transmitted to other vertebrates by horizontal transfer of their ancestral viral genes, and they are not transferred from the host, but they can be expressed in the human genome, and they can be expressed in the genome of other species, they are not expressed in the genome of germ
+
+[ROUGE Scores]
+Raw: {'rouge1': Score(precision=0.0, recall=0.0, fmeasure=0.0), 'rouge2': Score(precision=0.0, recall=0.0, fmeasure=0.0), 'rougeL': Score(precision=0.0, recall=0.0, fmeasure=0.0)} | RAG: {'rouge1': Score(precision=0.0, recall=0.0, fmeasure=0.0), 'rouge2': Score(precision=0.0, recall=0.0, fmeasure=0.0), 'rougeL': Score(precision=0.0, recall=0.0, fmeasure=0.0)}
+
+[BERT Scores]
+Raw: {'precision': 0.7794493436813354, 'recall': 0.7172809839248657, 'f1': 0.7470740079879761} | RAG: {'precision': 0.7838481068611145, 'recall': 0.758544385433197, 'f1': 0.7709887027740479}
+================================================================================
+
+================================================================================
+Question #6 | ID: 57169662cb4ef8864c000008
+Q: What is the function of 6SRNA in bacteria?
+Exact Answer (BioASQ gold): 
+Ideal Answer (BioASQ gold): 6S RNA, first described as a ncRNA in E. coli, mimics an open promoter structure, which has a large bulge with two hairpin/stalk structures that regulate transcription through interactions with RNA polymerase. Escherichia coli 6S RNA represents a non-coding RNA (ncRNA), which, based on the conserved secondary structure and previous functional studies, had been suggested to interfere with transcription. The carboxy terminus containing the Arg-Gly-Gly (RGG) repeat domains in these proteins are necessary for cis-repression of transcription activation and HAT activity by the N-terminal glutamine-rich domain. Escherichia coli 6S RNA represents a non-coding RNA (ncRNA), which, based on the conserved secondary structure and previous functional studies, had been suggested to interfere with transcription. 6S RNA-deficient cells are at a disadvantage for survival in stationary phase, a time when 6S RNA regulates transcription. 6S RNA regulation of both sigma(70) and sigma(S) activities contributes to increased cell persistence during nutrient deprivation. 6S RNA acts as a template for the transcription of defined RNA molecules in the absence of DNA. 6S RNA, first described as a ncRNA in E. coli, mimics an open promoter structure, which has a large bulge with two hairpin/stalk structures that regulate transcription through interactions with RNA polymerase. 6S RNA function enhances long-term cell survival. 
+
+-- BioMedLM (Raw) --
+===========================================================================================================================================================
+
+Warning: Missing gold exact answer. Skipping evaluation for Raw.
+
+-- BioMedLM (RAG) --
+=================== These are the most important questions, and how does the study of the ***Question:***, ***a*** is the answer, the study of the microbiome***b*** is the study of the effects of antibiotics on
+Warning: Missing gold exact answer. Skipping evaluation for RAG.
+
+[ROUGE Scores]
+Raw: {} | RAG: {}
+
+[BERT Scores]
+Raw: {} | RAG: {}
+================================================================================
+
+================================================================================
+Question #7 | ID: 5710ade4cf1c32585100002c
+Q: What is the suggested therapy for Mycobacterium avium infection?
+Exact Answer (BioASQ gold): 
+Ideal Answer (BioASQ gold): The activity of TLC G-65 (a liposomal gentamicin preparation), alone and in combination with rifapentine, clarithromycin, clofazimine and ethambutol, was evaluated in the beige mouse (C57BL/6J--bgj/bgj) model of disseminated Mycobacterium avium infection. TLC G-65 in combination with rifapentine appears to be an attractive regimen for the treatment of infections caused by bacteria in the M. avium complex. Rifampin 10 mg/kg daily, ciprofloxacin 500 mg twice daily, clofazimine 100 mg every day, and ethambutol 15 mg/kg orally daily for 24 weeks, with or without amikacin 10 mg/kg intravenously or intramuscularly 5 days weekly for the first 4 weeks. In vivo phage treatment may also be used in some cases. Rifampin 10 mg/kg daily, ciprofloxacin 500 mg twice daily, clofazimine 100 mg every day, and ethambutol 15 mg/kg orally daily for 24 weeks, with or without amikacin 10 mg/kg intravenously or intramuscularly 5 days weekly for the first 4 weeks The activity of TLC G-65 (a liposomal gentamicin preparation), alone and in combination with rifapentine, clarithromycin, clofazimine and ethambutol, was evaluated in the beige mouse (C57BL/6J--bgj/bgj) model of disseminated Mycobacterium avium infection
+
+-- BioMedLM (Raw) --
+============================================================================================================================================================
+
+Warning: Missing gold exact answer. Skipping evaluation for Raw.
+
+-- BioMedLM (RAG) --
+These are multiresistant strains of M. tuberculosis, particularly for the treatment of HIV, can be curable especially for its prevention and cure. Introduction {#section1-2050313X1982894519834845} ========================
+Warning: Missing gold exact answer. Skipping evaluation for RAG.
+
+[ROUGE Scores]
+Raw: {} | RAG: {}
+
+[BERT Scores]
+Raw: {} | RAG: {}
+================================================================================
+
+================================================================================
+Question #8 | ID: 515df063298dcd4e51000029
+Q: What is the indication for prophylactic use of antibiotics in COPD?
+Exact Answer (BioASQ gold): Reduction of number of exacerbations
+Ideal Answer (BioASQ gold): In a subset of patients with severe disease and prone to developing infections prophylactic use of antibiotics may reduce number of exacerbations and improve social and health care costs.
+
+-- BioMedLM (Raw) --
+Yes, we do not know.
+
+The authors would like to thank Dr. Bernardo Rodriguez-Sanchez-Ortiz, Ms. Julia L. M. Garcia-Grandahl, Dr. S. K. Gilbert
+
+**What is your answer:**
+
+**Question:**
+
+**Questionnaire {#Sec1}
+===================================================
+
+-- BioMedLM (RAG) --
+=================
+
+[ROUGE Scores]
+Raw: {'rouge1': Score(precision=0.0, recall=0.0, fmeasure=0.0), 'rouge2': Score(precision=0.0, recall=0.0, fmeasure=0.0), 'rougeL': Score(precision=0.0, recall=0.0, fmeasure=0.0)} | RAG: {'rouge1': Score(precision=0.0, recall=0.0, fmeasure=0.0), 'rouge2': Score(precision=0.0, recall=0.0, fmeasure=0.0), 'rougeL': Score(precision=0, recall=0, fmeasure=0)}
+
+[BERT Scores]
+Raw: {'precision': 0.772743821144104, 'recall': 0.835681676864624, 'f1': 0.8029813766479492} | RAG: {'precision': 0.8568151593208313, 'recall': 0.8092020153999329, 'f1': 0.832328200340271}
+================================================================================
+
+================================================================================
+Question #9 | ID: 551c2cd26b348bb82c00000d
+Q: Does helicobacter pylori infection increase risk for ischemic stroke?
+Exact Answer (BioASQ gold): 
+Ideal Answer (BioASQ gold): Findings regarding association between helicobacter pylori infection and ischemic stroke risk are conflicting. There is evidence to suggest that helicobacter pylori infection is associated with increased risk for ischemic stroke and should be considered stroke risk factors. However, some studies reported no association between helicobacter pylori infection and stroke.
+
+-- BioMedLM (Raw) --
+The authors have added a new method to study the effect of the *Helicobacter pylori* (*H. pylori*), a gram-negative bacterium that infects more than half of the world's population is infected with this bacterium to your list of differential diagnoses in the stomach.
+
+Introduction {#sec1}
+=======================================================================================
+
+Warning: Missing gold exact answer. Skipping evaluation for Raw.
+
+-- BioMedLM (RAG) --
+Yes, the novel coronavirus disease 2019 (COVID-19 is a highly prevalent infection, COVID-19 is a risk factor for ischemic stroke in the general population. The risk to be a risk factor for cerebrovascular disease. The marked increase in the number of male sex workers in the United States, the number of cases of COVID-19 (coronavirus disease 2019
+Warning: Missing gold exact answer. Skipping evaluation for RAG.
+
+[ROUGE Scores]
+Raw: {} | RAG: {}
+
+[BERT Scores]
+Raw: {} | RAG: {}
+================================================================================
+
+================================================================================
+Question #10 | ID: 513eec89bee46bd34c00000d
+Q: What is the biological role of expansins in fungi?
+Exact Answer (BioASQ gold): 
+Ideal Answer (BioASQ gold): Expansins are extracellular proteins that increase plant cell-wall extensibility. These wall-loosening proteins are involved in cell wall extension and polysaccharide degradation. In fungi expansins and expansin-like proteins have been found to localize in the conidial cell wall and are probably involved in cell wall remodeling during germination.
+
+-- BioMedLM (Raw) --
+**
+
+The authors have demonstrated that the **[Figure 1](#fig1){ref-type="fig"}**).
+
+![**(A)**: The authors have developed a novel method for the detection of *B**)**:**
+
+The authors have not been able to detect the presence of a novel method for the detection of the novel coronavirus disease 2019 (COVID-19**)**, a severe acute respiratory syndrome coronavirus 2 (COVID-19 disease (COVID-19-related symptoms and signs of infection in the patient with a history of travelling to the hospital for the diagnosis of COVID-19 infection in the
+
+Warning: Missing gold exact answer. Skipping evaluation for Raw.
+
+-- BioMedLM (RAG) --
+**Core tip:** The authors of this study have developed a novel approach to the management of patients with chronic obstructive pulmonary disease (COPD) is a major cause of morbidity and mortality of patients with pulmonary hypertension (PH) is challenging and complex, and the use of corticosteroids are often required to manage their disease with long-term oxygen therapy is a cornerstone of treatment. The
+Warning: Missing gold exact answer. Skipping evaluation for RAG.
+
+[ROUGE Scores]
+Raw: {} | RAG: {}
+
+[BERT Scores]
+Raw: {} | RAG: {}
+================================================================================
+
+================================================================================
+Question #11 | ID: 5719f5c67de986d80d00000d
+Q: What distinguishes lantibiotics from antibiotics?
+Exact Answer (BioASQ gold): Lantibiotics are post-translationally modified natural peptides containing lanthionine
+Ideal Answer (BioASQ gold): Lantibiotic compounds are ribosomally synthesized antimicrobial peptides against which bacteria are not able to produce resistance, hence making them a good alternative to antibiotics. It is interesting that low levels of resistance have been reported for lantibiotics compared with commercial antibiotics. Given that there are very few examples of naturally occurring lantibiotic resistance, attempts have been made to deliberately induce resistance phenotypes in order to investigate this phenomenon. Other general forms of resistance include the formation of spores or biofilms, which are a common mechanistic response to many classes of antimicrobials. One potentially interesting class of antimicrobials are the modified bacteriocins termed lantibiotics, which are bacterially produced, posttranslationally modified, lanthionine/methyllanthionine-containing peptides. Low levels of resistance have been reported for lantibiotics compared with commercial antibiotics. Nisin is the oldest and the most widely used lantibiotic, in food preservation, without having developed any significant resistance against it. One potentially interesting class of antimicrobials are the modified bacteriocins termed lantibiotics, which are bacterially produced, posttranslationally modified, lanthionine/methyllanthionine-containing peptides.
+
+-- BioMedLM (Raw) --
+The authors have shown that the use of the term "concise answer: Yes, we do not know.
+
+We have added a new figure to the paper.
+
+Introduction {#s1}
+==============================================================================================================
+
+-- BioMedLM (RAG) --
+"yes" is not a new class of antimicrobial agents, but lantibiotics: a) are produced by Lactococcus lactis strains of lacticin 3147 are the lantibiotics are"they are"indicated"no"suggestions that iturin A"are they are" (Figure 1). The only thing new antimicrobials produced by L. lactis"are"
+
+[ROUGE Scores]
+Raw: {'rouge1': Score(precision=0.0, recall=0.0, fmeasure=0.0), 'rouge2': Score(precision=0.0, recall=0.0, fmeasure=0.0), 'rougeL': Score(precision=0.0, recall=0.0, fmeasure=0.0)} | RAG: {'rouge1': Score(precision=0.041666666666666664, recall=0.2222222222222222, fmeasure=0.07017543859649122), 'rouge2': Score(precision=0.02127659574468085, recall=0.125, fmeasure=0.03636363636363636), 'rougeL': Score(precision=0.041666666666666664, recall=0.2222222222222222, fmeasure=0.07017543859649122)}
+
+[BERT Scores]
+Raw: {'precision': 0.7795320153236389, 'recall': 0.7663679122924805, 'f1': 0.7728939056396484} | RAG: {'precision': 0.7710925340652466, 'recall': 0.8133295774459839, 'f1': 0.7916480898857117}
+================================================================================
+
+================================================================================
+Question #12 | ID: 530f685c329f5fcf1e000002
+Q: Is there an association between borna virus and brain tumor?
+Exact Answer (BioASQ gold): no
+Ideal Answer (BioASQ gold): There is no data to suggest an association between borna virus and brain tumor. Borna disease virus establishes a persistent infection in the central nervous system of vertebrate animal species as well as in tissue cultures causing cellular damage. Infected neural cells, include astrocytes, neurons, oligodendroglioma cell line. Borna disease virus replicates and can cause damage of brain cells.
+
+-- BioMedLM (Raw) --
+No
+
+**Author contributions:**
+
+**Funding:**
+
+**Competing interests:**
+
+**Data curation:**
+
+    \(1\)       \(2\)      0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+
+-- BioMedLM (RAG) --
+No. The answer is No. The authors have developed a novel tool for the detection and management of the infection of the fetus with Zika virus (ZIKV)? The tools are not available.
+
+[ROUGE Scores]
+Raw: {'rouge1': Score(precision=0.09090909090909091, recall=1.0, fmeasure=0.16666666666666669), 'rouge2': Score(precision=0.0, recall=0.0, fmeasure=0.0), 'rougeL': Score(precision=0.09090909090909091, recall=1.0, fmeasure=0.16666666666666669)} | RAG: {'rouge1': Score(precision=0.03125, recall=1.0, fmeasure=0.06060606060606061), 'rouge2': Score(precision=0.0, recall=0.0, fmeasure=0.0), 'rougeL': Score(precision=0.03125, recall=1.0, fmeasure=0.06060606060606061)}
+
+[BERT Scores]
+Raw: {'precision': 0.675024151802063, 'recall': 0.8396608829498291, 'f1': 0.7483950257301331} | RAG: {'precision': 0.7917829751968384, 'recall': 0.8348028063774109, 'f1': 0.8127240538597107}
+================================================================================
+
+================================================================================
+Question #13 | ID: 52bf1cad03868f1b0600000a
+Q: Which virus is Cidofovir (Vistide) indicated for?
+Exact Answer (BioASQ gold): cytomegalovirus
+Ideal Answer (BioASQ gold): Cidofovir is commonly used in the treatment of cytomegalovirus (CMV) infection and disease.
+
+-- BioMedLM (Raw) --
+Human papillomavirus (HPV) vaccination and cervical cancer (CC) is a sexually transmitted disease (CCa) is a sexually active female condoms are safe and effective.
+
+  -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- BioMedLM (RAG) --
