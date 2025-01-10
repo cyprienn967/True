@@ -12,6 +12,9 @@ def process_tokens(logliks, tokens):
   
   for i in range(len(tokens)):
     
+    if tokens[i] == " ":
+      continue
+    
     if i == 0:
       words.append(tokens[i])
       probs.append(math.exp(logliks[i]))
@@ -55,6 +58,7 @@ def filter_hypotheses(hypotheses, keyword_list, probs):
         print(f"Found first keyword match: {keyword_list[keyword_pointer]}")
         num_words = len(keyword_list[keyword_pointer].split())
         hypothesis_words = ' '.join(hypothesis.split()[word_pointer:word_pointer+num_words])
+        print(f"Hypothesis words: {hypothesis_words}")
         
         if hypothesis_words == keyword_list[keyword_pointer] or hypothesis_words[:-1] == keyword_list[keyword_pointer]:
           print(f"Found full keyword match: {keyword_list[keyword_pointer]}")

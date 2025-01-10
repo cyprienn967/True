@@ -7,7 +7,7 @@ import nltk
 def extract_keywords(keyword_model, input: str):
   
   if (len(input) <= 5):
-    return {0: input.split()}
+    return input.split()
   
   if ("gpt" in keyword_model.lower()):
     
@@ -15,7 +15,7 @@ def extract_keywords(keyword_model, input: str):
     
     sentences = nltk.sent_tokenize(input)
     
-    prompt = "For every sentence in the following text, extract the key words and numbers, separated by commas. Output them in a numbered list. Output only the key words and numbers crucial for understanding the text. Do not output anything else: "
+    prompt = "For every sentence in the following text, extract the key words and numbers, separated by commas. Output them in a numbered list. Output only the key words and numbers crucial for understanding the text. Preserve capitalization. Do not output anything else: "
     full_prompt = prompt + "\n".join([f"{i+1}. {sentence}" for i, sentence in enumerate(sentences)])
     
     output_raw, _, _ = model.predict(prompt=full_prompt, max_completion_tokens=1000)
