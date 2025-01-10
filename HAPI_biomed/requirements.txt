@@ -11,4 +11,7 @@ sacremoses
 uvicorn
 fastapi
 openai
+rouge_score
+bert_score
+flask
 
