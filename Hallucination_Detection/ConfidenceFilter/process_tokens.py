@@ -26,34 +26,38 @@ def process_tokens(logliks, tokens):
       words[-1] += tokens[i]
       probs[-1] = min(probs[-1], math.exp(logliks[i]))
       
+  print(words, probs)
+      
   return words, probs
 
 
-def filter_hypotheses(hypotheses, keyword_dict, probs):
+def filter_hypotheses(hypotheses, keyword_list, probs):
   
   hypothesis_evaluations = [False] * len(hypotheses) # if keywords have low generated likelihood, they get flagged
   hallucinated_keywords = {i: [] for i in range(len(hypotheses))} # (keyword, likelihood) pairs
   
   token_pointer = 0
+  keyword_pointer = 0
   
   for i in range(len(hypotheses)):
     hypothesis = hypotheses[i]['text']
-    keywords = keyword_dict.get(i, [])
+    print(hypothesis)
     
-    pointer1 = 0
-    pointer2 = 0
+    word_pointer = 0
     
-    while pointer1 < len(hypothesis.split()) and pointer2 < len(keywords):
+    while word_pointer < len(hypothesis.split()) and keyword_pointer < len(keyword_list):
       
-      first_keyword = keywords[pointer2].split()[0]
+      first_keyword = keyword_list[keyword_pointer].split()[0]
       # print(hypothesis.split()[pointer1], first_keyword)
-      if hypothesis.split()[pointer1] == first_keyword or hypothesis.split()[pointer1][:-1] == first_keyword: # found a keyword
-        print(f"Found first keyword match: {keywords[pointer2]}")
-        num_words = len(keywords[pointer2].split())
-        hypothesis_words = ' '.join(hypothesis.split()[pointer1:pointer1+num_words])
+      first_hypothesis_word = hypothesis.split()[word_pointer]
+      
+      if first_hypothesis_word == first_keyword or first_hypothesis_word[:-1] == first_keyword or first_hypothesis_word[:-2] == first_keyword: # found a keyword
+        print(f"Found first keyword match: {keyword_list[keyword_pointer]}")
+        num_words = len(keyword_list[keyword_pointer].split())
+        hypothesis_words = ' '.join(hypothesis.split()[word_pointer:word_pointer+num_words])
         
-        if hypothesis_words == keywords[pointer2] or hypothesis_words[:-1] == keywords[pointer2]:
-          print(f"Found full keyword match: {keywords[pointer2]}")
+        if hypothesis_words == keyword_list[keyword_pointer] or hypothesis_words[:-1] == keyword_list[keyword_pointer]:
+          print(f"Found full keyword match: {keyword_list[keyword_pointer]}")
           min_likelihood = 1.0
           
           for j in range(num_words):
@@ -61,23 +65,23 @@ def filter_hypotheses(hypotheses, keyword_dict, probs):
             
           print(f"Min likelihood: {min_likelihood}")
           
-          if min_likelihood < 0.7: # if the keyword has low likelihood, flag it
+          if min_likelihood < 0.8: # if the keyword has low likelihood, flag it
             # print(token_pointer)
             hypothesis_evaluations[i] = True
-            hallucinated_keywords[i].append((keywords[pointer2], min_likelihood))
+            hallucinated_keywords[i].append((keyword_list[keyword_pointer], min_likelihood))
             print("flagged!")
             print(min_likelihood)
             
-          pointer1 += num_words
-          pointer2 += 1
+          word_pointer += num_words
+          keyword_pointer += 1
           token_pointer += num_words
           
         else:
-          pointer1 += 1
+          word_pointer += 1
           token_pointer += 1
           
       else:
-        pointer1 += 1
+        word_pointer += 1
         token_pointer += 1
       
   return hypothesis_evaluations, hallucinated_keywords

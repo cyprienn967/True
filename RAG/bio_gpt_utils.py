@@ -47,6 +47,31 @@ class BioGPTGenerator:
         answer = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
         answer = self.clean_model_output(answer)
         return answer
+    
+    def generate_with_logits(self, question: str, max_length: int = 200) -> str:
+        prompt = (
+            f"Question: {question}\n"
+            "You are a helpful assistant. Provide a concise, direct, and relevant answer.\n"
+            "Answer:"
+        )
+        inputs = self.tokenizer(prompt, return_tensors="pt").to(self.device)
+        with torch.no_grad():
+            outputs = self.model.generate(
+                **inputs,
+                max_length=max_length,
+                temperature=0.3,        # Lower temp => more deterministic
+                top_p=0.9,
+                do_sample=True,
+                repetition_penalty=1.05,
+                output_scores=True,
+                return_dict_in_generate=True
+            )
+        logits = outputs.scores
+        tokens = outputs.sequences[0]
+        answer = self.tokenizer.decode(tokens, skip_special_tokens=True)
+        
+        answer = self.clean_model_output(answer)
+        return answer, logits, tokens
 
     def truncate_context(self, context: str, max_tokens: int) -> str:
         tokenized_context = self.tokenizer(

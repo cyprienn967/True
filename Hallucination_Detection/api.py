@@ -21,10 +21,12 @@ from .CoNLI.modules.data.response_preprocess import hypothesis_preprocess_into_s
 from .SemanticEntropy.modules.utils.SE_config import SEConfig
 from .SemanticEntropy.compute_entropy import compute_entropy
 from .utils.init_model import init_model
+from .utils.inference_config import InferenceConfig
 from .ConfidenceFilter.process_tokens import process_tokens, filter_hypotheses
 from .ConfidenceFilter.create_validation import get_topic, generate_validation_prompt
 from .ConfidenceFilter.extract_keywords import extract_keywords
 from .SelfContradiction.self_contradiction import check_contradiction
+from concurrent.futures import ThreadPoolExecutor
 
 # logging.basicConfig(filename="newfile.log", filemode='w')
 # logger = logging.getLogger()
@@ -48,6 +50,7 @@ detection_agent = HallucinationDetector(
   entity_detection_parallelism=1)
 
 se_config = SEConfig()
+inference_config = InferenceConfig()
 
 @app.route('/')
 def home():
@@ -103,16 +106,17 @@ def run_hallucination_detection():
   response, token_log_likelihoods, tokens_raw = model_instance.predict(full_prompt, inference_temperature, max_completion_tokens=250)
   
   tokens, probs = process_tokens(token_log_likelihoods, tokens_raw)
+  print(response)
   
   hypotheses = hypothesis_preprocess_into_sentences(response)
   num_hypotheses = len(hypotheses)
   # sentences = {i: hypothesis for i, hypothesis in enumerate(hypotheses)}
-  keyword_dict = extract_keywords("gpt-4o-mini", response)
-  # print(keyword_dict)
+  keyword_list = extract_keywords(inference_config.keyword_model, response)
+  print(keyword_list)
   # for i in range(len(probs)):
   #   print(f"{tokens[i]}: {probs[i]}")
   
-  hypothesis_evaluations, hallucinated_keywords = filter_hypotheses(hypotheses, keyword_dict, probs)
+  hypothesis_evaluations, hallucinated_keywords = filter_hypotheses(hypotheses, keyword_list, probs)
   print(hallucinated_keywords)
   
   # flags hypotheses that contain low likelihood keywords
@@ -125,7 +129,6 @@ def run_hallucination_detection():
   topic = get_topic(prompt)
   print(f"Topic: {topic}")
   
-  # computes semantic entropy for flagged hypotheses
   for i in range(num_hypotheses):
     
     if not hypothesis_evaluations[i]:  # no possible hallucination flagged
@@ -144,7 +147,9 @@ def run_hallucination_detection():
     
     for hallucination in hallucinated_keywords[i]:
       
-      validation_prompt = generate_validation_prompt(hypothesis, hypothesis_context, topic, hallucination[0])
+      validation_prompt = generate_validation_prompt(inference_config.validation_model, hypothesis, hypothesis_context, topic, hallucination[0])
+      
+      
     
       full_responses = []
       sampled_responses = []
@@ -173,7 +178,7 @@ def run_hallucination_detection():
       # if entropy is above the threshold or responses are contradictory, then the response is hallucinated
       if (entropies["semantic_entropy"][0] > se_config.entropy_threshold) or \
          (entropies["semantic_entropy"][0] < se_config.contradiction_threshold and 
-          check_contradiction(hypothesis, sampled_responses, se_config.contradiction_num_samples)):
+          check_contradiction(inference_config.contradiction_model, hypothesis, sampled_responses, se_config.contradiction_num_samples)):
         is_hallucinated_se[i] = True
         hallucinated_keywords_se[i].append(hallucination)
   

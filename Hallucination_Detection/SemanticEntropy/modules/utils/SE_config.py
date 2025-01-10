@@ -18,7 +18,7 @@ class SEConfig:
     self.max_completion_tokens = 25
     self.compute_context_entails_response = False
     # if entropy is above the threshold, then the response is hallucinated
-    self.entropy_threshold = 0.625
+    self.entropy_threshold = 0.65
     # if entropy is below the threshold, and sampled responses contradict the generated response, then the response is hallucinated
     self.contradiction_threshold = 0.25
     self.contradiction_num_samples = 1

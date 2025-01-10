@@ -1,8 +1,8 @@
 from ..utils.init_model import init_model
 
-def check_contradiction(hypothesis, sampled_responses, num_samples):
+def check_contradiction(model_name, hypothesis, sampled_responses, num_samples):
   
-  model = init_model("gpt-4o-mini")
+  model = init_model(model_name)
   
   num_samples = min(num_samples, len(sampled_responses))
   prompt = "Given the following statement, determine if any of the following responses prove that it must be false. Answer 'yes' if any of the responses contradict it, and 'no' if they do not contradict it. Do not output anything else: "

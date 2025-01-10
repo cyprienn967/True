@@ -41,7 +41,7 @@ def hypothesis_preprocess_into_sentences(hypothesis: str) -> List[Dict[str, str]
     # Configure response preprocessing module
     # There is an expectation that the input data is cleaned before running Hallucination Detection
     preprocess_skipStartsWithSet = set([])
-    preprocess_replaceWordSet = set([])
+    preprocess_replaceWordSet = set(["*"])
     rp = ResponsePreprocess(
         skip_starts_with_set=preprocess_skipStartsWithSet,
         replace_set=preprocess_replaceWordSet)

@@ -13,12 +13,12 @@ def get_topic(input):
   return output_raw.rstrip('.,!?')
   
 
-def generate_validation_prompt(sentence, context, topic, concept):
+def generate_validation_prompt(model_name, sentence, context, topic, concept):
   
-  model = init_model("gpt-4o-mini")
+  model = init_model(model_name)
   
   prompt = f"You are given a statement about {topic}, along with context. Your task is to generate a very simple question that verifies the correctness of the term <{concept}> in the statement. Do not attempt to verify anything else.\nContext: {context}\nStatement: {sentence}"
   
   question, _, _ = model.predict(prompt=prompt, max_completion_tokens=50)
   
-  return question + " Answer the question in one simple sentence, as briefly as possible: "
+  return f"Given the topic {topic}, " + question + " Answer the question in one simple sentence, as briefly as possible: "
