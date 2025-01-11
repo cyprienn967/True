@@ -1,0 +1,10 @@
+numpy
+pandas
+scikit_learn
+spacy
+torch
+tqdm
+transformers
+accelerate
+sentencepiece
+protobuf
