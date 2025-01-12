@@ -68,14 +68,14 @@ logging.info("Logging into Hugging Face Hub...")
 login(token="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")
 
 # --------------------------------------------- #
-model_type = "1.3B"  # GPT-Neo 1.3B
+model_type = "125M"  # GPT-Neo 1.3B
 model_family = "gpt-neo"
 
 wiki_path = "./auto-labeled/wiki"
 output_path = f"./auto-labeled/output/{model_family}{model_type}"
 
 topk_first_token = 4
-windows = 16
+windows = 2
 topk_next_token = topk_first_token
 # --------------------------------------------- #
 
