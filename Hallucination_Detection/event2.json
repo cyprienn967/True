@@ -1,0 +1,18 @@
+{
+  "resource": "/model",
+  "path": "/model",
+  "httpMethod": "POST",
+  "headers": {
+    "Host": "localhost",
+    "User-Agent": "curl/7.64.1",
+    "Content-Type": "application/json"
+  },
+  "multiValueHeaders": {},
+  "queryStringParameters": null,
+  "pathParameters": null,
+  "stageVariables": null,
+  "requestContext": {},
+  "body": "{\"id\":\"1\",\"api_key\":\"key\",\"prompt\":\"where are the 2034 olympics being held?\"}",
+  "isBase64Encoded": false
+}
+

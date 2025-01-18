@@ -1,0 +1,17 @@
+{
+  "resource": "/model",
+  "path": "/model",
+  "httpMethod": "POST",
+  "headers": {
+    "Host": "localhost",
+    "User-Agent": "curl/7.64.1",
+    "Content-Type": "application/json"
+  },
+  "multiValueHeaders": {},
+  "queryStringParameters": null,
+  "pathParameters": null,
+  "stageVariables": null,
+  "requestContext": {},
+  "body": "{\"model\":\"gpt-4o-mini\",\"api_key\":\"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\"}",
+  "isBase64Encoded": false
+}

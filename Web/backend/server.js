@@ -14,7 +14,6 @@ app.use(cors());
 const dbPath = path.resolve(__dirname, "user_data.db");
 const db = new sqlite3(dbPath);
 
-// Create the `users` table if it doesn't exist
 db.exec(`
   CREATE TABLE IF NOT EXISTS users (
     username TEXT PRIMARY KEY,

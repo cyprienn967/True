@@ -1,0 +1,53 @@
+# FROM public.ecr.aws/lambda/python:3.8
+
+# # Install system packages needed for Miniconda
+# RUN yum update -y && yum install -y bzip2 curl
+
+# # Set an environment variable so we can easily reference Miniconda
+# ENV CONDA_DIR=/opt/miniconda
+# ENV PATH=$CONDA_DIR/bin:$PATH
+
+# # Download and install Miniconda
+# RUN curl -o /tmp/miniconda.sh -LO https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
+#     bash /tmp/miniconda.sh -b -p $CONDA_DIR && \
+#     rm -f /tmp/miniconda.sh
+
+# # Copy your environment.yml into the container
+# WORKDIR /var/task
+# COPY environment.yaml .
+
+# # Create the Conda environment in /opt/miniconda/envs/myenv
+# RUN conda env create -f environment.yaml -p $CONDA_DIR/envs/myenv && \
+#     conda clean -afy
+
+# # (Optional) If you want to activate the environment by default in all subsequent RUN instructions:
+# SHELL ["conda", "run", "-p", "/opt/miniconda/envs/myenv", "/bin/bash", "-c"]
+
+# # Copy your function code into /var/task
+# ARG FUNCTION_DIR="/var/task"
+# COPY ./ ${FUNCTION_DIR}
+
+
+# # The AWS Lambda runtime looks for a handler called "api.handler" by default
+# CMD ["api.handler"]
+
+FROM public.ecr.aws/lambda/python:3.9
+
+# Set the working directory inside the container
+WORKDIR /var/task
+
+# Copy only the requirements first (for caching)
+COPY app/requirements.txt .
+
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy entire Hallucination_Detection folder into /var/task
+COPY app/ ./app/
+
+# ARG OPENAI_API_KEY=defaultValue
+# ENV OPENAI_API_KEY=$OPENAI_API_KEY
+
+# Tell Lambda which handler to use
+# Because api.py is inside Hallucination_Detection, reference it as "Hallucination_Detection.api.handler"
+CMD ["app.api.handler"]

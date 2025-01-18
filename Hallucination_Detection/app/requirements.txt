@@ -1,0 +1,27 @@
+# PyTorch and related packages with CUDA support
+torch
+
+# Core Dependencies
+pyarrow==12.0.0
+flask
+numpy
+transformers>=4.31
+evaluate
+datasets
+pandas
+tqdm
+tokenizers>=0.13.3
+accelerate
+openai
+tiktoken
+bitsandbytes
+nltk
+tenacity
+safetensors
+azure-identity
+azure-keyvault-secrets
+azure-ai-textanalytics
+spacy
+requests
+werkzeug
+aws-wsgi

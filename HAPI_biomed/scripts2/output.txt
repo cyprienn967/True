@@ -1,0 +1,10 @@
+[INFO] Loaded 5049 questions from ../data/questions.json
+
+=== Q#1 ===
+Question: Is Hirschsprung disease a mendelian or a multifactorial disorder?
+Ideal: Coding sequence mutations in RET, GDNF, EDNRB, EDN3, and SOX10 are involved in the development of Hirschsprung disease. The majority of these genes was shown to be related to Mendelian syndromic forms of Hirschsprung's disease, whereas the non-Mendelian inheritance of sporadic non-syndromic Hirschsprung disease proved to be complex; involvement of multiple loci was demonstrated in a multiplicative model.
+[ERROR] HAPI request failed (hapi): ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+[RAW Answer]: Is Hirschsprung disease a mendelian or a multifactorial disorder?
+[HAPI Answer]: 
+[CLEAN RAW Answer]: Is Hirschsprung disease a mendelian or a multifactorial disorder?
+[CLEAN HAPI Answer]: 

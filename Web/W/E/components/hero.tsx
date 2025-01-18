@@ -1,10 +1,10 @@
 "use client";
 import React, { useRef, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
+// Removed: import Image from "next/image";
 import { cn } from "@/lib/utils";
 import Balancer from "react-wrap-balancer";
-import Link from "next/link";
+// Removed: import Link from "next/link";
 import { Button } from "./button";
 import { useCalEmbed } from "@/app/hooks/useCalEmbed";
 import { CONSTANTS } from "@/constants/links";
@@ -25,7 +25,7 @@ export function Hero() {
   return (
     <div
       ref={parentRef}
-      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 py-20 md:px-8 md:py-40 bg-neutral-50 dark:bg-neutral-900"
+      className="relative flex flex-col items-center justify-center overflow-hidden px-4 py-12 md:px-8 md:py-24 bg-neutral-50 dark:bg-neutral-900"
     >
       <BackgroundGrids />
       <CollisionMechanism
@@ -72,7 +72,7 @@ export function Hero() {
       <div className="text-balance relative z-20 mx-auto mb-4 mt-4 max-w-4xl text-center text-3xl font-semibold tracking-tight text-gray-700 dark:text-neutral-300 md:text-7xl">
         <Balancer>
           <motion.h2>
-            {"The future of AI safety is here"
+            {"Supercharge your LLMs with True"
               .split(" ")
               .map((word, index) => (
                 <motion.span
@@ -105,15 +105,14 @@ export function Hero() {
         transition={{ duration: 0.2, delay: 0.5 }}
         className="relative z-20 mx-auto mt-4 max-w-lg px-4 text-center text-base/6 text-gray-600 dark:text-gray-200"
       >
-        Deploy, test and build safe AI faster with True
+        Build safer, more reliable and smarter AI
       </motion.p>
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.2, delay: 0.7 }}
-        className="mb-10 mt-8 flex w-full flex-col items-center justify-center gap-4 px-8 sm:flex-row md:mb-20"
+        className="mb-6 mt-6 flex w-full flex-col items-center justify-center gap-6 px-8 sm:flex-row md:mb-12"
       >
-
         <Button
           data-cal-namespace={calOptions.namespace}
           data-cal-link={CONSTANTS.CALCOM_LINK}
@@ -125,23 +124,7 @@ export function Hero() {
           Book a call
         </Button>
       </motion.div>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.9, ease: "easeOut" }}
-        ref={containerRef}
-        className="relative mx-auto max-w-7xl rounded-[32px] border border-neutral-200/50 bg-neutral-100 p-2 backdrop-blur-lg dark:border-neutral-700 dark:bg-neutral-800/50 md:p-4"
-      >
-        <div className="rounded-[24px] border border-neutral-200 bg-white p-2 dark:border-neutral-700 dark:bg-black">
-          <Image
-            src="https://assets.aceternity.com/pro/dashboard-new.webp"
-            alt="header"
-            width={1920}
-            height={1080}
-            className="rounded-[20px]"
-          />
-        </div>
-      </motion.div>
+      {/* The image section has been removed */}
     </div>
   );
 }
@@ -240,7 +223,7 @@ const CollisionMechanism = React.forwardRef<
       setTimeout(() => {
         setCollision({ detected: false, coordinates: null });
         setCycleCollisionDetected(false);
-        // Set beam opacity to 0
+        // Set beam opacity to 1
         if (beamRef.current) {
           beamRef.current.style.opacity = "1";
         }
