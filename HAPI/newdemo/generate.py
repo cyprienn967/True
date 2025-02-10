@@ -58,7 +58,7 @@ def generate_filtered_text(prompt, classifier, max_length=400, temperature=1.0, 
     Generates text token-by-token with hallucination filtering.
     Each candidate token is sampled (using temperature and top-k filtering)
     and its hidden state is checked by the classifier. If it is flagged as a hallucination,
-    the token is re-sampled (up to max_attempts) before accepting it. This helps maintain coherence.
+    the token is re-sampled (up to max_attempts) before accepting it.
     """
     input_ids = tokenizer(prompt, return_tensors="pt").input_ids.to(model.device)
     generated_ids = input_ids.clone()
@@ -78,9 +78,12 @@ def generate_filtered_text(prompt, classifier, max_length=400, temperature=1.0, 
         chosen_token_id = None
 
         for attempt in range(max_attempts):
-            sampled_index = torch.multinomial(probs, num_samples=1)  # index within top-k candidates
-            token_id = top_k_indices[0, sampled_index].unsqueeze(0)  # shape: (1,)
-            # Form a candidate sequence by appending the candidate token
+            sampled_index = torch.multinomial(probs, num_samples=1)  # shape: (1, 1)
+            # Extract scalar index from sampled_index to avoid extra dimensions
+            sampled_index_scalar = sampled_index.item()
+            token_id = top_k_indices[0, sampled_index_scalar].unsqueeze(0)  # shape: (1,)
+
+            # Append token_id (reshaped to (1,1)) to the current sequence
             candidate_input_ids = torch.cat([generated_ids, token_id.unsqueeze(0)], dim=1)
             with torch.no_grad():
                 candidate_outputs = model(candidate_input_ids, output_hidden_states=True)
@@ -91,7 +94,7 @@ def generate_filtered_text(prompt, classifier, max_length=400, temperature=1.0, 
                 )
             if classifier.classify(candidate_hidden_state):
                 hallucinated_tokens.append(tokenizer.decode(token_id))
-                # Try another candidate token
+                # Try a new token candidate
                 continue
             else:
                 chosen_token_id = token_id
@@ -99,12 +102,11 @@ def generate_filtered_text(prompt, classifier, max_length=400, temperature=1.0, 
                 break
 
         if not valid_token_found:
-            # If all attempts are flagged, default to the top candidate
+            # Default to the top candidate if all attempts are flagged
             chosen_token_id = top_k_indices[0, 0].unsqueeze(0)
 
         generated_ids = torch.cat([generated_ids, chosen_token_id.unsqueeze(0)], dim=1)
 
-        # Stop if the EOS token is generated.
         if chosen_token_id.item() == tokenizer.eos_token_id:
             break
 

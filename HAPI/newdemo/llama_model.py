@@ -22,7 +22,6 @@ class LlamaChat7B:
         For each token, a candidate is sampled using temperature-scaled top-k sampling.
         The candidate token’s hidden state (from the last two layers) is checked by the classifier.
         If it is flagged as a hallucination, re-sampling occurs (up to max_attempts) before accepting a token.
-        This approach aims to produce coherent, longer text without sentence repetitions or abrupt cut-offs.
         """
         input_ids = self.tokenizer(prompt, return_tensors="pt").input_ids.to(self.device)
         generated_ids = input_ids.clone()
@@ -40,8 +39,11 @@ class LlamaChat7B:
             chosen_token_id = None
 
             for attempt in range(max_attempts):
-                sampled_index = torch.multinomial(probs, num_samples=1)  # index within top-k candidates
-                token_id = top_k_indices[0, sampled_index].unsqueeze(0)  # shape: (1,)
+                sampled_index = torch.multinomial(probs, num_samples=1)  # shape: (1, 1)
+                # Extract scalar index from sampled_index to avoid extra dimensions
+                sampled_index_scalar = sampled_index.item()
+                token_id = top_k_indices[0, sampled_index_scalar].unsqueeze(0)  # shape: (1,)
+
                 candidate_input_ids = torch.cat([generated_ids, token_id.unsqueeze(0)], dim=1)
                 with torch.no_grad():
                     candidate_outputs = self.model(candidate_input_ids, output_hidden_states=True)
