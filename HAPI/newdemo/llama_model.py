@@ -7,15 +7,22 @@ class LlamaChat7B:
         self.model = LlamaForCausalLM.from_pretrained(model_name, torch_dtype=torch.float16).to(self.device)
         self.tokenizer = LlamaTokenizer.from_pretrained(model_name)
 
-    def generate_text(self, prompt, max_length=100):
+    def generate_text(self, prompt, max_length=400):
+        """
+        Generates text using the Llama-2 model.
+        The max_length has been increased to produce roughly 200-300 words.
+        """
         input_ids = self.tokenizer(prompt, return_tensors="pt").input_ids.to(self.device)
         output_ids = self.model.generate(input_ids, max_length=max_length)
         return self.tokenizer.decode(output_ids[0], skip_special_tokens=True)
 
-    def generate_token_by_token(self, prompt, classifier, max_length=100):
+    def generate_token_by_token(self, prompt, classifier, max_length=400, temperature=1.0, top_k=50, max_attempts=5):
         """
-        Generates text one token at a time, checking after each token
-        if its hidden state is flagged by the hallucination classifier.
+        Generates text one token at a time with hallucination filtering.
+        For each token, a candidate is sampled using temperature-scaled top-k sampling.
+        The candidate token’s hidden state (from the last two layers) is checked by the classifier.
+        If it is flagged as a hallucination, re-sampling occurs (up to max_attempts) before accepting a token.
+        This approach aims to produce coherent, longer text without sentence repetitions or abrupt cut-offs.
         """
         input_ids = self.tokenizer(prompt, return_tensors="pt").input_ids.to(self.device)
         generated_ids = input_ids.clone()
@@ -23,21 +30,41 @@ class LlamaChat7B:
 
         for _ in range(max_length):
             with torch.no_grad():
-                outputs = self.model(input_ids, output_hidden_states=True)
-                next_token_logits = outputs.logits[:, -1, :]
-                next_token_id = torch.argmax(next_token_logits, dim=-1).unsqueeze(0)
+                outputs = self.model(generated_ids, output_hidden_states=True)
+                logits = outputs.logits[:, -1, :]  # shape: (1, vocab_size)
+                logits = logits / temperature
+                top_k_values, top_k_indices = torch.topk(logits, top_k)
+                probs = torch.softmax(top_k_values, dim=-1)
 
-                # Extract hidden states from the last two layers for the last token.
-                last_layer = outputs.hidden_states[-1][:, -1, :]
-                second_last_layer = outputs.hidden_states[-2][:, -1, :]
-                token_hidden_state = torch.cat((last_layer, second_last_layer), dim=1)  # Shape: (1, 8192)
+            valid_token_found = False
+            chosen_token_id = None
 
-            if classifier.classify(token_hidden_state):  # Check if the token is hallucinated
-                hallucinations.append(self.tokenizer.decode(next_token_id[0]))
-                # Skip adding this token and try generating a replacement in the next iteration.
-                continue
+            for attempt in range(max_attempts):
+                sampled_index = torch.multinomial(probs, num_samples=1)  # index within top-k candidates
+                token_id = top_k_indices[0, sampled_index].unsqueeze(0)  # shape: (1,)
+                candidate_input_ids = torch.cat([generated_ids, token_id.unsqueeze(0)], dim=1)
+                with torch.no_grad():
+                    candidate_outputs = self.model(candidate_input_ids, output_hidden_states=True)
+                    candidate_hidden_state = torch.cat(
+                        (candidate_outputs.hidden_states[-1][:, -1, :],
+                         candidate_outputs.hidden_states[-2][:, -1, :]),
+                        dim=1
+                    )
+                if classifier.classify(candidate_hidden_state):
+                    hallucinations.append(self.tokenizer.decode(token_id))
+                    continue
+                else:
+                    chosen_token_id = token_id
+                    valid_token_found = True
+                    break
 
-            generated_ids = torch.cat([generated_ids, next_token_id], dim=-1)
-            input_ids = generated_ids  # Update input for the next token
+            if not valid_token_found:
+                chosen_token_id = top_k_indices[0, 0].unsqueeze(0)
 
-        return self.tokenizer.decode(generated_ids[0], skip_special_tokens=True), hallucinations
+            generated_ids = torch.cat([generated_ids, chosen_token_id.unsqueeze(0)], dim=1)
+
+            if chosen_token_id.item() == self.tokenizer.eos_token_id:
+                break
+
+        generated_text = self.tokenizer.decode(generated_ids[0], skip_special_tokens=True)
+        return generated_text, hallucinations

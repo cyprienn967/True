@@ -43,67 +43,73 @@ filtered_results = []
 flagged_hallucinations = []
 
 
-def generate_text(prompt, max_length=100):
-    """Generates text using Llama-2 model."""
+def generate_text(prompt, max_length=400):
+    """
+    Generates text using the Llama-2 model.
+    The max_length has been increased to produce roughly 200-300 words.
+    """
     inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
     output_ids = model.generate(**inputs, max_length=max_length)
     return tokenizer.decode(output_ids[0], skip_special_tokens=True)
 
 
-def extract_hidden_states(input_ids):
+def generate_filtered_text(prompt, classifier, max_length=400, temperature=1.0, top_k=50, max_attempts=5):
     """
-    Extracts and concatenates the last two hidden state layers to match the classifier's 8192-dim input.
-    Note: The model is in fp16, so the resulting tensor is cast to float32 in the classifier.
+    Generates text token-by-token with hallucination filtering.
+    Each candidate token is sampled (using temperature and top-k filtering)
+    and its hidden state is checked by the classifier. If it is flagged as a hallucination,
+    the token is re-sampled (up to max_attempts) before accepting it. This helps maintain coherence.
     """
-    with torch.no_grad():
-        outputs = model(input_ids, output_hidden_states=True)
-        hidden_states = outputs.hidden_states  # All hidden states
+    input_ids = tokenizer(prompt, return_tensors="pt").input_ids.to(model.device)
+    generated_ids = input_ids.clone()
+    hallucinated_tokens = []
 
-        # Extract the last two layers and concatenate the final token's representations.
-        last_layer = hidden_states[-1][:, -1, :]  # Shape: (batch_size, hidden_dim)
-        second_last_layer = hidden_states[-2][:, -1, :]  # Shape: (batch_size, hidden_dim)
-        
-        concatenated_hidden_states = torch.cat((last_layer, second_last_layer), dim=1)  # Shape: (batch_size, 8192)
-        return concatenated_hidden_states
+    for _ in range(max_length):
+        with torch.no_grad():
+            outputs = model(generated_ids, output_hidden_states=True)
+            logits = outputs.logits[:, -1, :]  # shape: (1, vocab_size)
+            # Apply temperature scaling
+            logits = logits / temperature
+            # Apply top-k filtering
+            top_k_values, top_k_indices = torch.topk(logits, top_k)
+            probs = torch.softmax(top_k_values, dim=-1)
 
+        valid_token_found = False
+        chosen_token_id = None
 
-def generate_with_hallucination_filtering(prompt, classifier, max_length=150):
-    """
-    Generates text sentence-by-sentence, detecting hallucinations at token-level.
-    If any token in a sentence is flagged as hallucinated, the full sentence is regenerated.
-    """
-    inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
-    output_ids = model.generate(**inputs, max_length=max_length, output_scores=True, return_dict_in_generate=True)
+        for attempt in range(max_attempts):
+            sampled_index = torch.multinomial(probs, num_samples=1)  # index within top-k candidates
+            token_id = top_k_indices[0, sampled_index].unsqueeze(0)  # shape: (1,)
+            # Form a candidate sequence by appending the candidate token
+            candidate_input_ids = torch.cat([generated_ids, token_id.unsqueeze(0)], dim=1)
+            with torch.no_grad():
+                candidate_outputs = model(candidate_input_ids, output_hidden_states=True)
+                candidate_hidden_state = torch.cat(
+                    (candidate_outputs.hidden_states[-1][:, -1, :],
+                     candidate_outputs.hidden_states[-2][:, -1, :]),
+                    dim=1
+                )
+            if classifier.classify(candidate_hidden_state):
+                hallucinated_tokens.append(tokenizer.decode(token_id))
+                # Try another candidate token
+                continue
+            else:
+                chosen_token_id = token_id
+                valid_token_found = True
+                break
 
-    decoded_output = tokenizer.decode(output_ids.sequences[0], skip_special_tokens=True)
-    sentences = decoded_output.split(". ")  # Split into sentences
+        if not valid_token_found:
+            # If all attempts are flagged, default to the top candidate
+            chosen_token_id = top_k_indices[0, 0].unsqueeze(0)
 
-    filtered_sentences = []
-    hallucinations = []
+        generated_ids = torch.cat([generated_ids, chosen_token_id.unsqueeze(0)], dim=1)
 
-    for sentence in sentences:
-        tokens = sentence.split()
-        flag_hallucination = False  # Track if any token is flagged
+        # Stop if the EOS token is generated.
+        if chosen_token_id.item() == tokenizer.eos_token_id:
+            break
 
-        for token in tokens:
-            token_tensor = tokenizer(token, return_tensors="pt").input_ids.to(model.device)
-            hidden_state = extract_hidden_states(token_tensor)
-
-            if classifier.classify(hidden_state):  # If a single token is classified as hallucinated
-                flag_hallucination = True
-                hallucinations.append(sentence)  # Store the entire sentence
-                break  # Stop checking this sentence
-
-        if flag_hallucination:
-            print(f"🔴 Hallucination detected! Regenerating: {sentence}")
-            sentence_tensor = tokenizer(prompt, return_tensors="pt").input_ids.to(model.device)
-            new_output_ids = model.generate(sentence_tensor, max_length=30)  # Regenerate the full sentence
-            new_sentence = tokenizer.decode(new_output_ids[0], skip_special_tokens=True)
-            filtered_sentences.append(new_sentence)
-        else:
-            filtered_sentences.append(sentence)
-
-    return ". ".join(filtered_sentences), hallucinations
+    generated_text = tokenizer.decode(generated_ids[0], skip_special_tokens=True)
+    return generated_text, hallucinated_tokens
 
 
 # Loop through prompts and generate outputs
@@ -111,30 +117,30 @@ for i, prompt in enumerate(prompts):
     try:
         print(f"({i+1}/{len(prompts)}) Generating for prompt: {prompt}")
 
-        # Generate baseline output
-        baseline_output = generate_text(prompt, max_length=150)
+        # Generate baseline output without hallucination filtering
+        baseline_output = generate_text(prompt, max_length=400)
 
         # Generate filtered output (with hallucination detection)
-        filtered_output, hallucinations = generate_with_hallucination_filtering(prompt, classifier, max_length=150)
+        filtered_output, hallucinations = generate_filtered_text(prompt, classifier, max_length=400)
 
         # Store results
-        baseline_results.append(f"PROMPT: {prompt}\nBASELINE OUTPUT: {baseline_output}\n")
-        filtered_results.append(f"PROMPT: {prompt}\nFILTERED OUTPUT: {filtered_output}\n")
+        baseline_results.append(f"PROMPT: {prompt}\nBASELINE OUTPUT:\n{baseline_output}\n")
+        filtered_results.append(f"PROMPT: {prompt}\nFILTERED OUTPUT:\n{filtered_output}\n")
 
         if hallucinations:
-            flagged_hallucinations.append(f"PROMPT: {prompt}\nFLAGGED SENTENCES: {', '.join(hallucinations)}\n")
+            flagged_hallucinations.append(f"PROMPT: {prompt}\nFLAGGED TOKENS: {', '.join(hallucinations)}\n")
 
     except Exception as e:
         print(f"⚠️ Error processing prompt: {prompt}\n{e}")
 
 # Save outputs
 with open(BASELINE_OUTPUT_FILE, "w", encoding="utf-8") as f:
-    f.writelines("\n".join(baseline_results))
+    f.write("\n".join(baseline_results))
 
 with open(FILTERED_OUTPUT_FILE, "w", encoding="utf-8") as f:
-    f.writelines("\n".join(filtered_results))
+    f.write("\n".join(filtered_results))
 
 with open(HALLUCINATIONS_LOG_FILE, "w", encoding="utf-8") as f:
-    f.writelines("\n".join(flagged_hallucinations))
+    f.write("\n".join(flagged_hallucinations))
 
 print("\n✅ Generation complete! Check the outputs directory for results.")
