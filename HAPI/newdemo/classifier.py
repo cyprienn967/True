@@ -38,8 +38,11 @@ class HAPIClassifier(nn.Module):
         self.model.eval()  # Set model to evaluation mode
 
     def classify(self, token_tensor):
-        """Returns True if the token is classified as hallucination, otherwise False."""
-        token_tensor = token_tensor.to(self.device)
+        """
+        Returns True if the token is classified as hallucination, otherwise False.
+        The input tensor is cast to float32 to match the classifier's weights.
+        """
+        token_tensor = token_tensor.to(self.device).float()  # Ensure matching dtype
         with torch.no_grad():
             output = self.model(token_tensor)
             prediction = torch.argmax(output, dim=1).item()
