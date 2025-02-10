@@ -63,10 +63,15 @@ def extract_hidden_states(input_ids):
 def generate_sentence(context, sentence_max_length=60):
     """
     Generates a sentence using the current context as prompt.
-    It uses a relatively short maximum length to keep generation sentence-bound.
+    Uses max_new_tokens so that only new tokens (up to sentence_max_length) are generated.
     """
     inputs = tokenizer(context, return_tensors="pt").to(model.device)
-    output_ids = model.generate(**inputs, max_length=sentence_max_length, do_sample=True, top_k=50)
+    output_ids = model.generate(
+        **inputs, 
+        max_new_tokens=sentence_max_length, 
+        do_sample=True, 
+        top_k=50
+    )
     sentence = tokenizer.decode(output_ids[0], skip_special_tokens=True)
     # Extract only the first sentence if multiple are returned
     if ". " in sentence:
@@ -96,7 +101,7 @@ def generate_with_hallucination_filtering(prompt, classifier, desired_word_count
       - prompt: the input prompt.
       - classifier: the hallucination classifier.
       - desired_word_count: the target word count for the generated passage.
-      - sentence_max_length: maximum token length for each sentence.
+      - sentence_max_length: maximum number of new tokens for each sentence.
       - max_regen_attempts: maximum number of regeneration attempts per sentence if hallucinations are detected.
     """
     context = prompt
@@ -145,7 +150,9 @@ for i, prompt in enumerate(prompts):
         baseline_output = generate_full_text(prompt, max_length=400)
 
         # Generate filtered output (sentence-by-sentence hallucination filtering)
-        filtered_output, hallucinations = generate_with_hallucination_filtering(prompt, classifier, desired_word_count=250, sentence_max_length=60)
+        filtered_output, hallucinations = generate_with_hallucination_filtering(
+            prompt, classifier, desired_word_count=250, sentence_max_length=60
+        )
 
         baseline_results.append(f"PROMPT: {prompt}\nBASELINE OUTPUT:\n{baseline_output}\n")
         filtered_results.append(f"PROMPT: {prompt}\nFILTERED OUTPUT:\n{filtered_output}\n")
