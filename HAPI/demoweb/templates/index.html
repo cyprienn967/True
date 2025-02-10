@@ -9,18 +9,28 @@
 </head>
 <body>
     <div class="container">
-        <h1>HAPI Product Demo</h1>
-        <input type="text" id="prompt" placeholder="Enter prompt here..." />
         <div class="output-container">
             <div class="output-box">
                 <h2>Llama7b Output</h2>
                 <p id="llama-output"></p>
             </div>
+
             <div class="output-box">
-                <h2>HAPI Enhanced Output</h2>
+                <h2 id="hapi-title">Llama7b + HAPI</h2>
                 <p id="hapi-output"></p>
+                <p id="flagged-tokens" style="display: none;"></p>
+
+                <!-- Toggle Switch -->
+                <label class="switch">
+                    <input type="checkbox" id="toggle-switch">
+                    <span class="slider"></span>
+                </label>
             </div>
         </div>
+    </div>
+
+    <div class="input-container">
+        <input type="text" id="prompt" placeholder="Send a message..." autofocus />
     </div>
 
     <script src="/static/scripts.js"></script>

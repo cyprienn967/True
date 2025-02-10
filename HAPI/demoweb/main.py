@@ -6,13 +6,12 @@ import time
 app = Flask(__name__)
 socketio = SocketIO(app, async_mode="eventlet")
 
-# Predefined texts for the demo
 TEXT_LLAMMA7B = "This is the output from Llama7b without modifications."
 TEXT_HAPI = "This is the output using Llama7b with HAPI, which significantly enhances accuracy."
+TEXT_FLAGGED = "Flagged tokens: <span class='red'>[inaccurate]</span>, <span class='red'>[biased]</span>, <span class='red'>[hallucination]</span>"
 
-# Words to highlight
-RED_WORDS = {"modifications", "without"}  # Example of less accurate terms
-GREEN_WORDS = {"HAPI", "enhances", "accuracy"}  # Example of improved terms
+RED_WORDS = {"modifications", "without"}
+GREEN_WORDS = {"HAPI", "enhances", "accuracy"}
 
 def highlight_text(text):
     words = text.split(" ")
@@ -35,26 +34,32 @@ def index():
 @socketio.on("generate")
 def handle_generate(data):
     prompt = data.get("prompt", "")
-    
-    # Split text into chunks for real-time streaming
+
     words_llama = highlight_text(TEXT_LLAMMA7B).split(" ")
     words_hapi = highlight_text(TEXT_HAPI).split(" ")
+    words_flagged = TEXT_FLAGGED.split(" ")
 
     generated_llama = ""
     generated_hapi = ""
+    generated_flagged = ""
 
-    time.sleep(0.5)  # Small delay before generation starts
+    time.sleep(0.5)
 
-    for i in range(max(len(words_llama), len(words_hapi))):
-        eventlet.sleep(0.2)  # Delay for streaming effect
+    for i in range(max(len(words_llama), len(words_hapi), len(words_flagged))):
+        eventlet.sleep(0.2)
 
         if i < len(words_llama):
             generated_llama += words_llama[i] + " "
         if i < len(words_hapi):
             generated_hapi += words_hapi[i] + " "
+        if i < len(words_flagged):
+            generated_flagged += words_flagged[i] + " "
 
-        # Emit updates to frontend
-        socketio.emit("update_output", {"llama": generated_llama, "hapi": generated_hapi})
+        socketio.emit("update_output", {
+            "llama": generated_llama,
+            "hapi": generated_hapi,
+            "flagged": generated_flagged
+        })
 
 if __name__ == "__main__":
     socketio.run(app, debug=True)
