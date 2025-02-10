@@ -1,28 +1,46 @@
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
-import os
 
-class HallucinationClassifier:
-    def __init__(self, classifier_path, device="cpu", input_size=8192):
-        self.device = device
+class HAPIClassifier(nn.Module):
+    def __init__(self, model_path, device="cuda"):
+        super(HAPIClassifier, self).__init__()
+        self.device = torch.device(device if torch.cuda.is_available() else "cpu")
+
+        # Define classifier architecture
         self.model = nn.Sequential(
-            nn.Linear(input_size, 256),
+            nn.Linear(4096 * 2, 256),  # First linear layer
             nn.ReLU(),
-            nn.Linear(256, 128),
+            nn.Linear(256, 128),       # Second linear layer
             nn.ReLU(),
-            nn.Linear(128, 64),
+            nn.Linear(128, 64),        # Third linear layer
             nn.ReLU(),
-            nn.Linear(64, 2)
+            nn.Linear(64, 2)           # Output layer (binary classification)
         )
-        self.model.load_state_dict(torch.load(classifier_path, map_location=self.device)["model_state_dict"])
-        self.model.to(self.device)
-        self.model.eval()
 
-    def predict(self, hidden_states):
-        """Returns True if hallucination is detected, False otherwise"""
+        # Load model weights
+        checkpoint = torch.load(model_path, map_location=self.device)
+        state_dict = checkpoint["model_state_dict"]
+
+        # Fix the mismatch in saved state dict key names
+        corrected_state_dict = {
+            "0.weight": state_dict["linear1.weight"],
+            "0.bias": state_dict["linear1.bias"],
+            "2.weight": state_dict["linear2.weight"],
+            "2.bias": state_dict["linear2.bias"],
+            "4.weight": state_dict["linear3.weight"],
+            "4.bias": state_dict["linear3.bias"],
+            "6.weight": state_dict["linear4.weight"],
+            "6.bias": state_dict["linear4.bias"]
+        }
+
+        self.model.load_state_dict(corrected_state_dict)
+        self.model.to(self.device)
+        self.model.eval()  # Set model to evaluation mode
+
+    def classify(self, token_tensor):
+        """Returns True if the token is classified as hallucination, otherwise False."""
+        token_tensor = token_tensor.to(self.device)
         with torch.no_grad():
-            input_tensor = torch.tensor(hidden_states, dtype=torch.float32).to(self.device).unsqueeze(0)
-            scores = self.model(input_tensor)
-            probabilities = F.softmax(scores, dim=1)
-            return probabilities[0, 1].item() > 0.5  # If hallu prob > 0.5, consider it a hallucination
+            output = self.model(token_tensor)
+            prediction = torch.argmax(output, dim=1).item()
+        return prediction == 1  # 1 means hallucination, 0 means valid
