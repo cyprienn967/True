@@ -79,11 +79,15 @@ def generate_sentence(context, sentence_max_length=60):
     return sentence.strip()
 
 
-def sentence_contains_hallucination(sentence, classifier):
+def sentence_contains_hallucination(sentence, classifier, original_prompt):
     """
-    Checks a sentence token-by-token. Returns True if any token is flagged by the classifier.
+    Checks a sentence token-by-token for hallucinations.
+    Before checking, any occurrence of the original prompt and line breaks are stripped from the sentence.
+    Returns True if any token is flagged by the classifier.
     """
-    tokens = sentence.split()
+    # Remove the original prompt and any newlines to avoid repeated content issues.
+    stripped_sentence = sentence.replace(original_prompt, "").replace("\n", " ").strip()
+    tokens = stripped_sentence.split()
     for token in tokens:
         token_tensor = tokenizer(token, return_tensors="pt").input_ids.to(model.device)
         hidden_state = extract_hidden_states(token_tensor)
@@ -113,8 +117,8 @@ def generate_with_hallucination_filtering(prompt, classifier, desired_word_count
         sentence = generate_sentence(context, sentence_max_length=sentence_max_length)
         attempts = 0
 
-        # Check the generated sentence for hallucinations.
-        while sentence_contains_hallucination(sentence, classifier) and attempts < max_regen_attempts:
+        # Check the generated sentence for hallucinations after stripping the prompt.
+        while sentence_contains_hallucination(sentence, classifier, prompt) and attempts < max_regen_attempts:
             print(f"🔴 Hallucination detected in sentence: '{sentence}'. Regenerating sentence (attempt {attempts+1})...")
             hallucinated_sentences.append(sentence)
             sentence = generate_sentence(context, sentence_max_length=sentence_max_length)
