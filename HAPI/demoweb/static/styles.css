@@ -42,9 +42,9 @@ body {
 /* Styled code overlay to mimic a terminal */
 #splash-text {
   position: absolute;
-  top: 55%;  /* Moved up a bit from previous 60% */
-  left: 48%; /* Moved left a tiny bit */
-  transform: translate(-50%, -50%);
+  top: 18%;  /* Moved up a bit */
+  left: 5%; /* Shifted a little to the left */
+  /* Removed transform so the container's top remains fixed */
   font-family: 'Courier New', monospace;
   background-color: #00123A;
   color: #00ff00;

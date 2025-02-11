@@ -1,13 +1,4 @@
-// Enhanced syntax highlighting for Python using VS Code–like colors
-function highlightLine(line) {
-    // Highlight Python keywords (from, import, print, as)
-    line = line.replace(/\b(from|import|print|as)\b/g, '<span class="py-keyword">$1</span>');
-    // Highlight string literals (both single and double quotes)
-    line = line.replace(/('[^']*'|"[^"]*")/g, '<span class="py-string">$1</span>');
-    return line;
-  }
-  
-  document.addEventListener("DOMContentLoaded", async function () {
+document.addEventListener("DOMContentLoaded", async function () {
     // Run the splash sequence first
     await runSplashSequence();
   
@@ -43,7 +34,6 @@ function highlightLine(line) {
     // Toggle between HAPI output and flagged tokens (using the original element ID)
     document.getElementById("toggle-btn").addEventListener("click", function () {
       isFlaggedView = !isFlaggedView;
-  
       if (isFlaggedView) {
         document.getElementById("hapi-output").style.display = "none";
         document.getElementById("flagged-tokens").style.display = "block";
@@ -54,45 +44,59 @@ function highlightLine(line) {
     });
   });
   
-  // Function to animate the splash sequence
+  // Function to animate the splash sequence with manually colored code
   async function runSplashSequence() {
     const splashScreen = document.getElementById("splash-screen");
     const splashText = document.getElementById("splash-text");
     const loadingScreen = document.getElementById("loading-screen");
   
-    // New multiline code snippet with blank lines as provided
-    const codeSnippet = `from HAPI import hapi
+    // Plain text version of your code snippet (with blank lines between each code line)
+    const plainLines = [
+      "from HAPI import hapi",
+      "",
+      "api = hapi(api_key=\"your_hapi_key\")",
+      "",
+      "response = api.generate(model, prompt)",
+      "",
+      "print(response.text)"
+    ];
   
-  from huggingface import model
+    // Manually colored HTML version for each line:
+    const highlightedLines = [
+      // Line 1
+      '<span style="color:#FFFF00;">from</span> <span style="color:#ADD8E6;">HAPI</span> <span style="color:#FFFF00;">import</span> <span style="color:#ADD8E6;">hapi</span>',
+      // Blank line
+      '',
+      // Line 2
+      '<span style="color:#ADD8E6;">api </span><span style="color:#00FF00;">=</span><span style="color:#ADD8E6;"> hapi(api_key</span><span style="color:#00FF00;">=</span><span style="color:#FFC0CB;">"your_hapi_key"</span><span style="color:#ADD8E6;">)</span>',
+      // Blank line
+      '',
+      // Line 3
+      '<span style="color:#ADD8E6;">response </span><span style="color:#00FF00;">=</span><span style="color:#ADD8E6;"> api.</span><span style="color:#FFC0CB;">generate</span><span style="color:#ADD8E6;">(model, prompt)</span>',
+      // Blank line
+      '',
+      // Line 4
+      '<span style="color:#00FF00;">print</span><span style="color:#ADD8E6;">(response.text)</span>'
+    ];
   
-  api = hapi(api_key="your_hapi_key")
-  
-  model = huggingface(api_key="model_key")
-  
-  response = api.generate(model, prompt)
-  
-  print(response.text)`;
-  
-    const lines = codeSnippet.split("\n");
     splashText.innerHTML = "";
   
     // For each line, create a fixed-height div and animate letter by letter.
-    for (let li = 0; li < lines.length; li++) {
-      let lineText = lines[li];
+    for (let li = 0; li < plainLines.length; li++) {
+      let lineText = plainLines[li];
       let lineDiv = document.createElement("div");
       lineDiv.className = "splash-line";
-      // Start with an empty text content for smooth typing effect.
+      // Start with empty text for smooth typing.
       lineDiv.textContent = "";
       splashText.appendChild(lineDiv);
       let currentText = "";
-      // Type out each character in place.
       for (let ci = 0; ci < lineText.length; ci++) {
         currentText += lineText[ci];
         lineDiv.textContent = currentText;
         await new Promise(resolve => setTimeout(resolve, 50)); // Delay per character
       }
-      // Once the line is complete, update it with syntax-highlighted HTML.
-      lineDiv.innerHTML = highlightLine(lineText);
+      // Once the line is complete, replace it with the manually colored HTML.
+      lineDiv.innerHTML = highlightedLines[li];
       await new Promise(resolve => setTimeout(resolve, 200)); // Pause before next line
     }
   
