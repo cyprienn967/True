@@ -21,6 +21,32 @@
     <div class="spinner"></div>
   </div>
 
+  <!-- MIDDLE PAGE (NEW) -->
+  <div id="middle-page" style="display: none;">
+    <div class="middle-content">
+      <!-- Image2.png at the top middle -->
+      <div style="text-align: center; margin-top: 30px;">
+        <img src="/static/image2.png" alt="Benchmark Image" style="max-width: 400px;" />
+      </div>
+
+      <!-- Benchmarking results for hidden states approach -->
+      <h2 class="middle-header">Hidden States Approach Metrics</h2>
+      <div id="metrics-container" class="metrics-container">
+        <!-- The expand/collapse sections for each LLM will be inserted by JavaScript -->
+      </div>
+
+      <!-- Another set of metrics from run_results_hallu_questions -->
+      <h2 class="middle-header">Hallucination Questions Results</h2>
+      <div id="hallu-container" class="metrics-container">
+        <!-- The expand/collapse for run_results_hallu_questions will be inserted by JavaScript -->
+      </div>
+
+      <p style="text-align:center; margin-top:20px; font-weight:bold;">
+        Press ENTER to continue...
+      </p>
+    </div>
+  </div>
+
   <!-- Main UI (EXACTLY as originally provided) -->
   <div class="container" id="main-ui" style="display: none;">
     <div class="output-container">

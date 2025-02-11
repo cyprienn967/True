@@ -44,7 +44,6 @@ body {
   position: absolute;
   top: 18%;  /* Moved up a bit */
   left: 5%; /* Shifted a little to the left */
-  /* Removed transform so the container's top remains fixed */
   font-family: 'Courier New', monospace;
   background-color: #00123A;
   color: #00ff00;
@@ -221,4 +220,46 @@ input:checked + .slider {
 
 input:checked + .slider:before {
   transform: translateX(20px);
+}
+
+/* MIDDLE PAGE STYLES */
+#middle-page {
+  width: 80%;
+  margin: 0 auto;
+  text-align: left;
+  padding: 20px;
+}
+
+.middle-content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Expandable / Accordion style for metrics */
+.metrics-container {
+  margin-top: 20px;
+}
+
+.accordion-item {
+  border: 1px solid #ddd;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.accordion-header {
+  background: #eee;
+  padding: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.accordion-content {
+  display: none;
+  padding: 10px;
+  background: #fafafa;
+}
+
+.accordion-content.show {
+  display: block;
 }

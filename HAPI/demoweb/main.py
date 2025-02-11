@@ -106,7 +106,7 @@ def handle_generate(data):
 
     generated_llama, generated_hapi, generated_flagged = "", "", ""
 
-    time.sleep(0.3)  # Smaller delay before starting
+    time.sleep(0.8)  # Smaller delay before starting
 
     for i in range(max(len(words_llama), len(words_hapi), len(words_flagged))):
         eventlet.sleep(0.02)  # Smoother and faster streaming
