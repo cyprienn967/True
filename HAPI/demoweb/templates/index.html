@@ -1,38 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HAPI Demo</title>
-    <link rel="stylesheet" href="/static/styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HAPI Demo</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
 </head>
 <body>
-    <div class="container">
-        <div class="output-container">
-            <div class="output-box">
-                <h2>Llama7b Output</h2>
-                <p id="llama-output"></p>
-            </div>
-
-            <div class="output-box">
-                <h2 id="hapi-title">Llama7b + HAPI</h2>
-                <p id="hapi-output"></p>
-                <p id="flagged-tokens" style="display: none;"></p>
-
-                <!-- Toggle Switch -->
-                <label class="switch">
-                    <input type="checkbox" id="toggle-switch">
-                    <span class="slider"></span>
-                </label>
-            </div>
-        </div>
+  <!-- Splash Screen -->
+  <div id="splash-screen">
+    <div id="splash-container">
+      <img src="/static/image.png" alt="Terminal Image" />
+      <div id="splash-text"></div>
     </div>
+  </div>
 
-    <div class="input-container">
-        <input type="text" id="prompt" placeholder="Send a message..." autofocus />
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Main UI (EXACTLY as originally provided) -->
+  <div class="container" id="main-ui" style="display: none;">
+    <div class="output-container">
+      <div class="output-box">
+        <h2>Llama7b Output</h2>
+        <p id="llama-output"></p>
+      </div>
+
+      <div class="output-box">
+        <h2>HAPI Enhanced Output</h2>
+        <p id="hapi-output"></p>
+        <p id="flagged-tokens" style="display: none;"></p>
+
+        <!-- Toggle Switch (originally provided) -->
+        <label class="switch" id="toggle-btn">
+          <input type="checkbox" id="toggle-switch" />
+          <span class="slider"></span>
+        </label>
+      </div>
     </div>
+  </div>
 
-    <script src="/static/scripts.js"></script>
+  <div class="input-container" id="input-ui" style="display: none;">
+    <input type="text" id="prompt" placeholder="Send a message..." autofocus />
+  </div>
+
+  <script src="/static/scripts.js"></script>
 </body>
 </html>
