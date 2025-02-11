@@ -1,8 +1,17 @@
-document.addEventListener("DOMContentLoaded", async function () {
+// Enhanced syntax highlighting for Python using VS Code–like colors
+function highlightLine(line) {
+    // Highlight Python keywords (from, import, print, as)
+    line = line.replace(/\b(from|import|print|as)\b/g, '<span class="py-keyword">$1</span>');
+    // Highlight string literals (both single and double quotes)
+    line = line.replace(/('[^']*'|"[^"]*")/g, '<span class="py-string">$1</span>');
+    return line;
+  }
+  
+  document.addEventListener("DOMContentLoaded", async function () {
     // Run the splash sequence first
     await runSplashSequence();
   
-    // Now show the original UI (exactly as provided)
+    // Now show the original UI (EXACTLY as provided)
     document.getElementById("main-ui").style.display = "block";
     document.getElementById("input-ui").style.display = "block";
   
@@ -51,30 +60,43 @@ document.addEventListener("DOMContentLoaded", async function () {
     const splashText = document.getElementById("splash-text");
     const loadingScreen = document.getElementById("loading-screen");
   
-    // Multiline code snippet to mimic a terminal
-    const codeSnippet = `import demoweb
-  client = demoweb.Client(api_key='YOUR_API_KEY')
-  response = client.generate(prompt='Hello, World!')
-  print(response)`;
+    // New multiline code snippet with blank lines as provided
+    const codeSnippet = `from HAPI import hapi
+  
+  from huggingface import model
+  
+  api = hapi(api_key="your_hapi_key")
+  
+  model = huggingface(api_key="model_key")
+  
+  response = api.generate(model, prompt)
+  
+  print(response.text)`;
   
     const lines = codeSnippet.split("\n");
     splashText.innerHTML = "";
   
-    // For each line, create a div and animate letter by letter.
+    // For each line, create a fixed-height div and animate letter by letter.
     for (let li = 0; li < lines.length; li++) {
       let lineText = lines[li];
       let lineDiv = document.createElement("div");
       lineDiv.className = "splash-line";
+      // Start with an empty text content for smooth typing effect.
+      lineDiv.textContent = "";
       splashText.appendChild(lineDiv);
+      let currentText = "";
+      // Type out each character in place.
       for (let ci = 0; ci < lineText.length; ci++) {
-        lineDiv.innerHTML += lineText[ci];
+        currentText += lineText[ci];
+        lineDiv.textContent = currentText;
         await new Promise(resolve => setTimeout(resolve, 50)); // Delay per character
       }
-      // Slight pause before the next line begins
-      await new Promise(resolve => setTimeout(resolve, 200));
+      // Once the line is complete, update it with syntax-highlighted HTML.
+      lineDiv.innerHTML = highlightLine(lineText);
+      await new Promise(resolve => setTimeout(resolve, 200)); // Pause before next line
     }
   
-    // Wait for the Enter key (without displaying any prompt)
+    // Wait for the Enter key (with no visible prompt)
     await new Promise(resolve => {
       function onKeyDown(event) {
         if (event.key === "Enter") {

@@ -33,7 +33,7 @@ body {
 }
 
 #splash-container img {
-  width: 450px;  /* Slightly bigger image */
+  width: 600px;  /* Slightly bigger image */
   height: auto;
   display: block;
   margin: 0 auto;
@@ -42,23 +42,31 @@ body {
 /* Styled code overlay to mimic a terminal */
 #splash-text {
   position: absolute;
-  top: 10%;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 55%;  /* Moved up a bit from previous 60% */
+  left: 48%; /* Moved left a tiny bit */
+  transform: translate(-50%, -50%);
   font-family: 'Courier New', monospace;
   background-color: #00123A;
   color: #00ff00;
   padding: 10px;
   border-radius: 5px;
-  white-space: pre-wrap;
+  white-space: pre;
   text-align: left;
-  max-width: 90%;
+  width: 400px;  /* Fixed width to keep text in place */
   line-height: 1.6; /* Proper line spacing */
 }
 
 /* Ensure each generated line stays in place */
 .splash-line {
   height: 1.6em;
+}
+
+/* Syntax highlighting classes (VS Code–like colors) */
+.py-keyword {
+  color: #569CD6; /* Blue for keywords */
+}
+.py-string {
+  color: #CE9178; /* Orange for strings */
 }
 
 /* Loading Screen */
